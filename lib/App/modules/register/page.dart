@@ -70,7 +70,7 @@ class RegisterScreen extends StatelessWidget {
                             CustomFormField(
                               prefixIcon: Icon(Icons.person),
                               validator: () {},
-                              hint: 'الإسم كامل',
+                              hint: 'الإسم الاول',
                               isPassword: false,
                               width: deviceWidth * 0.87,
                             ),
