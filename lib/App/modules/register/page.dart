@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -52,21 +51,62 @@ class RegisterScreen extends StatelessWidget {
                 SizedBox(
                   height: deviceHeight * 0.023,
                 ),
-                Text(
-                  "الإسم كامل",
-                  style: TextStyle(
-                      fontSize: 16.spMin, fontWeight: FontWeight.w500),
-                ),
                 SizedBox(
-                  height: deviceHeight * 0.009,
-                ),
-                CustomFormField(
-                  prefixIcon: Icon(Icons.person),
-                  validator: () {},
-                  hint: 'الإسم كامل',
-                  isPassword: false,
-                  width: deviceWidth * 0.87,
-                ),
+                  width: deviceWidth* 0.87,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "الإسم الاول",
+                              style: TextStyle(
+                                  fontSize: 16.spMin, fontWeight: FontWeight.w500),
+                            ),
+                            SizedBox(
+                              height: deviceHeight * 0.009,
+                            ),
+                            CustomFormField(
+                              prefixIcon: Icon(Icons.person),
+                              validator: () {},
+                              hint: 'الإسم كامل',
+                              isPassword: false,
+                              width: deviceWidth * 0.87,
+                            ),
+
+                          ],
+                        ),
+                      ),
+                      SizedBox(width: 32.w,),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "الإسم الاخير",
+                              style: TextStyle(
+                                  fontSize: 16.spMin, fontWeight: FontWeight.w500),
+                            ),
+                            SizedBox(
+                              height: deviceHeight * 0.009,
+                            ),
+                            CustomFormField(
+                              prefixIcon: Icon(Icons.person),
+                              validator: () {},
+                              hint: 'الإسم الاخير',
+                              isPassword: false,
+                              width: deviceWidth * 0.87,
+                            ),
+
+                          ],
+                        ),
+                      ),
+
+                    ],
+
+                  ),
+                ) ,
                 SizedBox(
                   height: deviceHeight * 0.0090,
                 ),
