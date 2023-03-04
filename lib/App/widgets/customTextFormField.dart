@@ -31,12 +31,12 @@ class CustomFormField extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: TextFormField(
-        validator: (value){
+        validator: (value) {
           validator();
         },
         obscureText: isPassword,
         decoration: InputDecoration(
-          prefixIcon: prefixIcon,
+            prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
             iconColor: iconPrimaryColor,
             border: InputBorder.none,
