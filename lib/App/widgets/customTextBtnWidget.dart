@@ -15,7 +15,9 @@ class CustomTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return  InkWell(
       child:  Text(text,style: TextStyle(fontSize: fontSize.spMin,color: color,fontWeight: FontWeight.w400),),
-      onTap: (){},
+      onTap: (){
+        function();
+      },
     );
   }
 }

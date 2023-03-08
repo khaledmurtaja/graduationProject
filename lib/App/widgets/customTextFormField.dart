@@ -4,19 +4,23 @@ import '../../core/values/colors.dart';
 
 class CustomFormField extends StatelessWidget {
   Icon prefixIcon;
-  Icon? suffixIcon;
+  IconButton? suffixIcon;
   Function validator;
   Color backGroundColor;
   String hint;
   bool isPassword;
   double width;
   Color iconColor;
+  TextEditingController controller;
+  TextEditingController? passwordConfirmController;
 
   CustomFormField(
       {required this.prefixIcon,
       this.suffixIcon,
       required this.validator,
+      this.passwordConfirmController,
       this.backGroundColor = textFormFieldColor,
+      required this.controller,
       required this.hint,
       required this.isPassword,
       required this.width,
@@ -24,24 +28,24 @@ class CustomFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      decoration: BoxDecoration(
-        color: backGroundColor,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: TextFormField(
-        validator: (value) {
-          validator();
-        },
-        obscureText: isPassword,
-        decoration: InputDecoration(
-            prefixIcon: prefixIcon,
-            suffixIcon: suffixIcon,
-            iconColor: iconPrimaryColor,
-            border: InputBorder.none,
-            hintText: hint),
-      ),
+    return TextFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      controller: controller,
+      validator: (value) {
+        if (passwordConfirmController != null) {
+          return validator(value, passwordConfirmController);
+        } else {
+          return validator(value);
+        }
+      },
+      obscureText: isPassword,
+      decoration: InputDecoration(
+          fillColor: backGroundColor,
+          filled: true,
+          suffixIcon: suffixIcon,
+          iconColor: iconPrimaryColor,
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+          hintText: hint),
     );
   }
 }
