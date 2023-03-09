@@ -4,16 +4,24 @@ import 'package:get/get.dart';
 class DonationRequestScreenController extends GetxController {
   bool needChoice = true;
   bool donorChoice = false;
-  TextEditingController nameOfTheNeedyController = TextEditingController();
 
-  void changeSelection() {
-    if (needChoice == true && donorChoice == false) {
-      needChoice = false;
+  // Controllers for needChoice
+  TextEditingController nameOfNeedyController = TextEditingController();
+  TextEditingController phoneOfNeedyController = TextEditingController();
+  TextEditingController detailsOfNeedyController = TextEditingController();
+
+  // Controllers for donorChoice
+  TextEditingController nameOfDonorController = TextEditingController();
+  TextEditingController phoneOfDonorController = TextEditingController();
+
+  void changeSelection(String choice) {
+    if (choice == 'donor') {
       donorChoice = true;
+      needChoice = false;
       update();
     } else {
-      needChoice = true;
       donorChoice = false;
+      needChoice = true;
       update();
     }
   }

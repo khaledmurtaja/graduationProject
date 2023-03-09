@@ -2,16 +2,16 @@
 
 import 'package:blood4life/App/modules/donationRequest/controller.dart';
 import 'package:blood4life/App/modules/donationRequest/widgets/buttomWidget.dart';
+import 'package:blood4life/App/modules/donationRequest/widgets/pageDonorWidget.dart';
+import 'package:blood4life/App/modules/donationRequest/widgets/pageNeedWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'dart:math' as math; // import this
 
 import '../../../core/utils/helperFunctions.dart';
 import '../../../core/values/colors.dart';
-import '../../widgets/customTextFormField.dart';
+import '../../widgets/customAppBar.dart';
 
 class DonationRequestScreen extends GetView<DonationRequestScreenController> {
   @override
@@ -26,36 +26,9 @@ class DonationRequestScreen extends GetView<DonationRequestScreenController> {
         ),
         child: Column(
           children: [
-            Row(
-              children: [
-                Container(
-                  width: 24,
-                  height: 24,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(6),
-                    ),
-                    color: iconArrowBackBackgroundColor,
-                  ),
-                  child: Transform(
-                    alignment: Alignment.center,
-                    transform: Matrix4.rotationY(math.pi),
-                    child: const Icon(
-                      Icons.arrow_back_ios_new_sharp,
-                      size: 20,
-                    ),
-                  ),
-                  alignment: Alignment.center,
-                ),
-                SizedBox(
-                  width: getMediaQueryWidth(context: context, value: 8),
-                ),
-                Text(
-                  "إنشاء طلب تبرع",
-                  style: TextStyle(
-                      fontSize: 20.spMin, fontWeight: FontWeight.w700),
-                ),
-              ],
+            CustomAppBar(
+              function: () {},
+              title: 'إنشاء طلب تبرع',
             ),
             SizedBox(
               height: getMediaQueryHeight(context: context, value: 16),
@@ -67,7 +40,7 @@ class DonationRequestScreen extends GetView<DonationRequestScreenController> {
                 borderRadius: BorderRadius.all(
                   Radius.circular(25),
                 ),
-                color: iconArrowBackBackgroundColor,
+                color: textFormFieldColor,
               ),
               child: GetBuilder<DonationRequestScreenController>(
                   builder: (DonationRequestScreenController controller) {
@@ -78,7 +51,7 @@ class DonationRequestScreen extends GetView<DonationRequestScreenController> {
                         direction: 'Right',
                         buttonText: 'محتاج',
                         IsChosen: controller.needChoice,
-                        controller: controller,
+                        function: () => controller.changeSelection(""),
                       ),
                     ),
                     VerticalDivider(),
@@ -87,7 +60,7 @@ class DonationRequestScreen extends GetView<DonationRequestScreenController> {
                         direction: 'Left',
                         buttonText: 'متبرع',
                         IsChosen: controller.donorChoice,
-                        controller: controller,
+                        function: () => controller.changeSelection("donor"),
                       ),
                     ),
                   ],
@@ -97,62 +70,14 @@ class DonationRequestScreen extends GetView<DonationRequestScreenController> {
             SizedBox(
               height: getMediaQueryHeight(context: context, value: 32),
             ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "إسم المحتاج",
-                      style: TextStyle(
-                          fontSize: 16.spMin, fontWeight: FontWeight.w500),
-                    ),
-                    SizedBox(
-                      height: getMediaQueryHeight(context: context, value: 8),
-                    ),
-                    CustomFormField(
-                      controller: controller.nameOfTheNeedyController,
-                      prefixIcon: Icon(Icons.person),
-                      validator: () {},
-                      hint: 'اسم المحتاج بالكامل',
-                      isPassword: false,
-                      width: getMediaQueryWidth(context: context, value: 327),
-                    ),
-                    SizedBox(
-                      height: getMediaQueryHeight(context: context, value: 16),
-                    ),
-                    Text(
-                      "رقم التواصل",
-                      style: TextStyle(
-                          fontSize: 16.spMin, fontWeight: FontWeight.w500),
-                    ),
-                    SizedBox(
-                      height: getMediaQueryHeight(context: context, value: 8),
-                    ),
-                    CustomFormField(
-                      controller: controller.nameOfTheNeedyController,
-                      prefixIcon: Icon(Icons.person),
-                      validator: () {},
-                      hint: 'مثال 0597000000',
-                      isPassword: false,
-                      width: getMediaQueryWidth(context: context, value: 327),
-                    ),
-                    SizedBox(
-                      height: getMediaQueryHeight(context: context, value: 16),
-                    ),
-
-                    
-                    Text(
-                      "رقم التواصل",
-                      style: TextStyle(
-                          fontSize: 16.spMin, fontWeight: FontWeight.w500),
-                    ),
-                    SizedBox(
-                      height: getMediaQueryHeight(context: context, value: 8),
-                    ),
-                  ],
-                ),
-              ),
+            GetBuilder<DonationRequestScreenController>(
+              builder: (DonationRequestScreenController controller) {
+                return controller.needChoice
+                    ? PageNeedWidget(
+                        controller: controller,
+                      )
+                    : PageDonorWidget(controller: controller);
+              },
             ),
           ],
         ),

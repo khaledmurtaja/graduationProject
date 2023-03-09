@@ -5,7 +5,7 @@ class LoginScreenController extends GetxController{
   bool securePassword=true;
   TextEditingController emailController=TextEditingController();
   TextEditingController passwordController=TextEditingController();
-
+TextEditingController DE=TextEditingController();
   onRedEyeClicked(){ /// for controlling password visibility icon
     securePassword=!securePassword;
     update();

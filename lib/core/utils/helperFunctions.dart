@@ -50,6 +50,15 @@ String? validatePasswordLogin(String password) {
   }
 }
 
+///for validating description filed
+String? validateDescription(String password) {
+  if (password.length > 200) {
+    return lessThat200CharRequiredMessage;
+  } else {
+    return null;
+  }
+}
+
 ///for validating name Filed
 String? validateNameField(String name) {
   if (name.isEmpty) {
@@ -63,22 +72,18 @@ String? validateNameField(String name) {
   }
 }
 
-///for responsive Height
-
 double getMediaQueryHeight(
     {required BuildContext context, required num value}) {
   var size = MediaQuery.of(context).size;
-  //Figma Height
-  double xdHeight = 812;
+  //figma height
+  double xdHeight = 813;
   double percentage = (value / xdHeight * 100).roundToDouble() / 100;
   return size.height * percentage;
 }
 
-///for responsive Width
-
 double getMediaQueryWidth({required BuildContext context, required num value}) {
   var size = MediaQuery.of(context).size;
-  //Figma width
+  //figma height
   double xdWidth = 375;
   double percentage = (value / xdWidth * 100).roundToDouble() / 100;
   return size.width * percentage;

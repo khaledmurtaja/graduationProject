@@ -10,17 +10,20 @@ class ButtonWidget extends StatelessWidget {
   String buttonText;
   String direction;
   bool IsChosen;
-  DonationRequestScreenController controller;
-  ButtonWidget(
-      {required this.buttonText,
-      required this.direction,
-      required this.IsChosen,
-      required this.controller});
+
+  final VoidCallback function;
+
+  ButtonWidget({
+    required this.buttonText,
+    required this.direction,
+    required this.IsChosen,
+    required this.function,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => controller.changeSelection(),
+      onTap: function,
       child: Container(
         height: getMediaQueryWidth(context: context, value: 38),
         margin: direction == 'Right'
@@ -38,7 +41,7 @@ class ButtonWidget extends StatelessWidget {
                   topLeft: Radius.circular(25),
                   bottomLeft: Radius.circular(25),
                 ),
-          color: IsChosen ? primaryColor : iconArrowBackBackgroundColor,
+          color: IsChosen ? primaryColor : textFormFieldColor,
         ),
         child: Center(
           child: Text(

@@ -7,4 +7,3 @@ Color inActiveDotsColor = hexToColor("#D9D9D9"); // grey color  لون سكني
 const Color textBtnColor = Color(0xff0000FF);
 const Color textFormFieldColor = Color(0xffEAEAEA);
 const Color iconPrimaryColor = Color(0xff909090);
-const Color iconArrowBackBackgroundColor = Color(0xffEAEAEA);
