@@ -25,10 +25,11 @@ class LoginScreen extends GetView<LoginScreenController> {
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.only(right: 24, left: 24),
-            child: SizedBox(
-              width: double.infinity,
+          physics: const BouncingScrollPhysics(),
+          child: SizedBox(
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -58,9 +59,9 @@ class LoginScreen extends GetView<LoginScreenController> {
                     height: deviceHeight * 0.01,
                   ),
                   CustomFormField(
-                    controller:controller.emailController ,
-                    prefixIcon: Icon(Icons.email),
-                    validator:validateEmail,
+                    controller: controller.emailController,
+                    prefixIcon: const Icon(Icons.email),
+                    validator: validateEmail,
                     hint: 'example@gmail.com',
                     isPassword: false,
                     width: deviceWidth * 0.87,
@@ -81,7 +82,7 @@ class LoginScreen extends GetView<LoginScreenController> {
                       return CustomFormField(
                         controller: controller.passwordController,
                         prefixIcon: const Icon(Icons.lock),
-                        validator:validatePasswordLogin,
+                        validator: validatePasswordLogin,
                         hint: '********',
                         isPassword: controller.securePassword,
                         width: deviceWidth * 0.87,
@@ -116,8 +117,8 @@ class LoginScreen extends GetView<LoginScreenController> {
                   ),
                   CustomButton(
                     onPressed: () {
-                      bool isFormValidated=_formKey.currentState!.validate();
-                      if(isFormValidated){
+                      bool isFormValidated = _formKey.currentState!.validate();
+                      if (isFormValidated) {
                         Get.offAllNamed("/home");
                       }
                     },
@@ -137,9 +138,11 @@ class LoginScreen extends GetView<LoginScreenController> {
                       const SizedBox(
                         width: 4,
                       ),
-                      CustomTextButton(text: 'انشاء حساب جديد', function: () {
-                        Get.toNamed("/register");
-                      }),
+                      CustomTextButton(
+                          text: 'انشاء حساب جديد',
+                          function: () {
+                            Get.toNamed("/register");
+                          }),
                     ],
                   ),
                   SizedBox(

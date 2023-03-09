@@ -10,6 +10,7 @@ const nameIsRequiredMessage=" حقل الاسم مطلوب";
 const unMatchedPasswordsMessage="كلمتا المرورر غير متوافقتين";
 const nameMustHave4LettersAtLeastMessage="حقل الاسم يجب ان يحتوي اربعة احرف على الاقل";
 const nameMustHave30LettersAtMostMessage="حقل الاسم لا يمكن ان يتجاوز ثلاثون حرفا";
+const lessThat200CharRequiredMessage="الوصف لا يمكن أن يتجاز ٢٠٠ حرف";
 final RegExp uppercaseRegex = RegExp(r'[A-Z]');
 final RegExp lowercaseRegex = RegExp(r'[a-z]');
 final RegExp numberRegex = RegExp(r'[0-9]');
