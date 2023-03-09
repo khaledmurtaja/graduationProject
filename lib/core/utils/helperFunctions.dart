@@ -40,6 +40,7 @@ String? validatePasswordRegister(
     return null;
   }
 }
+
 /// for validating password field in login screen
 String? validatePasswordLogin(String password) {
   if (password.isEmpty) {
@@ -60,4 +61,25 @@ String? validateNameField(String name) {
   } else {
     return null;
   }
+}
+
+///for responsive Height
+
+double getMediaQueryHeight(
+    {required BuildContext context, required num value}) {
+  var size = MediaQuery.of(context).size;
+  //Figma Height
+  double xdHeight = 812;
+  double percentage = (value / xdHeight * 100).roundToDouble() / 100;
+  return size.height * percentage;
+}
+
+///for responsive Width
+
+double getMediaQueryWidth({required BuildContext context, required num value}) {
+  var size = MediaQuery.of(context).size;
+  //Figma width
+  double xdWidth = 375;
+  double percentage = (value / xdWidth * 100).roundToDouble() / 100;
+  return size.width * percentage;
 }
