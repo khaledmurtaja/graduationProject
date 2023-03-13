@@ -2,12 +2,11 @@ import 'package:blood4life/routes/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'App/modules/donationRequest/binding.dart';
-import 'App/modules/donationRequest/page.dart';
-import 'App/modules/login/binding.dart';
-import 'App/modules/login/page.dart';
-import 'App/modules/register/binding.dart';
-import 'App/modules/register/page.dart';
+import 'App/modules/donationForm/binding.dart';
+import 'App/modules/donationForm/page.dart';
+import 'App/modules/home/binding.dart';
+import 'App/modules/home/page.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -26,8 +25,8 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: ThemeData(primarySwatch: Colors.red, fontFamily: "Tajawal"),
           getPages: AppPages.pages,
-          initialBinding: DonationRequestBinding(),
-          home: DonationRequestScreen(),
+          initialBinding: HomeBinding(),
+          home: HomeScreen(),
         );
       },
     );

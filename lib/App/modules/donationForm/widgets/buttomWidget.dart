@@ -41,7 +41,7 @@ class ButtonWidget extends StatelessWidget {
                   topLeft: Radius.circular(25),
                   bottomLeft: Radius.circular(25),
                 ),
-          color: IsChosen ? primaryColor : textFormFieldColor,
+          color: IsChosen ? primaryColor : iconPrimaryColor,
         ),
         child: Center(
           child: Text(

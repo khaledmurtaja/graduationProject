@@ -4,8 +4,8 @@ import 'package:blood4life/App/modules/register/binding.dart';
 import 'package:blood4life/App/modules/register/page.dart';
 import 'package:blood4life/routes/routes.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
-import '../App/modules/donationRequest/binding.dart';
-import '../App/modules/donationRequest/page.dart';
+import '../App/modules/donationForm/binding.dart';
+import '../App/modules/donationForm/page.dart';
 import '../App/modules/home/binding.dart';
 import '../App/modules/home/page.dart';
 import '../App/modules/landingScreen/binding.dart';
@@ -29,7 +29,7 @@ abstract class AppPages {
         bindings: [RegisterBinding()]),
     GetPage(
         name: Routes.DONATION_REQUESTS,
-        page: () => DonationRequestScreen(),
-        bindings: [DonationRequestBinding()])
+        page: () => DonationFormScreen(),
+        bindings: [DonationFormBinding()])
   ];
 }

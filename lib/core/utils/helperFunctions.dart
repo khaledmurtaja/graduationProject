@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../values/consts.dart';
+import '../values/strings.dart';
 
 /// Construct a color from a hex code string, of the format #RRGGBB.
 Color hexToColor(String code) {

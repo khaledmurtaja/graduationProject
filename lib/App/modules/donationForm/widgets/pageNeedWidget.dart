@@ -1,35 +1,38 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/utils/helperFunctions.dart';
+import '../../../../core/values/colors.dart';
 import '../../../widgets/customButtonWidget.dart';
 import '../../../widgets/customDropdownButton.dart';
 import '../../../widgets/customTextFormField.dart';
 import '../controller.dart';
 
-class PageDonorWidget extends StatelessWidget {
-  DonationRequestScreenController controller;
-  PageDonorWidget({
+class PageNeedWidget extends StatelessWidget {
+  DonationFormScreenController controller;
+  PageNeedWidget({
     required this.controller,
   });
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
+
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "إسم المتبرع",
+              "إسم المحتاج",
               style: TextStyle(fontSize: 16.spMin, fontWeight: FontWeight.w500),
             ),
             SizedBox(
               height: getMediaQueryHeight(context: context, value: 8),
             ),
             CustomFormField(
-              controller: controller.nameOfDonorController,
+              controller: controller.nameOfNeedyController,
               prefixIcon: Icon(Icons.person),
               validator: () {},
               hint: 'اسم المحتاج بالكامل',
@@ -48,7 +51,7 @@ class PageDonorWidget extends StatelessWidget {
               height: getMediaQueryHeight(context: context, value: 8),
             ),
             CustomFormField(
-              controller: controller.phoneOfDonorController,
+              controller: controller.phoneOfNeedyController,
               prefixIcon: Icon(Icons.phone),
               validator: () {},
               hint: 'مثال 0597000000',
@@ -65,20 +68,6 @@ class PageDonorWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "العمر",
-                        style: TextStyle(
-                            fontSize: 16.spMin, fontWeight: FontWeight.w500),
-                      ),
-                      SizedBox(
-                        height: getMediaQueryHeight(context: context, value: 8),
-                      ),
-                      CustomDropdownButton(
-                        text: '18',
-                      ),
-                      SizedBox(
-                          height:
-                              getMediaQueryHeight(context: context, value: 16)),
                       Text(
                         "فصيلة الدم",
                         style: TextStyle(
@@ -101,20 +90,6 @@ class PageDonorWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "الوزن",
-                        style: TextStyle(
-                            fontSize: 16.spMin, fontWeight: FontWeight.w500),
-                      ),
-                      SizedBox(
-                        height: getMediaQueryHeight(context: context, value: 8),
-                      ),
-                      CustomDropdownButton(
-                        text: '63',
-                      ),
-                      SizedBox(
-                          height:
-                              getMediaQueryHeight(context: context, value: 16)),
-                      Text(
                         "مكان السكن",
                         style: TextStyle(
                             fontSize: 16.spMin, fontWeight: FontWeight.w500),
@@ -127,11 +102,29 @@ class PageDonorWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
             SizedBox(
-              height: getMediaQueryHeight(context: context, value: 96),
+              height: getMediaQueryHeight(context: context, value: 16),
+            ),
+            Text(
+              "التفاصيل (الوصف)",
+              style: TextStyle(fontSize: 16.spMin, fontWeight: FontWeight.w500),
+            ),
+            SizedBox(
+              height: getMediaQueryHeight(context: context, value: 8),
+            ),
+            CustomFormField(
+              controller: controller.detailsOfNeedyController,
+              validator: () {},
+              isPassword: false,
+              textInputType: TextInputType.text,
+              width: getMediaQueryWidth(context: context, value: 327),
+              height: getMediaQueryHeight(context: context, value: 133),
+            ),
+            SizedBox(
+              height: getMediaQueryHeight(context: context, value: 72),
             ),
             CustomButton(
               onPressed: () {},

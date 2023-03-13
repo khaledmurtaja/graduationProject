@@ -1,9 +1,9 @@
 // ignore_for_file: sort_child_properties_last
 
-import 'package:blood4life/App/modules/donationRequest/controller.dart';
-import 'package:blood4life/App/modules/donationRequest/widgets/buttomWidget.dart';
-import 'package:blood4life/App/modules/donationRequest/widgets/pageDonorWidget.dart';
-import 'package:blood4life/App/modules/donationRequest/widgets/pageNeedWidget.dart';
+import 'package:blood4life/App/modules/donationForm/controller.dart';
+import 'package:blood4life/App/modules/donationForm/widgets/buttomWidget.dart';
+import 'package:blood4life/App/modules/donationForm/widgets/pageDonorWidget.dart';
+import 'package:blood4life/App/modules/donationForm/widgets/pageNeedWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -13,7 +13,7 @@ import '../../../core/utils/helperFunctions.dart';
 import '../../../core/values/colors.dart';
 import '../../widgets/customAppBar.dart';
 
-class DonationRequestScreen extends GetView<DonationRequestScreenController> {
+class DonationFormScreen extends GetView<DonationFormScreenController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,10 +40,10 @@ class DonationRequestScreen extends GetView<DonationRequestScreenController> {
                 borderRadius: BorderRadius.all(
                   Radius.circular(25),
                 ),
-                color: textFormFieldColor,
+                color: iconPrimaryColor,
               ),
-              child: GetBuilder<DonationRequestScreenController>(
-                  builder: (DonationRequestScreenController controller) {
+              child: GetBuilder<DonationFormScreenController>(
+                  builder: (DonationFormScreenController controller) {
                 return Row(
                   children: <Widget>[
                     Expanded(
@@ -70,8 +70,8 @@ class DonationRequestScreen extends GetView<DonationRequestScreenController> {
             SizedBox(
               height: getMediaQueryHeight(context: context, value: 32),
             ),
-            GetBuilder<DonationRequestScreenController>(
-              builder: (DonationRequestScreenController controller) {
+            GetBuilder<DonationFormScreenController>(
+              builder: (DonationFormScreenController controller) {
                 return controller.needChoice
                     ? PageNeedWidget(
                         controller: controller,

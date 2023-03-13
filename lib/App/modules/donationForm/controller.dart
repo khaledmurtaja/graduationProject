@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class DonationRequestScreenController extends GetxController {
+class DonationFormScreenController extends GetxController {
   bool needChoice = true;
   bool donorChoice = false;
 

@@ -35,9 +35,10 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  get: ^4.6.5
-  flutter_svg: ^2.0.2
-  flutter_screenutil: ^5.6.1
+  get:
+  flutter_svg:
+  flutter_screenutil:
+  carousel_slider:
   smooth_page_indicator:
 dev_dependencies:
   flutter_test:
@@ -67,6 +68,7 @@ flutter:
     - assets/images/Sign in-pana.svg
     - assets/images/signup.svg
     - assets/images/icons/
+    - assets/images/banners/
 
 
 
@@ -79,6 +81,9 @@ flutter:
           weight: 500
         - asset: assets/google-fonts/Tajawal-Bold.ttf
           weight: 700
+#    - family: MyFlutterApp
+#      fonts:
+#        - asset: assets/IconFonts/MyFlutterApp.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:
