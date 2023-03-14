@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../blog/page.dart';
 import '../donationAppeal/page.dart';
 import '../notification/page.dart';
+import '../profile/binding.dart';
 import '../profile/page.dart';
 import 'homePageContent.dart';
 
@@ -26,7 +27,6 @@ class HomeScreenController extends GetxController {
       DeviceOrientation.portraitDown,
     ]);
   }
-
 
   changeCurrentBannerIndex(int index) {
     currentBannerIndex = index;

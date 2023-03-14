@@ -68,7 +68,9 @@ flutter:
     - assets/images/Sign in-pana.svg
     - assets/images/signup.svg
     - assets/images/icons/
+    - assets/images/icons/profile/
     - assets/images/banners/
+    - assets/images/test/
 
 
 

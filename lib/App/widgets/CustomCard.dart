@@ -6,7 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../core/values/colors.dart';
 
 class CustomCard extends StatelessWidget {
-  const CustomCard({Key? key}) : super(key: key);
+  const   CustomCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

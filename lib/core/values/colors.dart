@@ -8,4 +8,8 @@ const Color textBtnColor = Color(0xff0000FF);
 const Color iconPrimaryColor= Color(0xffEAEAEA);
 const Color textFormFieldColor = Color(0xfff8f8f8);
 const Color customCardTextColor=Color(0xff909090);
+const Color cardTextColor=Color(0xff717070);
+const Color dividerColor=Color(0xffD0CFCF);
+
+
 Color btmNavColor=hexToColor("#E52D2D");
