@@ -6,7 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../core/utils/helperFunctions.dart';
 import '../../core/values/colors.dart';
 
-class CustomAppBar extends StatelessWidget {
+class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   String title;
   final VoidCallback function;
 
@@ -17,33 +17,40 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        GestureDetector(
-          onTap: function,
-          child: Container(
-            width: 24,
-            height: 24,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(6),
-              ),
-              color: textFormFieldColor,
-            ),
+    return AppBar(
+      elevation: 0,
+      automaticallyImplyLeading: false,
+      backgroundColor: Colors.white,
+      titleSpacing: 0,
+      centerTitle: false,
+      title: Row(
+        children: [
+          SizedBox(
+            width: getMediaQueryWidth(context: context, value: 24),
+          ),
+          GestureDetector(
+            onTap: function,
             child: SvgPicture.asset(
               "assets/images/icons/turnBack.svg",
+              width: 24,
+              height: 24,
             ),
-            alignment: Alignment.center,
           ),
-        ),
-        SizedBox(
-          width: getMediaQueryWidth(context: context, value: 8),
-        ),
-        Text(
-          title,
-          style: TextStyle(fontSize: 20.spMin, fontWeight: FontWeight.w700),
-        ),
-      ],
+          SizedBox(
+            width: getMediaQueryWidth(context: context, value: 8),
+          ),
+          Text(
+            title,
+            style: TextStyle(
+                fontSize: 20.spMin,
+                fontWeight: FontWeight.w700,
+                color: Colors.black),
+          ),
+        ],
+      ),
     );
   }
+
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }
