@@ -16,7 +16,6 @@ class ProfileScreen extends GetView<ProfileScreenController> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -56,7 +55,9 @@ class ProfileScreen extends GetView<ProfileScreenController> {
               CustomListTile(
                 leadingicon: "assets/images/icons/profile/person.svg",
                 title: 'معلوماتي الشخصية',
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed("/personalInformation");
+                },
               ),
               SizedBox(
                 height: getMediaQueryHeight(context: context, value: 8),
@@ -71,7 +72,9 @@ class ProfileScreen extends GetView<ProfileScreenController> {
               CustomListTile(
                 leadingicon: "assets/images/icons/profile/note.svg",
                 title: 'سجل التبرع',
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed("/donationRecord");
+                },
               ),
               SizedBox(
                 height: getMediaQueryHeight(context: context, value: 8),
@@ -108,7 +111,9 @@ class ProfileScreen extends GetView<ProfileScreenController> {
               CustomListTile(
                 leadingicon: "assets/images/icons/profile/passwordcheck.svg",
                 title: 'إعادة تعين كلمة المرور',
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed("/resetPassword");
+                },
               ),
               SizedBox(
                 height: getMediaQueryHeight(context: context, value: 8),

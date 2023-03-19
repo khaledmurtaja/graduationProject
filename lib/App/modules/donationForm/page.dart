@@ -18,20 +18,20 @@ class DonationFormScreen extends GetView<DonationFormScreenController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: CustomAppBar(
+        function: () {},
+        title: 'إنشاء طلب تبرع',
+      ),
       body: Padding(
         padding: EdgeInsets.only(
-          top: getMediaQueryHeight(context: context, value: 60),
+          // top: getMediaQueryHeight(context: context, value: 60),
           left: getMediaQueryWidth(context: context, value: 24),
           right: getMediaQueryWidth(context: context, value: 24),
         ),
         child: Column(
           children: [
-            CustomAppBar(
-              function: () {},
-              title: 'إنشاء طلب تبرع',
-            ),
             SizedBox(
-              height: getMediaQueryHeight(context: context, value: 16),
+              height: getMediaQueryHeight(context: context, value: 8),
             ),
             Container(
               width: getMediaQueryWidth(context: context, value: 327),

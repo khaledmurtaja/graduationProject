@@ -75,6 +75,8 @@ class HomeScreenContent extends GetView<HomeScreenController> {
         SizedBox(
           height: getMediaQueryHeight(context: context, value: 24),
         ),
+
+        
         Expanded(
           child: ListView.separated(
             physics: const BouncingScrollPhysics(),
