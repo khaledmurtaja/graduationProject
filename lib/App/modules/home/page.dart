@@ -74,9 +74,12 @@ class HomeScreen extends GetView<HomeScreenController> {
           },
         ),
       ),
-      body: GetBuilder(builder: (HomeScreenController controller) {
-        return SafeArea(child: controller.pages[controller.currentPageIndex]);
-      }),
+      body: Padding(
+        padding:  EdgeInsets.symmetric(horizontal: getMediaQueryWidth(context: context, value: 24)),
+        child: GetBuilder(builder: (HomeScreenController controller) {
+          return SafeArea(child: controller.pages[controller.currentPageIndex]);
+        }),
+      ),
     );
   }
 }

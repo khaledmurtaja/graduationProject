@@ -10,6 +10,7 @@ const Color textFormFieldColor = Color(0xfff8f8f8);
 const Color customCardTextColor=Color(0xff909090);
 const Color cardTextColor=Color(0xff717070);
 const Color dividerColor=Color(0xffD0CFCF);
+const Color bottomSheetLineColor=Color(0xff8B97A9);
 
 
 Color btmNavColor=hexToColor("#E52D2D");

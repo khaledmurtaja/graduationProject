@@ -75,6 +75,12 @@ class PageDonorWidget extends StatelessWidget {
                       ),
                       CustomDropdownButton(
                         text: '18',
+                        textStyle: TextStyle(
+                          fontSize: 20.spMin,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        data: [],
                       ),
                       SizedBox(
                           height:
@@ -89,6 +95,12 @@ class PageDonorWidget extends StatelessWidget {
                       ),
                       CustomDropdownButton(
                         text: 'O-',
+                        textStyle: TextStyle(
+                          fontSize: 20.spMin,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        data: [],
                       ),
                     ],
                   ),
@@ -110,6 +122,12 @@ class PageDonorWidget extends StatelessWidget {
                       ),
                       CustomDropdownButton(
                         text: '63',
+                        textStyle: TextStyle(
+                          fontSize: 20.spMin,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        data: [],
                       ),
                       SizedBox(
                           height:
@@ -124,6 +142,12 @@ class PageDonorWidget extends StatelessWidget {
                       ),
                       CustomDropdownButton(
                         text: 'دير البلح',
+                        textStyle: TextStyle(
+                          fontSize: 20.spMin,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        data: [],
                       ),
                     ],
                   ),

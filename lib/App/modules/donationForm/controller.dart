@@ -4,6 +4,14 @@ import 'package:get/get.dart';
 class DonationFormScreenController extends GetxController {
   bool needChoice = true;
   bool donorChoice = false;
+  List city=[
+    "غزة",
+    "بيت حانون",
+    "بيت لاهيا",
+    "الوسطى",
+    "خانيونس",
+    "رفح"
+  ];
 
   // Controllers for needChoice
   TextEditingController nameOfNeedyController = TextEditingController();

@@ -27,8 +27,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: ThemeData(primarySwatch: Colors.red, fontFamily: "Tajawal"),
           getPages: AppPages.pages,
-          initialBinding: ProfileBinding(),
-          home: BlogScreen(),
+          initialRoute: "/home",
         );
       },
     );

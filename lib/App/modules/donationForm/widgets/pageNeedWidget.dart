@@ -78,6 +78,15 @@ class PageNeedWidget extends StatelessWidget {
                       ),
                       CustomDropdownButton(
                         text: 'O-',
+                        textStyle: TextStyle(
+                          fontSize: 20.spMin,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        data: [
+                          "-O",
+                          "-A"
+                        ],
                       ),
                     ],
                   ),
@@ -99,6 +108,14 @@ class PageNeedWidget extends StatelessWidget {
                       ),
                       CustomDropdownButton(
                         text: 'دير البلح',
+                        textStyle: TextStyle(
+                          fontSize: 20.spMin,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        data: [
+
+                        ],
                       ),
                     ],
                   ),

@@ -7,17 +7,27 @@ import '../../core/values/colors.dart';
 
 
 class CustomDropdownButton extends StatelessWidget {
-  List<String> data = ['A', 'B', 'C', 'D'];
   String text;
+  TextStyle textStyle;
+  List<String> data;
+  String? iconPath;
+  double width;
+  double height;
   CustomDropdownButton({
     Key? key,
+    required this.data,
     required this.text,
+    required this.textStyle,
+     this.width=148,
+    this.height=48,
+     this.iconPath
+
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: getMediaQueryWidth(context: context, value: 148),
-      height: getMediaQueryHeight(context: context, value: 48),
+      width: getMediaQueryWidth(context: context, value: width),
+      height: getMediaQueryHeight(context: context, value: height),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(
           Radius.circular(12),
@@ -40,18 +50,14 @@ class CustomDropdownButton extends StatelessWidget {
           }).toList(),
           hint: Row(
             children: <Widget>[
-              Padding(
+             iconPath!=null? Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12.0),
                   child: SvgPicture.asset(
                     "assets/images/icons/drop.svg",
-                  )),
+                  )):Container(),
               Text(
                 text,
-                style: TextStyle(
-                  fontSize: 20.spMin,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w500,
-                ),
+                style:textStyle,
               ),
             ],
           ),
