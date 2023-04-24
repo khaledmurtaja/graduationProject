@@ -20,246 +20,236 @@ class AppealScreen extends GetView<DonationAppealScreenController> {
         backgroundColor: Colors.white,
         elevation: 0,
         title: Padding(
-          padding: EdgeInsets.only(
-              right: getMediaQueryWidth(context: context, value: 24),
-              top: getMediaQueryHeight(context: context, value: 16)),
+          padding:  EdgeInsets.only(top: getMediaQueryHeight(context: context, value: 24)),
           child: Text(
             "الطلبات",
             style: TextStyle(
-                fontSize: 20.sp,
+                fontSize: 20.spMin,
                 fontWeight: FontWeight.w700,
                 color: Colors.black),
           ),
         ),
-      ),
-      body: GestureDetector(
-        onTap:(){
-          Get.back();
-        } ,
-        child: GetBuilder<DonationAppealScreenController>(
-          builder: (controller) {
-            return Column(
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: CustomSearchBar(
-                        searchBarController: controller.searchBarController,
-                        readOnly: true,
-                        function: (){
-                          print("going to search screen");
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      width: getMediaQueryWidth(context: context, value: 8),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.bottomSheet(
-                            GetBuilder<DonationAppealScreenController>(
-                          builder: (controller) {
-                            return SizedBox(
-                              height: getMediaQueryHeight(
-                                  context: context, value: 543),
-                              child: Padding(
-                                padding: const EdgeInsets.all(24),
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Align(
-                                        alignment: Alignment.center,
-                                        child: Container(
-                                          color: bottomSheetLineColor,
-                                          width: 100,
-                                          height: 3,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: getMediaQueryHeight(
-                                            context: context, value: 16.75),
-                                      ),
-                                      Row(
-                                        children: [
-                                          const Spacer(),
-                                          Text(
-                                            "الفرز والعرض حسب",
-                                            style: TextStyle(
-                                                fontSize: 20.sp,
-                                                fontWeight: FontWeight.w700),
-                                          ),
-                                          const Spacer(),
-                                          InkWell(
-                                              onTap: () {
-                                                Get.back();
-
-                                                ///close the bottom sheet
-                                              },
-                                              child: SvgPicture.asset(
-                                                  "assets/images/icons/close.svg"))
-                                        ],
-                                      ),
-                                      Text(
-                                        "الفرز",
-                                        style: TextStyle(
-                                            fontSize: 20.sp,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                      SizedBox(
-                                        height: getMediaQueryHeight(
-                                            context: context, value: 16),
-                                      ),
-                                      Text(
-                                        "فصيلة الدم",
-                                        style: TextStyle(
-                                            fontSize: 20.sp,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                      SizedBox(
-                                        height: getMediaQueryHeight(
-                                            context: context, value: 8),
-                                      ),
-                                      Row(
-                                        children: [
-                                          BloodUnit(
-                                            bloodUnit: '-A',
-                                            controller: controller,
-                                          ),
-                                          BloodUnit(
-                                            bloodUnit: '-B',
-                                            controller: controller,
-                                          ),
-                                          BloodUnit(
-                                            bloodUnit: '-AB',
-                                            controller: controller,
-                                          ),
-                                          BloodUnit(
-                                            bloodUnit: '-O',
-                                            controller: controller,
-                                          )
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: getMediaQueryHeight(
-                                            context: context, value: 8),
-                                      ),
-                                      Row(
-                                        children: [
-                                          BloodUnit(
-                                            bloodUnit: '+A',
-                                            controller: controller,
-                                          ),
-                                          BloodUnit(
-                                            bloodUnit: '+B',
-                                            controller: controller,
-                                          ),
-                                          BloodUnit(
-                                            bloodUnit: '+AB',
-                                            controller: controller,
-                                          ),
-                                          BloodUnit(
-                                            bloodUnit: '+O',
-                                            controller: controller,
-                                          )
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: getMediaQueryHeight(
-                                            context: context, value: 16),
-                                      ),
-                                      Text(
-                                        "مكان السكن",
-                                        style: TextStyle(
-                                            fontSize: 16.sp,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                      SizedBox(
-                                        height: getMediaQueryHeight(
-                                            context: context, value: 8),
-                                      ),
-                                      CustomDropdownButton(
-                                        height: getMediaQueryHeight(
-                                            context: context, value: 48),
-                                        width: getMediaQueryWidth(
-                                            context: context, value: 176),
-                                        textStyle: TextStyle(
-                                            fontSize: 16.sp,
-                                            color: customCardTextColor),
-                                        text: "اختر مكان السكن",
-                                        data: controller.city,
-                                      ),
-                                      SizedBox(
-                                          height: getMediaQueryHeight(
-                                              context: context, value: 32)),
-                                      Text(
-                                        "العرض حسب",
-                                        style: TextStyle(
-                                            fontSize: 20.sp,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                      SizedBox(
-                                        height: getMediaQueryHeight(
-                                            context: context, value: 16),
-                                      ),
-                                      InkWell(
-                                        onTap: () {},
-                                        child: Text(
-                                          "من الاقدم الى الأحدث",
-                                          style: TextStyle(
-                                              fontSize: 16.spMin,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: getMediaQueryHeight(
-                                            context: context, value: 16),
-                                      ),
-                                      InkWell(
-                                        onTap: () {},
-                                        child: Text(
-                                          "من الأحدث الى الاقدم",
-                                          style: TextStyle(
-                                              fontSize: 16.spMin,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      )
-                                    ],
+        actions: [
+          InkWell(
+            onTap: () {
+              Get.bottomSheet(
+                  GetBuilder<DonationAppealScreenController>(
+                    builder: (controller) {
+                      return SizedBox(
+                        height: getMediaQueryHeight(
+                            context: context, value: 543),
+                        child: Padding(
+                          padding: const EdgeInsets.all(24),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment:
+                              CrossAxisAlignment.start,
+                              children: [
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Container(
+                                    color: bottomSheetLineColor,
+                                    width: 100,
+                                    height: 3,
                                   ),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
-                            backgroundColor: Colors.white,
-                            isScrollControlled: true,
-                            shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50),
-                                    topLeft: Radius.circular(50))));
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: textFormFieldColor,
-                        ),
-                        height:
-                            getMediaQueryHeight(context: context, value: 40),
-                        width: getMediaQueryWidth(context: context, value: 40),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SvgPicture.asset(
-                            "assets/images/icons/documentfilter.svg",
+                                SizedBox(
+                                  height: getMediaQueryHeight(
+                                      context: context, value: 16.75),
+                                ),
+                                Row(
+                                  children: [
+                                    const Spacer(),
+                                    Text(
+                                      "الفرز والعرض حسب",
+                                      style: TextStyle(
+                                          fontSize: 20.spMin,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                    const Spacer(),
+                                    InkWell(
+                                        onTap: () {
+                                          Get.back();
+
+                                          ///close the bottom sheet
+                                        },
+                                        child: SvgPicture.asset(
+                                            "assets/images/icons/close.svg"))
+                                  ],
+                                ),
+                                Text(
+                                  "الفرز",
+                                  style: TextStyle(
+                                      fontSize: 20.spMin,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                                SizedBox(
+                                  height: getMediaQueryHeight(
+                                      context: context, value: 16),
+                                ),
+                                Text(
+                                  "فصيلة الدم",
+                                  style: TextStyle(
+                                      fontSize: 20.spMin,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                SizedBox(
+                                  height: getMediaQueryHeight(
+                                      context: context, value: 8),
+                                ),
+                                Row(
+                                  children: [
+                                    BloodUnit(
+                                      bloodUnit: '-A',
+                                      controller: controller,
+                                    ),
+                                    BloodUnit(
+                                      bloodUnit: '-B',
+                                      controller: controller,
+                                    ),
+                                    BloodUnit(
+                                      bloodUnit: '-AB',
+                                      controller: controller,
+                                    ),
+                                    BloodUnit(
+                                      bloodUnit: '-O',
+                                      controller: controller,
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: getMediaQueryHeight(
+                                      context: context, value: 8),
+                                ),
+                                Row(
+                                  children: [
+                                    BloodUnit(
+                                      bloodUnit: '+A',
+                                      controller: controller,
+                                    ),
+                                    BloodUnit(
+                                      bloodUnit: '+B',
+                                      controller: controller,
+                                    ),
+                                    BloodUnit(
+                                      bloodUnit: '+AB',
+                                      controller: controller,
+                                    ),
+                                    BloodUnit(
+                                      bloodUnit: '+O',
+                                      controller: controller,
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: getMediaQueryHeight(
+                                      context: context, value: 16),
+                                ),
+                                Text(
+                                  "مكان السكن",
+                                  style: TextStyle(
+                                      fontSize: 16.spMin,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                SizedBox(
+                                  height: getMediaQueryHeight(
+                                      context: context, value: 8),
+                                ),
+                                CustomDropdownButton(
+                                  height: getMediaQueryHeight(
+                                      context: context, value: 48),
+                                  width: getMediaQueryWidth(
+                                      context: context, value: 176),
+                                  textStyle: TextStyle(
+                                      fontSize: 16.spMin,
+                                      color: customCardTextColor),
+                                  data: controller.city, onChange: (String ) {  },
+                                ),
+                                SizedBox(
+                                    height: getMediaQueryHeight(
+                                        context: context, value: 32)),
+                                Text(
+                                  "العرض حسب",
+                                  style: TextStyle(
+                                      fontSize: 20.spMin,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                                SizedBox(
+                                  height: getMediaQueryHeight(
+                                      context: context, value: 16),
+                                ),
+                                InkWell(
+                                  onTap: () {},
+                                  child: Text(
+                                    "من الاقدم الى الأحدث",
+                                    style: TextStyle(
+                                        fontSize: 16.spMin,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: getMediaQueryHeight(
+                                      context: context, value: 16),
+                                ),
+                                InkWell(
+                                  onTap: () {},
+                                  child: Text(
+                                    "من الأحدث الى الاقدم",
+                                    style: TextStyle(
+                                        fontSize: 16.spMin,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  ],
+                      );
+                    },
+                  ),
+                  backgroundColor: Colors.white,
+                  isScrollControlled: true,
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(50),
+                          topLeft: Radius.circular(50))));
+            },
+            child: Padding(
+              padding:  EdgeInsets.only(top: getMediaQueryHeight(context: context, value: 16)),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: textFormFieldColor,
                 ),
-                SizedBox(
-                  height: getMediaQueryHeight(context: context, value: 16),
+                height:
+                getMediaQueryHeight(context: context, value: 40),
+                width: getMediaQueryWidth(context: context, value: 40),
+                child: Padding(
+                  padding:  EdgeInsets.only(
+                    right: getMediaQueryWidth(context: context, value: 5),
+                    left: getMediaQueryWidth(context: context, value: 5),
+                    top: getMediaQueryHeight(context: context, value: 6),
+                    bottom: getMediaQueryWidth(context: context, value: 6)
+
+                  ),
+                  child: SvgPicture.asset(
+                    "assets/images/icons/documentfilter.svg",
+                    height: getMediaQueryHeight(context: context, value: 27),
+                    width: getMediaQueryWidth(context: context, value: 29),
+                  ),
                 ),
+              ),
+            ),
+          ),
+
+        ],
+      ),
+      body: GetBuilder<DonationAppealScreenController>(
+        builder: (controller) {
+          return Padding(
+            padding:  EdgeInsets.only(top: getMediaQueryHeight(context: context, value: 24)),
+            child: Column(
+              children: [
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
@@ -298,7 +288,7 @@ class AppealScreen extends GetView<DonationAppealScreenController> {
                                 style: TextStyle(
                                     fontWeight: FontWeight.w500,
                                     color: controller.isAppealTabSelected?Colors.black:customCardTextColor,
-                                    fontSize: 12.sp),
+                                    fontSize: 12.spMin),
                               ),
                             ),
                           ),
@@ -329,7 +319,7 @@ class AppealScreen extends GetView<DonationAppealScreenController> {
                                 style: TextStyle(
                                     fontWeight: FontWeight.w500,
                                     color: !controller.isAppealTabSelected?Colors.black:customCardTextColor,
-                                    fontSize: 12.sp),
+                                    fontSize: 12.spMin),
                               ),
                             ),
                           ),
@@ -343,7 +333,7 @@ class AppealScreen extends GetView<DonationAppealScreenController> {
                   child: ListView.separated(
                     physics: const BouncingScrollPhysics(),
                     itemCount: 6,
-                    itemBuilder: (context, index) => CustomCard(),
+                    itemBuilder: (context, index) => const CustomCard(),
                     separatorBuilder: (BuildContext context, int index) {
                       return SizedBox(
                         height: getMediaQueryHeight(context: context, value: 16),
@@ -352,9 +342,9 @@ class AppealScreen extends GetView<DonationAppealScreenController> {
                   ),
                 )
               ],
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }

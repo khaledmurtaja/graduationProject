@@ -2,11 +2,11 @@ import 'package:blood4life/App/modules/notification/widgets/customCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 import '../../../core/utils/helperFunctions.dart';
-import '../../../core/values/colors.dart';
-
-class NotificationScreen extends StatelessWidget {
+import 'controller.dart';
+class NotificationScreen extends GetView<NotificationScreenController> {
   NotificationScreen({super.key});
   bool notf = false;
   @override

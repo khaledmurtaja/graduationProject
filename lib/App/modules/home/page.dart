@@ -11,6 +11,8 @@ class HomeScreen extends GetView<HomeScreenController> {
   const HomeScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    double iconHeight = getMediaQueryHeight(context: context, value: 24);
+    double iconWidth = getMediaQueryWidth(context: context, value: 24);
     return Scaffold(
       backgroundColor: Colors.white,
       bottomNavigationBar: SizedBox(
@@ -19,7 +21,28 @@ class HomeScreen extends GetView<HomeScreenController> {
           builder: (HomeScreenController controller) {
             return BottomNavigationBar(
                 onTap: (index) {
-                  controller.changeCurrentPageIndex(index);
+                  if (index == profilePageIndex) {
+                    if (controller.isLoggedIn != null &&
+                        controller.isLoggedIn == true) {
+                      controller.changeCurrentPageIndex(index);
+                    } else {
+                      controller.blurScreenFun(true);
+                      customDialog(
+                              context: context,
+                              controller: controller,
+                              onDismissCallback: () {
+                                controller.blurScreenFun(false);
+                              },
+                          title: "الولوج الى هذه الصفحة يحتاج منك تسجيل الدخول",
+                              btnCancelOnPress: () {},
+                              btnOkOnPress: () {
+                                Get.toNamed("/login");
+                              })
+                          .show();
+                    }
+                  } else {
+                    controller.changeCurrentPageIndex(index);
+                  }
                 },
                 currentIndex: controller.currentPageIndex,
                 backgroundColor: btmNavColor,
@@ -31,43 +54,59 @@ class HomeScreen extends GetView<HomeScreenController> {
                 items: [
                   BottomNavigationBarItem(
                       icon: Padding(
-                        padding: EdgeInsets.only(bottom: 5.spMin),
-                        child: SvgPicture.asset(controller.currentPageIndex == 0
-                            ? boldHomeIcon
-                            : linearHomeIcon),
+                        padding: EdgeInsets.only(bottom: 5.h),
+                        child: SvgPicture.asset(
+                          controller.currentPageIndex == 0
+                              ? boldHomeIcon
+                              : linearHomeIcon,
+                          height: iconHeight,
+                          width: iconWidth,
+                        ),
                       ),
                       label: "الرئيسية"),
                   BottomNavigationBarItem(
                       icon: Padding(
-                        padding: EdgeInsets.only(bottom: 5.spMin),
-                        child: SvgPicture.asset(controller.currentPageIndex == 1
-                            ? boldDirectBoxReciveIcon
-                            : linearDirectBoxReciveIcon),
+                        padding: EdgeInsets.only(bottom: 5.h),
+                        child: SvgPicture.asset(
+                            controller.currentPageIndex == 1
+                                ? boldDirectBoxReciveIcon
+                                : linearDirectBoxReciveIcon,
+                            height: iconHeight,
+                            width: iconWidth),
                       ),
                       label: "طلبات التبرع"),
                   BottomNavigationBarItem(
                       icon: Padding(
-                        padding: EdgeInsets.only(bottom: 5.spMin),
-                        child: SvgPicture.asset(controller.currentPageIndex == 2
-                            ? boldNotificationIcon
-                            : linearNotificationIcon),
+                        padding: EdgeInsets.only(bottom: 5.h),
+                        child: SvgPicture.asset(
+                            controller.currentPageIndex == 2
+                                ? boldNotificationIcon
+                                : linearNotificationIcon,
+                            height: iconHeight,
+                            width: iconWidth),
                       ),
                       label: "الاشعارات"),
                   BottomNavigationBarItem(
                     icon: Padding(
-                      padding: EdgeInsets.only(bottom: 5.spMin),
-                      child: SvgPicture.asset(controller.currentPageIndex == 3
-                          ? boldBookIcon
-                          : linearBookIcon),
+                      padding: EdgeInsets.only(bottom: 5.h),
+                      child: SvgPicture.asset(
+                          controller.currentPageIndex == 3
+                              ? boldBookIcon
+                              : linearBookIcon,
+                          height: iconHeight,
+                          width: iconWidth),
                     ),
                     label: "مدونتي",
                   ),
                   BottomNavigationBarItem(
                       icon: Padding(
-                        padding: EdgeInsets.only(bottom: 5.spMin),
-                        child: SvgPicture.asset(controller.currentPageIndex == 4
-                            ? boldProfileIcon
-                            : linearProfileIcon),
+                        padding: EdgeInsets.only(bottom: 5.h),
+                        child: SvgPicture.asset(
+                            controller.currentPageIndex == 4
+                                ? boldProfileIcon
+                                : linearProfileIcon,
+                            height: iconHeight,
+                            width: iconWidth),
                       ),
                       label: "صفحتي")
                 ]);
@@ -75,7 +114,8 @@ class HomeScreen extends GetView<HomeScreenController> {
         ),
       ),
       body: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: getMediaQueryWidth(context: context, value: 24)),
+        padding: EdgeInsets.symmetric(
+            horizontal: getMediaQueryWidth(context: context, value: 24)),
         child: GetBuilder(builder: (HomeScreenController controller) {
           return SafeArea(child: controller.pages[controller.currentPageIndex]);
         }),

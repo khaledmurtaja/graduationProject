@@ -7,6 +7,7 @@ class DonationAppealBinding extends Bindings {
   void dependencies() {
     // TODO: implement dependencies
     Get.lazyPut<DonationAppealScreenController>(
-            () => DonationAppealScreenController());
+            () => DonationAppealScreenController(),fenix: true);
+    // Get.put(DonationAppealScreenController());
   }
 }

@@ -6,6 +6,8 @@ import 'package:blood4life/routes/routes.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import '../App/modules/appealDetails/binding.dart';
 import '../App/modules/appealDetails/page.dart';
+import '../App/modules/blog/binding.dart';
+import '../App/modules/donationAppeal/binding.dart';
 import '../App/modules/donationForm/binding.dart';
 import '../App/modules/donationForm/page.dart';
 import '../App/modules/donationRecord/binding.dart';
@@ -13,11 +15,14 @@ import '../App/modules/donationRecord/page.dart';
 import '../App/modules/donationRequestDetails/binding.dart';
 import '../App/modules/donationRequestDetails/page.dart';
 import '../App/modules/home/binding.dart';
+import '../App/modules/home/middleware.dart';
 import '../App/modules/home/page.dart';
 import '../App/modules/landingScreen/binding.dart';
 import '../App/modules/landingScreen/page.dart';
+import '../App/modules/notification/binding.dart';
 import '../App/modules/personalInformation/binding.dart';
 import '../App/modules/personalInformation/page.dart';
+import '../App/modules/profile/binding.dart';
 import '../App/modules/resetPassword/binding.dart';
 import '../App/modules/resetPassword/page.dart';
 
@@ -27,8 +32,15 @@ abstract class AppPages {
         name: Routes.LANDING_Page,
         page: () => LandingScreen(),
         bindings: [LandingBinding()]),
-    GetPage(
-        name: Routes.HOME, page: () => HomeScreen(), bindings: [HomeBinding()]),
+    GetPage(name: Routes.HOME, page: () => HomeScreen(), bindings: [
+      HomeBinding(),
+      NotificationBinding(),
+      DonationAppealBinding(),
+      BlogBinding(),
+      ProfileBinding()
+    ], middlewares: [
+      HomeMiddleWare()
+    ]),
     GetPage(
         name: Routes.LOGIN,
         page: () => LoginScreen(),
@@ -38,7 +50,7 @@ abstract class AppPages {
         page: () => RegisterScreen(),
         bindings: [RegisterBinding()]),
     GetPage(
-      name: Routes.DONATION_REQUESTS,
+      name: Routes.DONATION_FORM,
       page: () => DonationFormScreen(),
       bindings: [DonationFormBinding()],
     ),

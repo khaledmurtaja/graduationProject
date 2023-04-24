@@ -11,14 +11,16 @@ class CustomButton extends StatelessWidget {
   double? width;
   bool? showIcon;
   FontWeight? textBtnFontWeight;
+  IconData? theIconBesideText;
 
   CustomButton(
       {super.key,
       required this.onPressed,
       required this.text,
       this.width,
+        this.theIconBesideText,
       this.showIcon = false,
-      this.textBtnFontWeight = FontWeight.w500});
+      this.textBtnFontWeight = FontWeight.w500,  });
 
   @override
   Widget build(BuildContext context) {
@@ -35,13 +37,19 @@ class CustomButton extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(top: 15, bottom: 15),
             child: !showIcon!
-                ? Text(
-                    text,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.spMin,
-                        fontWeight: textBtnFontWeight),
-                  )
+                ? Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    theIconBesideText!=null?Icon(theIconBesideText,color: Colors.white,):Container(),
+                    Text(
+                        text,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16.spMin,
+                            fontWeight: textBtnFontWeight),
+                      ),
+                  ],
+                )
                 : SvgPicture.asset(
                     "assets/images/icons/share.svg",
                   ),

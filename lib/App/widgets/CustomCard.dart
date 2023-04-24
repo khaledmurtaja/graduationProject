@@ -16,18 +16,16 @@ class CustomCard extends StatelessWidget {
         color: textFormFieldColor,
       ),
       child: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: getMediaQueryWidth(context: context, value: 8),vertical: getMediaQueryWidth(context: context, value: 8)),
+        padding:  EdgeInsets.symmetric(horizontal: getMediaQueryWidth(context: context, value: 8),vertical: getMediaQueryWidth(context: context, value: 16)),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
-                CircleAvatar(
-                  backgroundColor: textFormFieldColor,
-                  child: SvgPicture.asset(
-                    "assets/images/icons/profilecircleBlack.svg",
-                    width: 24.w,
-                    height: 24.h,
-                  ),
+                SvgPicture.asset(
+                  "assets/images/icons/profilecircleBlack.svg",
+                  width: 24.w,
+                  height: 24.h,
                 ),
                 SizedBox(
                   width: getMediaQueryWidth(context: context, value: 8),
@@ -45,7 +43,7 @@ class CustomCard extends StatelessWidget {
               "أنا احتاج الى ٣اكياس من الدم لعملية جراحية طارئة لفصيلة دمo- في متستشفى الاقصى",
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 8.spMin,color: customCardTextColor),
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 10.spMin,color: customCardTextColor),
             ),
             SizedBox(
               height: getMediaQueryHeight(context: context, value: 8),

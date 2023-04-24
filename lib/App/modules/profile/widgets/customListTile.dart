@@ -37,10 +37,7 @@ class CustomListTile extends StatelessWidget {
         SizedBox(
           width: getMediaQueryWidth(context: context, value: 11),
         ),
-        SizedBox(
-          width: containsSwitch
-              ? getMediaQueryWidth(context: context, value: 181)
-              : getMediaQueryWidth(context: context, value: 192),
+        Expanded(
           child: Text(
             title,
             style: TextStyle(

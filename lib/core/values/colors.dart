@@ -13,4 +13,5 @@ const Color dividerColor = Color(0xffD0CFCF);
 const Color timeColor = Color(0xffADAEB3);
 const Color editBtnColor = Color(0xff909090);
 const Color verifyBtnColor = Color(0xffD9D9D9);
+const Color bottomSheetLineColor=Color(0xff8B97A9);
 Color btmNavColor = hexToColor("#E52D2D");

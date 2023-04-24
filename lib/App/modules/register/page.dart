@@ -1,10 +1,8 @@
 import 'package:blood4life/core/utils/helperFunctions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
 import '../../widgets/customButtonWidget.dart';
 import '../../widgets/customTextBtnWidget.dart';
 import '../../widgets/customTextFormField.dart';
@@ -12,10 +10,9 @@ import 'controller.dart';
 
 class RegisterScreen extends GetView<RegisterScreenController> {
   final _formKey = GlobalKey<FormState>();
-  
+
   @override
   Widget build(BuildContext context) {
-
     double deviceHeight = MediaQuery.of(context).size.height;
     double deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -64,10 +61,14 @@ class RegisterScreen extends GetView<RegisterScreenController> {
                   ),
                   CustomFormField(
                     controller: controller.nameController,
-                    prefixIcon: Icon(Icons.person),
+                    prefixIcon: const Icon(Icons.person),
                     validator: validateNameField,
                     hint: 'الإسم رباعي',
                     isPassword: false,
+                    focusNode: controller.nameFocusNode,
+                    onFieldSubmitted: (){
+                      controller.emailFocusNode.requestFocus();
+                    },
                     width: deviceWidth * 0.87,
                   ),
                   SizedBox(
@@ -86,6 +87,10 @@ class RegisterScreen extends GetView<RegisterScreenController> {
                     prefixIcon: const Icon(Icons.email),
                     validator: validateEmail,
                     hint: 'email@gmail.com',
+                    focusNode: controller.emailFocusNode,
+                    onFieldSubmitted: (){
+                      controller.passwordFocusNode.requestFocus();
+                    },
                     isPassword: false,
                     width: deviceWidth * 0.87,
                   ),
@@ -104,10 +109,15 @@ class RegisterScreen extends GetView<RegisterScreenController> {
                     builder: (RegisterScreenController controller) {
                       return CustomFormField(
                         controller: controller.passwordController,
-                        passwordConfirmController: controller.passwordConfirmController,
+                        passwordConfirmController:
+                            controller.passwordConfirmController,
                         prefixIcon: const Icon(Icons.lock),
-                        validator:validatePasswordRegister,
+                        validator: validatePasswordRegister,
                         hint: '********',
+                        focusNode: controller.passwordFocusNode,
+                        onFieldSubmitted: (){
+                          controller.passwordConfirmFocusNode.requestFocus();
+                        },
                         isPassword: controller.securePasswordField,
                         width: deviceWidth * 0.87,
                         suffixIcon: IconButton(
@@ -136,10 +146,13 @@ class RegisterScreen extends GetView<RegisterScreenController> {
                     builder: (RegisterScreenController controller) {
                       return CustomFormField(
                         controller: controller.passwordConfirmController,
-                        passwordConfirmController: controller.passwordController,
+                        passwordConfirmController:
+                            controller.passwordController,
                         prefixIcon: const Icon(Icons.lock),
                         validator: validatePasswordRegister,
+                        onFieldSubmitted: (){},
                         hint: '********',
+                        focusNode: controller.passwordConfirmFocusNode,
                         isPassword: controller.securePasswordConfirmField,
                         width: deviceWidth * 0.87,
                         suffixIcon: IconButton(
@@ -156,14 +169,27 @@ class RegisterScreen extends GetView<RegisterScreenController> {
                   SizedBox(
                     height: deviceHeight * 0.04,
                   ),
-                  CustomButton(
-                    onPressed: () {
-                      bool isFormValidated=_formKey.currentState!.validate();
-                      if(isFormValidated){
-                        Get.offAllNamed("/home");
-                      }
-                    },
-                    text: 'إنشاء حساب',
+                  Align(
+                    alignment: Alignment.center,
+                    child: GetBuilder<RegisterScreenController>(
+                      builder: (RegisterScreenController controller) {
+                        if (controller.isLoading) {
+                          return const CircularProgressIndicator(
+                          );
+                        } else {
+                          return CustomButton(
+                            onPressed: () async {
+                              bool isFormValidated =
+                                  _formKey.currentState!.validate();
+                              if (isFormValidated) {
+                                controller.registerUser(controller: controller);
+                              }
+                            },
+                            text: 'إنشاء حساب',
+                          );
+                        }
+                      },
+                    ),
                   ),
                   SizedBox(
                     height: deviceHeight * 0.019,
@@ -179,9 +205,11 @@ class RegisterScreen extends GetView<RegisterScreenController> {
                       const SizedBox(
                         width: 4,
                       ),
-                      CustomTextButton(text: 'تسجيل الدخول', function: () {
-                        Get.offAllNamed("/login");
-                      }),
+                      CustomTextButton(
+                          text: 'تسجيل الدخول',
+                          function: () {
+                            Get.offAllNamed("/login");
+                          }),
                     ],
                   ),
                   SizedBox(
