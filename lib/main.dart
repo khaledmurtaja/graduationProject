@@ -11,6 +11,8 @@ import 'App/modules/home/binding.dart';
 import 'App/modules/home/page.dart';
 import 'App/modules/profile/binding.dart';
 import 'App/modules/profile/page.dart';
+import 'App/modules/resetPassword/binding.dart';
+import 'App/modules/resetPassword/page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,7 +37,8 @@ class MyApp extends StatelessWidget {
           // home: ProfileScreen(),
           initialBinding: HomeBinding(),
           home: HomeScreen(),
-          // home: DonationRequestDetailsScreen(),
+          // home: ResetPasswordScreen(),
+          // initialBinding: ResetPasswordBinding(),
         );
       },
     );
