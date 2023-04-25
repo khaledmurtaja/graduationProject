@@ -1,11 +1,13 @@
 import 'package:blood4life/App/modules/blog/widgets/customCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../../core/utils/helperFunctions.dart';
 import '../../../core/values/colors.dart';
+import 'controller.dart';
 
-class BlogScreen extends StatelessWidget {
+class BlogScreen extends GetView<BlogScreenController> {
   const BlogScreen({super.key});
 
   @override

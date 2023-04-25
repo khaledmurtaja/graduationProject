@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../../core/utils/helperFunctions.dart';
+import '../../../core/values/strings.dart';
+import '../../data/services/sharedPrefService.dart';
 import '../../widgets/customButtonWidget.dart';
 import '../../widgets/customTextFormField.dart';
 import 'controller.dart';
@@ -63,6 +65,10 @@ class LoginScreen extends GetView<LoginScreenController> {
                     prefixIcon: const Icon(Icons.email),
                     validator: validateEmail,
                     hint: 'example@gmail.com',
+                    focusNode: controller.emailFocusNode,
+                    onFieldSubmitted: (){
+                      controller.passwordFocusNode.requestFocus();
+                    },
                     isPassword: false,
                     width: deviceWidth * 0.87,
                   ),
@@ -84,6 +90,8 @@ class LoginScreen extends GetView<LoginScreenController> {
                         prefixIcon: const Icon(Icons.lock),
                         validator: validatePasswordLogin,
                         hint: '********',
+                        onFieldSubmitted: (){},
+                        focusNode: controller.passwordFocusNode,
                         isPassword: controller.securePassword,
                         width: deviceWidth * 0.87,
                         suffixIcon: IconButton(
@@ -115,15 +123,29 @@ class LoginScreen extends GetView<LoginScreenController> {
                   SizedBox(
                     height: deviceHeight * 0.07,
                   ),
-                  CustomButton(
-                    onPressed: () {
-                      bool isFormValidated = _formKey.currentState!.validate();
-                      if (isFormValidated) {
-                        Get.offAllNamed("/home");
-                      }
-                    },
-                    text: 'تسجيل الدخول',
-                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: GetBuilder<LoginScreenController>(
+                      builder: (LoginScreenController controller){
+                        if(controller.isLoading){
+                          return const CircularProgressIndicator();
+                        }else{
+                          return  CustomButton(
+                            onPressed: () {
+                              bool isFormValidated = _formKey.currentState!.validate();
+                              if (isFormValidated) {
+                                /// after signing in successfully
+                                controller.loginUser(controller: controller);
+
+                              }
+                            },
+                            text: 'تسجيل الدخول',
+                          );
+                        }
+                      },
+                    ),
+                  )
+                  ,
                   SizedBox(
                     height: deviceHeight * 0.019,
                   ),

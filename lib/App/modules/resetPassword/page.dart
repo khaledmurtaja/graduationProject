@@ -3,7 +3,6 @@ import 'package:blood4life/App/widgets/customButtonWidget.dart';
 import 'package:blood4life/core/utils/helperFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';

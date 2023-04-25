@@ -3,8 +3,7 @@ abstract class Routes {
   static const HOME = '/home';
   static const LOGIN = '/login';
   static const REGISTER = '/register';
-  static const DONATION_APPEAL = '/donationAppeal';
-  static const DONATION_REQUESTS = '/donationRequest';
+  static const DONATION_FORM = '/donationForm';
   static const PERSONAL_INFORMATION = '/personalInformation';
   static const DONATION_RECORD = '/donationRecord';
   static const RESET_PASSWORD = '/resetPassword';

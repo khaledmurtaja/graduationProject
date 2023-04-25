@@ -23,7 +23,9 @@ class LandingPageOne extends GetView<LandingPageController> {
           SizedBox(height: deviceHeight*0.0688,),
           CustomButton(
             text: 'التالي',
-            onPressed: () {},
+            onPressed: () {
+              controller.pageController.nextPage(duration: const Duration(milliseconds: 10), curve: Curves.linear);
+            },
           )
 
         ],
