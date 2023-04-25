@@ -1,17 +1,13 @@
 import 'dart:ui';
-
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../../../core/utils/helperFunctions.dart';
 import '../../../routes/routes.dart';
 import '../../data/models/donationAppealModel.dart';
-import '../../widgets/CustomCard.dart';
 import '../../widgets/appealCard.dart';
 import '../../widgets/customButtonWidget.dart';
 import '../../widgets/fistPageErrorIndicator.dart';
