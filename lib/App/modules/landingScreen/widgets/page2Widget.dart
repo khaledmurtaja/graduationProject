@@ -23,7 +23,7 @@ class LandingPageTwo extends GetView<LandingPageController> {
           LandingTextWidget(
             landingText: 'تبرع بالدم وأنقذحياة شخص',
           ),
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
           LandingTextWidget(
