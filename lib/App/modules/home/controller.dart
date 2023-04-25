@@ -31,8 +31,6 @@ class HomeScreenController extends GetxController {
   @override
   void onInit() {
     pagingController.addPageRequestListener((pageKey) async {
-      print(pageKey);
-      print("object");
       await fetchData(pageKey: pageKey);
     });
   }
