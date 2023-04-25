@@ -99,6 +99,23 @@ class HomeScreenContent extends GetView<HomeScreenController> {
                 firstPageErrorIndicatorBuilder: (context){
                   return firstPageErrorIndicator(controller);
                 },
+                  newPageErrorIndicatorBuilder:(context){
+                  return InkWell(
+                    onTap: (){
+                      controller.pagingController.retryLastFailedRequest();
+
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: const [
+                           Text("حدث خطأ ما.اضعط للمحاولة مجددا"),
+                           Icon(Icons.refresh)
+                        ],
+                      ),
+                    ),
+                  );
+                  },
                   animateTransitions: true,
                   itemBuilder: (context, item, index) {
                     return CustomAppealCard(
