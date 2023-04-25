@@ -68,16 +68,15 @@ class HomeScreenContent extends GetView<HomeScreenController> {
               } else {
                 controller.blurScreenFun(true);
                 customDialog(
-                        context: context,
-                        controller: controller,
-                        onDismissCallback: () {
-                          controller.blurScreenFun(false);
-                        },
-                        btnCancelOnPress: () {},
-                        btnOkOnPress: () {
-                          Get.toNamed(Routes.LOGIN);
-                        })
-                    .show();
+                    context: context,
+                    controller: controller,
+                    onDismissCallback: () {
+                      controller.blurScreenFun(false);
+                    },
+                    btnCancelOnPress: () {},
+                    btnOkOnPress: () {
+                      Get.toNamed(Routes.LOGIN);
+                    }).show();
               }
             },
             text: 'أنشئ طلب تبرع',
@@ -93,40 +92,45 @@ class HomeScreenContent extends GetView<HomeScreenController> {
             height: getMediaQueryHeight(context: context, value: 24),
           ),
           Expanded(
-            child: PagedListView<int, DonationAppealModel>.separated(
-              pagingController: controller.pagingController,
-              builderDelegate: PagedChildBuilderDelegate<DonationAppealModel>(
-                firstPageErrorIndicatorBuilder: (context){
-                  return firstPageErrorIndicator(controller);
-                },
-                  newPageErrorIndicatorBuilder:(context){
-                  return InkWell(
-                    onTap: (){
-                      controller.pagingController.retryLastFailedRequest();
-
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: const [
-                           Text("حدث خطأ ما.اضعط للمحاولة مجددا"),
-                           Icon(Icons.refresh)
-                        ],
-                      ),
-                    ),
-                  );
-                  },
-                  animateTransitions: true,
-                  itemBuilder: (context, item, index) {
-                    return CustomAppealCard(
-                      donationAppealModel: item,
-                    );
-                  }),
-              separatorBuilder: (BuildContext context, int index) {
-                return SizedBox(
-                  height: getMediaQueryHeight(context: context, value: 16),
-                );
+            child: RefreshIndicator(
+              onRefresh: () {
+                  return Future.sync(() => controller.pagingController.refresh());
               },
+
+              child: PagedListView<int, DonationAppealModel>.separated(
+                pagingController: controller.pagingController,
+                builderDelegate: PagedChildBuilderDelegate<DonationAppealModel>(
+                    firstPageErrorIndicatorBuilder: (context) {
+                      return firstPageErrorIndicator(controller);
+                    },
+                    newPageErrorIndicatorBuilder: (context) {
+                      return InkWell(
+                        onTap: () {
+                          controller.pagingController.retryLastFailedRequest();
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: const [
+                              Text("حدث خطأ ما.اضعط للمحاولة مجددا"),
+                              Icon(Icons.refresh)
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                    animateTransitions: true,
+                    itemBuilder: (context, item, index) {
+                      return CustomAppealCard(
+                        donationAppealModel: item,
+                      );
+                    }),
+                separatorBuilder: (BuildContext context, int index) {
+                  return SizedBox(
+                    height: getMediaQueryHeight(context: context, value: 16),
+                  );
+                },
+              ),
             ),
           )
         ],

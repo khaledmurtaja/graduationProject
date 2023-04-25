@@ -19,7 +19,7 @@ class HomeScreenController extends GetxController {
   bool blurScreen = false;
   static const _pageSize = 15;
   final PagingController<int, DonationAppealModel> pagingController =
-      PagingController(firstPageKey: 0);
+      PagingController(firstPageKey: 1);
   List<Widget> pages = [
     HomeScreenContent(),
     const AppealScreen(),

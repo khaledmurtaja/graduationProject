@@ -156,6 +156,7 @@ class AppealScreen extends GetView<DonationAppealScreenController> {
                                       context: context, value: 8),
                                 ),
                                 CustomDropdownButton(
+                                  iconPath: "assets/images/icons/home.svg",
                                   height: getMediaQueryHeight(
                                       context: context, value: 48),
                                   width: getMediaQueryWidth(
@@ -163,7 +164,7 @@ class AppealScreen extends GetView<DonationAppealScreenController> {
                                   textStyle: TextStyle(
                                       fontSize: 16.spMin,
                                       color: customCardTextColor),
-                                  data: controller.city, onChange: (String ) {  },
+                                  data: controller.city, onChange: (value ) {  },
                                 ),
                                 SizedBox(
                                     height: getMediaQueryHeight(

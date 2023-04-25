@@ -25,58 +25,61 @@ class CustomDropdownButton extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return DropdownButtonHideUnderline(
-      child: DropdownButtonFormField<String>(
-        isExpanded: true,
-        validator: (value) {
-          return validateDropDown(value);
-        },
-        icon: Container(),
-        menuMaxHeight: getMediaQueryHeight(context: context, value: 250),
-        decoration: InputDecoration(
-          fillColor: backGroundColor,
-          filled: true,
-          focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: primaryColor)),
-          errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: primaryColor)),
-          focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: primaryColor)),
-          enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: textFormFieldColor)),
-          suffixIcon: IconButton(
-            icon: SvgPicture.asset("assets/images/icons/arrowright2.svg"),
-            onPressed: null,
+    return Container(
+      width: width,
+      child: DropdownButtonHideUnderline(
+        child: DropdownButtonFormField<String>(
+          isExpanded: true,
+          validator: (value) {
+            return validateDropDown(value);
+          },
+          icon: Container(),
+          menuMaxHeight: getMediaQueryHeight(context: context, value: 250),
+          decoration: InputDecoration(
+            fillColor: backGroundColor,
+            filled: true,
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(color: primaryColor)),
+            errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(color: primaryColor)),
+            focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(color: primaryColor)),
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(color: textFormFieldColor)),
+            suffixIcon: IconButton(
+              icon: SvgPicture.asset("assets/images/icons/arrowright2.svg"),
+              onPressed: null,
+            ),
+            prefixIcon: SvgPicture.asset(
+              iconPath!,
+              height: getMediaQueryHeight(context: context, value: 24),
+              fit: BoxFit.scaleDown,
+            ),
           ),
-          prefixIcon: SvgPicture.asset(
-            iconPath!,
-            height: getMediaQueryHeight(context: context, value: 24),
-            fit: BoxFit.scaleDown,
-          ),
-        ),
-        items: data.map((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Center(
-              child: FittedBox(
-                child: Row(
-                  children: <Widget>[
-                    Text(
-                      value,
-                    ),
-                  ],
+          items: data.map((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Center(
+                child: FittedBox(
+                  child: Row(
+                    children: <Widget>[
+                      Text(
+                        value,
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        }).toList(),
-        onChanged: (value) {
-          onChange!(value!);
-        },
+            );
+          }).toList(),
+          onChanged: (value) {
+            onChange!(value!);
+          },
+        ),
       ),
     );
   }
