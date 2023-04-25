@@ -86,7 +86,7 @@ class HomeScreenContent extends GetView<HomeScreenController> {
             height: getMediaQueryHeight(context: context, value: 32),
           ),
           Text(
-            "طلبات التبرع الحديثة",
+            "مناشدات للتبرع بالدم",
             style: TextStyle(fontSize: 20.spMin, fontWeight: FontWeight.w700),
           ),
           SizedBox(
