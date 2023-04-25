@@ -74,7 +74,9 @@ class HomeScreenContent extends GetView<HomeScreenController> {
                           controller.blurScreenFun(false);
                         },
                         btnCancelOnPress: () {},
-                        btnOkOnPress: () {})
+                        btnOkOnPress: () {
+                          Get.toNamed(Routes.LOGIN);
+                        })
                     .show();
               }
             },
