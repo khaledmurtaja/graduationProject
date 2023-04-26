@@ -94,14 +94,15 @@ class HomeScreenContent extends GetView<HomeScreenController> {
           Expanded(
             child: RefreshIndicator(
               onRefresh: () {
-                  return Future.sync(() => controller.pagingController.refresh());
+                return Future.sync(() => controller.pagingController.refresh());
               },
-
               child: PagedListView<int, DonationAppealModel>.separated(
                 pagingController: controller.pagingController,
                 builderDelegate: PagedChildBuilderDelegate<DonationAppealModel>(
                     firstPageErrorIndicatorBuilder: (context) {
-                      return firstPageErrorIndicator(controller);
+                      return firstPageErrorIndicator(controller, () {
+                        controller.pagingController.retryLastFailedRequest();
+                      });
                     },
                     newPageErrorIndicatorBuilder: (context) {
                       return InkWell(

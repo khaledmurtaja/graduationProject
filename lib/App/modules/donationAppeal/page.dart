@@ -1,4 +1,6 @@
+import 'package:blood4life/App/data/models/donationOfferModel.dart';
 import 'package:blood4life/App/modules/donationAppeal/widgets/bloodUnit.dart';
+import 'package:blood4life/App/widgets/offerCard.dart';
 import 'package:blood4life/core/utils/helperFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -338,42 +340,111 @@ class AppealScreen extends GetView<DonationAppealScreenController> {
                   height: getMediaQueryHeight(context: context, value: 24),
                 ),
                 Expanded(
-                  child: PagedListView.separated(
-                      pagingController: controller.pagingController,
-                      builderDelegate:
-                          PagedChildBuilderDelegate<DonationAppealModel>(
-                              firstPageErrorIndicatorBuilder: (context) {
-                                return firstPageErrorIndicator(controller);
-                              },
-                              newPageErrorIndicatorBuilder: (context) {
-                                return InkWell(
-                                  onTap: () {
-                                    controller.pagingController
-                                        .retryLastFailedRequest();
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      children: const [
-                                        Text("حدث خطأ ما.اضعط للمحاولة مجددا"),
-                                        Icon(Icons.refresh)
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                              animateTransitions: true,
-                              itemBuilder: (context, item, index) {
-                                return CustomAppealCard(
-                                  donationAppealModel: item,
-                                );
-                              }),
-                      separatorBuilder: (BuildContext context, int index) {
-                        return SizedBox(
-                          height:
-                              getMediaQueryHeight(context: context, value: 16),
-                        );
-                      }),
+                  child: controller.isAppealTabSelected
+                      ? RefreshIndicator(
+                          onRefresh: () {
+                            return Future.sync(() => controller
+                                .pagingControllerForAppeals
+                                .refresh());
+                          },
+                          child:
+                              PagedListView<int, DonationAppealModel>.separated(
+                            builderDelegate:
+                                PagedChildBuilderDelegate<DonationAppealModel>(
+                                    firstPageErrorIndicatorBuilder: (context) {
+                                      return firstPageErrorIndicator(controller,
+                                          () {
+                                        controller.pagingControllerForAppeals
+                                            .retryLastFailedRequest();
+                                      });
+                                    },
+                                    newPageErrorIndicatorBuilder: (context) {
+                                      return InkWell(
+                                        onTap: () {
+                                          controller.pagingControllerForAppeals
+                                              .retryLastFailedRequest();
+                                        },
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            children: const [
+                                              Text(
+                                                  "حدث خطأ ما.اضعط للمحاولة مجددا"),
+                                              Icon(Icons.refresh)
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    animateTransitions: true,
+                                    itemBuilder: (context, item, index) {
+                                      return CustomAppealCard(
+                                        donationAppealModel: item,
+                                      );
+                                    }),
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return SizedBox(
+                                height: getMediaQueryHeight(
+                                    context: context, value: 16),
+                              );
+                            },
+                            pagingController:
+                                controller.pagingControllerForAppeals,
+                          ),
+                        )
+                      : RefreshIndicator(
+                          onRefresh: () {
+                            return Future.sync(() => controller
+                                .pagingControllerForOffers
+                                .refresh());
+                          },
+                          child:
+                              PagedListView<int, DonationOfferModel>.separated(
+                            builderDelegate:
+                                PagedChildBuilderDelegate<DonationOfferModel>(
+                                    firstPageErrorIndicatorBuilder: (context) {
+                                      return firstPageErrorIndicator(controller,
+                                          () {
+                                        controller.pagingControllerForOffers
+                                            .retryLastFailedRequest();
+                                      });
+                                    },
+                                    newPageErrorIndicatorBuilder: (context) {
+                                      return InkWell(
+                                        onTap: () {
+                                          controller.pagingControllerForOffers
+                                              .retryLastFailedRequest();
+                                        },
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            children: const [
+                                              Text(
+                                                  "حدث خطأ ما.اضعط للمحاولة مجددا"),
+                                              Icon(Icons.refresh)
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    animateTransitions: true,
+                                    itemBuilder: (context, item, index) {
+                                      return CustomOfferCard(
+                                        donationOfferModel: item,
+                                      );
+                                    }),
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return SizedBox(
+                                height: getMediaQueryHeight(
+                                    context: context, value: 16),
+                              );
+                            },
+                            pagingController:
+                                controller.pagingControllerForOffers,
+                          ),
+                        ),
                 )
               ],
             ),
