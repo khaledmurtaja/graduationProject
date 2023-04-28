@@ -6,5 +6,5 @@ class ApiEndPoints{
   static const String SHARE_OFFER="/api/donations";
   static const String SHARE_APPEAL="/api/appeals";
   static const String PUBLIC_APPEALS="/api/public-appeals";
-  static const String PUBLIC_OFFERS="/api/public-donation";
+  static const String PUBLIC_OFFERS="/api/public-donations";
 }
