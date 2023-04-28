@@ -11,6 +11,7 @@ class ApiEndPoints {
   static const String SHARE_APPEAL = "/api/appeals";
   static const String PUBLIC_APPEALS = "/api/public-appeals";
   static const String ARTICLS = "/api/articles";
+  static const String PUBLIC_OFFERS="/api/public-donation";
 
   static const String CAMPAINGNS = "/api/donation-campaigns";
 }
