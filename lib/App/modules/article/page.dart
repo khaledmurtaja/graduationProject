@@ -36,8 +36,11 @@ class ArticleScreen extends GetView<ArticleScreenController> {
         builderDelegate: PagedChildBuilderDelegate<ArticleModel>(
           firstPageErrorIndicatorBuilder: (context) {
             return Padding(
-              padding:  EdgeInsets.only(top: getMediaQueryHeight(context: context, value: 250)),
-              child: firstPageErrorIndicator(controller),
+              padding: EdgeInsets.only(
+                  top: getMediaQueryHeight(context: context, value: 250)),
+              child: firstPageErrorIndicator(controller, () {
+                controller.pagingController.retryLastFailedRequest();
+              }),
             );
           },
           newPageErrorIndicatorBuilder: (context) {
