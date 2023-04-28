@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart' as api;
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
@@ -74,6 +76,9 @@ class ApiService extends GetxService {
       {required String url,
       Map<String, String>? additionalHeaders,
       String? pathParameter}) async {
+    print('**********');
+
+    print(url);
     try {
       if (additionalHeaders != null) {
         ///adding headers the request if its given(optional)
@@ -89,8 +94,11 @@ class ApiService extends GetxService {
         return response;
       }
     } on api.DioError catch (error) {
+      //   print(error.response != null);
+      //   print('**********');
       if (error.response != null) {
         var statusCode = error.response!.statusCode;
+
         if (statusCode == HttpStatus.unauthorized) {
           throw UnAuthorizedException();
         } else if (statusCode == HttpStatus.serverError) {

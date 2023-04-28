@@ -2,10 +2,12 @@ import 'package:blood4life/App/modules/home/repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import '../../../core/errors/exceptions.dart';
 import '../../../core/values/strings.dart';
+import '../../data/models/campaignModel.dart';
 import '../../data/models/donationAppealModel.dart';
 import '../../data/services/sharedPrefService.dart';
-import '../blog/page.dart';
+import '../article/page.dart';
 import '../donationAppeal/page.dart';
 import '../notification/page.dart';
 import '../profile/page.dart';
@@ -18,18 +20,23 @@ class HomeScreenController extends GetxController {
   final repo = Get.find<HomeRepository>();
   bool blurScreen = false;
   static const _pageSize = 15;
+  String? errorMessage = '';
+
   final PagingController<int, DonationAppealModel> pagingController =
       PagingController(firstPageKey: 1);
   List<Widget> pages = [
     HomeScreenContent(),
     const AppealScreen(),
     NotificationScreen(),
-    const BlogScreen(),
+    const ArticleScreen(),
     const ProfileScreen()
   ];
-
+  List<CampaignModel>? campaigns;
+  bool campaignsIsLoading = false;
   @override
   void onInit() {
+    fetchCampaigns();
+
     pagingController.addPageRequestListener((pageKey) async {
       await fetchData(pageKey: pageKey);
     });
@@ -49,6 +56,32 @@ class HomeScreenController extends GetxController {
     } catch (error) {
       pagingController.error = error;
     }
+  }
+
+  updateErrorMessage(String message) {
+    errorMessage = message;
+    update();
+  }
+
+  fetchCampaigns() async {
+    campaignsIsLoading = true;
+    try {
+      campaigns = await repo.getCampaigns();
+      // } on ServerException {
+      //   print('ServerException \n ServerException');
+      // } on NetworkException {
+      //   print('NetworkException \n NetworkException');
+
+      //   print('');
+    } on Exception catch (exception) {
+      if (exception is ServerException) {
+        print('ServerException ServerException ServerException');
+      } else if (exception is NetworkException) {
+        print('NetworkException NetworkException NetworkException');
+      } else {}
+    }
+    campaignsIsLoading = false;
+    update();
   }
 
   changeCurrentBannerIndex(int index) {

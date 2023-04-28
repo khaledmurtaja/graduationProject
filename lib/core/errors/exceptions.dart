@@ -4,3 +4,4 @@ class UnProcessableException implements Exception{}
 class TooManyRequestsException implements Exception{}
 class ConflictException implements Exception{}
 class UnKnownException implements Exception{}
+class NetworkException implements Exception{}

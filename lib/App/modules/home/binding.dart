@@ -10,6 +10,7 @@ class HomeBinding extends Bindings {
     Get.lazyPut<HomeScreenController>(
       () => HomeScreenController(),
     );
-    Get.lazyPut<HomeRepository>(() => HomeRepository());
+    Get.lazyPut<HomeRepository>(
+        () => HomeRepository());
   }
 }
