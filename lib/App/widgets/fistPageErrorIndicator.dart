@@ -6,8 +6,9 @@ import 'customButtonWidget.dart';
 
 class firstPageErrorIndicator extends StatelessWidget {
   dynamic controller;
+  Function? function;
 
-  firstPageErrorIndicator(this.controller, {super.key});
+  firstPageErrorIndicator(this.controller,this.function,{super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,8 @@ class firstPageErrorIndicator extends StatelessWidget {
         ),
         CustomButton(
             onPressed: () {
-              controller.pagingController.retryLastFailedRequest();
+              function!();
+            //  controller.pagingControllerForAppeals.retryLastFailedRequest();
             },
             text: "حاول مجددا",
             theIconBesideText: Icons.refresh)

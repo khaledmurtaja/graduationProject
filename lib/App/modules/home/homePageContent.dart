@@ -131,7 +131,9 @@ class HomeScreenContent extends GetView<HomeScreenController> {
                 pagingController: controller.pagingController,
                 builderDelegate: PagedChildBuilderDelegate<DonationAppealModel>(
                     firstPageErrorIndicatorBuilder: (context) {
-                      return firstPageErrorIndicator(controller);
+                      return firstPageErrorIndicator(controller, () {
+                        controller.pagingController.retryLastFailedRequest();
+                      });
                     },
                     newPageErrorIndicatorBuilder: (context) {
                       return InkWell(
