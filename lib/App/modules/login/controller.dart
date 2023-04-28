@@ -22,8 +22,10 @@ class LoginScreenController extends GetxController {
   ///user login to the system
   loginUser({required LoginScreenController controller}) async {
     isLoading = true;
-    final loginRepo = Get.find<LoginRepository>();///this object may have various login implementations
-    final homeController=Get.find<HomeScreenController>();
+    final loginRepo = Get.find<LoginRepository>();
+
+    ///this object may have various login implementations
+    final homeController = Get.find<HomeScreenController>();
     update();
     final response = await loginRepo.login();
     isLoading = false;
@@ -32,11 +34,15 @@ class LoginScreenController extends GetxController {
     if (response != null) {
       sharedPref.putStringValue(key: 'token', value: response.data['token']);
       sharedPref.putBoolValue(key: loginPageKey, value: true);
-      homeController.isLoggedIn=true;
+      homeController.isLoggedIn = true;
       Get.toNamed("/home");
-      showSnackBar(title: "تم تسجيل دخولك بنجاح",message:"يمكنك الان نشر المناشدات او العروض للتبرع بالدم",backGroundColor:Colors.green.shade400,snackPosition: SnackPosition.TOP);
-
+      showSnackBar(
+          title: "تم تسجيل دخولك بنجاح",
+          message: "يمكنك الان نشر المناشدات او العروض للتبرع بالدم",
+          backGroundColor: Colors.green.shade400,
+          snackPosition: SnackPosition.TOP);
     }
+
     ///user is logged in
   }
 }

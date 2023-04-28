@@ -122,7 +122,9 @@ class ProfileScreen extends GetView<ProfileScreenController> {
             CustomListTile(
               leadingicon: "assets/images/icons/profile/conditions.svg",
               title: 'الشروط والسياسات',
-              onTap: () {},
+              onTap: () {
+                Get.toNamed('/termsandpolicies');
+              },
             ),
             SizedBox(
               height: getMediaQueryHeight(context: context, value: 16),
@@ -159,7 +161,9 @@ class ProfileScreen extends GetView<ProfileScreenController> {
             CustomListTile(
               leadingicon: "assets/images/icons/profile/call.svg",
               title: 'تواصل معنا',
-              onTap: () {},
+              onTap: () {
+                Get.toNamed("/connectUs");
+              },
             ),
             SizedBox(
               height: getMediaQueryHeight(context: context, value: 8),
@@ -175,7 +179,11 @@ class ProfileScreen extends GetView<ProfileScreenController> {
               leadingicon:
                   "assets/images/icons/profile/mdi_warning-circle-outline.svg",
               title: 'من نحن',
-              onTap: () {},
+              onTap: () {
+                Get.toNamed("/whoAreWeScreen");
+
+                // whoAreWeScreen
+              },
             ),
             SizedBox(
               height: getMediaQueryHeight(context: context, value: 57),
@@ -193,16 +201,15 @@ class ProfileScreen extends GetView<ProfileScreenController> {
                     btnOkOnPress: () async {
                       Get.dialog(
                           AlertDialog(
-                        title: const Text("جاري تسجيل خروجك"),
-                        content: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                             CircularProgressIndicator(),
-                          ],
-                        ),
-                      ),
-                        barrierDismissible: false
-                      );
+                            title: const Text("جاري تسجيل خروجك"),
+                            content: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                CircularProgressIndicator(),
+                              ],
+                            ),
+                          ),
+                          barrierDismissible: false);
                       await controller.logOutUser();
                     }).show();
               },

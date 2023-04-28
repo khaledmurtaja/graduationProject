@@ -6,7 +6,11 @@ import 'package:blood4life/routes/routes.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import '../App/modules/appealDetails/binding.dart';
 import '../App/modules/appealDetails/page.dart';
-import '../App/modules/blog/binding.dart';
+import '../App/modules/article/binding.dart';
+import '../App/modules/articleWebView/binding.dart';
+import '../App/modules/articleWebView/page.dart';
+import '../App/modules/connectUs/binding.dart';
+import '../App/modules/connectUs/page.dart';
 import '../App/modules/donationAppeal/binding.dart';
 import '../App/modules/donationForm/binding.dart';
 import '../App/modules/donationForm/page.dart';
@@ -25,22 +29,29 @@ import '../App/modules/personalInformation/page.dart';
 import '../App/modules/profile/binding.dart';
 import '../App/modules/resetPassword/binding.dart';
 import '../App/modules/resetPassword/page.dart';
+import '../App/modules/terms&policies/binding.dart';
+import '../App/modules/terms&policies/page.dart';
+import '../App/modules/whoAreWe/page.dart';
 
 abstract class AppPages {
   static final pages = [
     GetPage(
-        name: Routes.LANDING_Page,
-        page: () => LandingScreen(),
-        bindings: [LandingBinding()]),
-    GetPage(name: Routes.HOME, page: () => HomeScreen(), bindings: [
-      HomeBinding(),
-      NotificationBinding(),
-      DonationAppealBinding(),
-      BlogBinding(),
-      ProfileBinding()
-    ], middlewares: [
-      HomeMiddleWare()
-    ]),
+      name: Routes.LANDING_Page,
+      page: () => LandingScreen(),
+      bindings: [LandingBinding()],
+    ),
+    GetPage(
+      name: Routes.HOME,
+      page: () => HomeScreen(),
+      bindings: [
+        HomeBinding(),
+        NotificationBinding(),
+        DonationAppealBinding(),
+        ArticleBinding(),
+        ProfileBinding()
+      ],
+      middlewares: [HomeMiddleWare()],
+    ),
     GetPage(
         name: Routes.LOGIN,
         page: () => LoginScreen(),
@@ -79,5 +90,22 @@ abstract class AppPages {
       page: () => AppealDetailsScreen(),
       bindings: [AppealDetailsBinding()],
     ),
+    GetPage(
+      name: Routes.TERMS_POLICIES,
+      page: () => TermsAndPoliciesScreen(),
+      bindings: [TermsAndPoliciesBinding()],
+    ),
+    GetPage(
+        name: Routes.CONNECT_US,
+        page: () => ConnectUsScreen(),
+        bindings: [ConnectUsBinding()]),
+    GetPage(
+      name: Routes.WHO_ARE_WE,
+      page: () => WhoAreWeScreen(),
+    ),
+    GetPage(
+        name: Routes.ARTICLE_WEB_VIEW,
+        page: () => ArticleWebViewScreen(),
+        bindings: [ArticleWebViewBinding()]),
   ];
 }

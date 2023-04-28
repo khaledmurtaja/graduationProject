@@ -22,23 +22,24 @@ class HomeScreen extends GetView<HomeScreenController> {
             return BottomNavigationBar(
                 onTap: (index) {
                   if (index == profilePageIndex) {
+                    //  delete
+                    // controller.isLoggedIn = true;
                     if (controller.isLoggedIn != null &&
                         controller.isLoggedIn == true) {
                       controller.changeCurrentPageIndex(index);
                     } else {
                       controller.blurScreenFun(true);
                       customDialog(
-                              context: context,
-                              controller: controller,
-                              onDismissCallback: () {
-                                controller.blurScreenFun(false);
-                              },
+                          context: context,
+                          controller: controller,
+                          onDismissCallback: () {
+                            controller.blurScreenFun(false);
+                          },
                           title: "الولوج الى هذه الصفحة يحتاج منك تسجيل الدخول",
-                              btnCancelOnPress: () {},
-                              btnOkOnPress: () {
-                                Get.toNamed("/login");
-                              })
-                          .show();
+                          btnCancelOnPress: () {},
+                          btnOkOnPress: () {
+                            Get.toNamed("/login");
+                          }).show();
                     }
                   } else {
                     controller.changeCurrentPageIndex(index);

@@ -7,7 +7,9 @@ import 'App/data/services/sharedPrefService.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initServices(); ///here we will initialize all of the services we need,like storage,API,Database.
+  await initServices();
+
+  ///here we will initialize all of the services we need,like storage,API,Database.
   runApp(const MyApp());
 }
 
@@ -15,6 +17,7 @@ Future<void> initServices() async {
   await Get.putAsync(() => AppSharedPref().init());
   await Get.putAsync(() => ApiService().init());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
@@ -33,3 +36,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+// ipconfig

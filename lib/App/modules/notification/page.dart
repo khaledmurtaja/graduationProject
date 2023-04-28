@@ -47,112 +47,106 @@ class NotificationScreen extends GetView<NotificationScreenController> {
             )
           : SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
-              child: Padding(
-                padding: EdgeInsets.only(
-                  left: getMediaQueryWidth(context: context, value: 24),
-                  right: getMediaQueryWidth(context: context, value: 24),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'اليوم',
-                      style: TextStyle(
-                          fontSize: 16.spMin,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'اليوم',
+                    style: TextStyle(
+                        fontSize: 16.spMin,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black),
+                  ),
+                  SizedBox(
+                    height: getMediaQueryHeight(context: context, value: 16),
+                  ),
+                  ListView.separated(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: 2,
+                    itemBuilder: (context, index) => CustomCard(
+                      imageUrl:
+                          "assets/images/test/young-bearded-man-with-striped-shirt.jpg",
+                      supTitle:
+                          'سيتم عقد ورشة تعليمية بعنوان فوائد التبرع بالدم بشكل دوري في الجامعة الاسلامية بتاريخ 22/10/2023م الساعة 11 صباحا',
+                      time: '9:30 Am',
+                      title: 'بنك الدم المركزي',
                     ),
-                    SizedBox(
-                      height: getMediaQueryHeight(context: context, value: 16),
+                    separatorBuilder: (BuildContext context, int  index) {
+                      return SizedBox(
+                        height:
+                            getMediaQueryHeight(context: context, value: 16),
+                      );
+                    },
+                  ),
+                  SizedBox(
+                    height: getMediaQueryHeight(context: context, value: 24),
+                  ),
+                  Text(
+                    'قبل يومين',
+                    style: TextStyle(
+                        fontSize: 16.spMin,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black),
+                  ),
+                  SizedBox(
+                    height: getMediaQueryHeight(context: context, value: 16),
+                  ),
+                  ListView.separated(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: 2,
+                    itemBuilder: (context, index) => CustomCard(
+                      imageUrl:
+                          "assets/images/test/young-bearded-man-with-striped-shirt.jpg",
+                      supTitle:
+                          'سيتم عقد ورشة تعليمية بعنوان فوائد التبرع بالدم بشكل دوري في الجامعة الاسلامية بتاريخ 22/10/2023م الساعة 11 صباحا',
+                      time: '9:30 Am',
+                      title: 'بنك الدم المركزي',
                     ),
-                    ListView.separated(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: 2,
-                      itemBuilder: (context, index) => CustomCard(
-                        imageUrl:
-                            "assets/images/test/young-bearded-man-with-striped-shirt.jpg",
-                        supTitle:
-                            'سيتم عقد ورشة تعليمية بعنوان فوائد التبرع بالدم بشكل دوري في الجامعة الاسلامية بتاريخ 22/10/2023م الساعة 11 صباحا',
-                        time: '9:30 Am',
-                        title: 'بنك الدم المركزي',
-                      ),
-                      separatorBuilder: (BuildContext context, int  index) {
-                        return SizedBox(
-                          height:
-                              getMediaQueryHeight(context: context, value: 16),
-                        );
-                      },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        height:
+                            getMediaQueryHeight(context: context, value: 16),
+                      );
+                    },
+                  ),
+                  SizedBox(
+                    height: getMediaQueryHeight(context: context, value: 24),
+                  ),
+                  Text(
+                    'قبل 3 أيام',
+                    style: TextStyle(
+                        fontSize: 16.spMin,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black),
+                  ),
+                  SizedBox(
+                    height: getMediaQueryHeight(context: context, value: 16),
+                  ),
+                  ListView.separated(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: 2,
+                    itemBuilder: (context, index) => CustomCard(
+                      imageUrl:
+                          "assets/images/test/young-bearded-man-with-striped-shirt.jpg",
+                      supTitle:
+                          'سيتم عقد ورشة تعليمية بعنوان فوائد التبرع بالدم بشكل دوري في الجامعة الاسلامية بتاريخ 22/10/2023م الساعة 11 صباحا',
+                      time: '9:30 Am',
+                      title: 'بنك الدم المركزي',
                     ),
-                    SizedBox(
-                      height: getMediaQueryHeight(context: context, value: 24),
-                    ),
-                    Text(
-                      'قبل يومين',
-                      style: TextStyle(
-                          fontSize: 16.spMin,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black),
-                    ),
-                    SizedBox(
-                      height: getMediaQueryHeight(context: context, value: 16),
-                    ),
-                    ListView.separated(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: 2,
-                      itemBuilder: (context, index) => CustomCard(
-                        imageUrl:
-                            "assets/images/test/young-bearded-man-with-striped-shirt.jpg",
-                        supTitle:
-                            'سيتم عقد ورشة تعليمية بعنوان فوائد التبرع بالدم بشكل دوري في الجامعة الاسلامية بتاريخ 22/10/2023م الساعة 11 صباحا',
-                        time: '9:30 Am',
-                        title: 'بنك الدم المركزي',
-                      ),
-                      separatorBuilder: (BuildContext context, int index) {
-                        return SizedBox(
-                          height:
-                              getMediaQueryHeight(context: context, value: 16),
-                        );
-                      },
-                    ),
-                    SizedBox(
-                      height: getMediaQueryHeight(context: context, value: 24),
-                    ),
-                    Text(
-                      'قبل 3 أيام',
-                      style: TextStyle(
-                          fontSize: 16.spMin,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black),
-                    ),
-                    SizedBox(
-                      height: getMediaQueryHeight(context: context, value: 16),
-                    ),
-                    ListView.separated(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: 2,
-                      itemBuilder: (context, index) => CustomCard(
-                        imageUrl:
-                            "assets/images/test/young-bearded-man-with-striped-shirt.jpg",
-                        supTitle:
-                            'سيتم عقد ورشة تعليمية بعنوان فوائد التبرع بالدم بشكل دوري في الجامعة الاسلامية بتاريخ 22/10/2023م الساعة 11 صباحا',
-                        time: '9:30 Am',
-                        title: 'بنك الدم المركزي',
-                      ),
-                      separatorBuilder: (BuildContext context, int index) {
-                        return SizedBox(
-                          height:
-                              getMediaQueryHeight(context: context, value: 16),
-                        );
-                      },
-                    ),
-                    SizedBox(
-                      height: getMediaQueryHeight(context: context, value: 10),
-                    )
-                  ],
-                ),
+                    separatorBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        height:
+                            getMediaQueryHeight(context: context, value: 16),
+                      );
+                    },
+                  ),
+                  SizedBox(
+                    height: getMediaQueryHeight(context: context, value: 10),
+                  )
+                ],
               ),
             ),
     );

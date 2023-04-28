@@ -9,4 +9,10 @@ abstract class Routes {
   static const RESET_PASSWORD = '/resetPassword';
   static const DONATION_REQUEST_DETAILS = '/donationRequestRetails';
   static const APPEAL_DETAILS = '/appealDetails';
+  static const TERMS_POLICIES = '/termsandpolicies';
+  static const CONNECT_US = '/connectUs';
+  static const WHO_ARE_WE = '/whoAreWeScreen';
+  static const ARTICLE_WEB_VIEW = '/articleWebView';
+
+  
 }

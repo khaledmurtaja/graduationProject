@@ -48,6 +48,7 @@ class ResetPasswordScreen extends GetView<ResetPasswordScreenController> {
                 hint: '********',
                 isPassword: true,
                 width: getMediaQueryWidth(context: context, value: 327),
+                height: getMediaQueryHeight(context: context, value: 48),
                 suffixIcon: IconButton(
                   icon: Icon(controller.securePassword
                       ? Icons.remove_red_eye
@@ -75,6 +76,7 @@ class ResetPasswordScreen extends GetView<ResetPasswordScreenController> {
                 hint: '********',
                 isPassword: true,
                 width: getMediaQueryWidth(context: context, value: 327),
+                height: getMediaQueryHeight(context: context, value: 48),
                 suffixIcon: IconButton(
                   icon: Icon(controller.securePassword
                       ? Icons.remove_red_eye
@@ -102,6 +104,7 @@ class ResetPasswordScreen extends GetView<ResetPasswordScreenController> {
                 hint: '********',
                 isPassword: true,
                 width: getMediaQueryWidth(context: context, value: 327),
+                height: getMediaQueryHeight(context: context, value: 48),
                 suffixIcon: IconButton(
                   icon: Icon(controller.securePassword
                       ? Icons.remove_red_eye
@@ -132,8 +135,7 @@ class ResetPasswordScreen extends GetView<ResetPasswordScreenController> {
                                 context: context, value: 28),
                           ),
                           child: Column(
-                                mainAxisSize: MainAxisSize.min,
-
+                            mainAxisSize: MainAxisSize.min,
                             children: [
                               SvgPicture.asset(
                                 "assets/images/icons/verifySuccessfully.svg",
