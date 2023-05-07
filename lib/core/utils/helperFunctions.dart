@@ -126,7 +126,7 @@ double getMediaQueryHeight(
 
 double getMediaQueryWidth({required BuildContext context, required num value}) {
   var size = MediaQuery.of(context).size;
-  //figma height
+  //figma width
   double xdWidth = 375;
   double percentage = value / xdWidth;
 
