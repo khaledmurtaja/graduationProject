@@ -35,7 +35,8 @@ class RegisterScreenController extends GetxController {
     final homeController=Get.find<HomeScreenController>();
     isLoading = true;
     update();
-    final response = await registerRepo.register();
+    final response = await registerRepo.
+    register();
     isLoading = false;
     update();
     if (response != null) {
@@ -43,10 +44,11 @@ class RegisterScreenController extends GetxController {
       sharedPref.putStringValue(
           key: 'token', value: response.data['token'].toString());
       sharedPref.putBoolValue(key: loginPageKey, value: true);
+      sharedPref.putStringValue(key: userEmailKey, value: emailController.text);
+      sharedPref.putBoolValue(key: isEmailVerifiedKey, value: false);
       homeController.isLoggedIn=true;
-
       ///user is logged in
-      Get.offAllNamed("/home");
+      Get.offAllNamed("/emailVerification");
     }
   }
 }

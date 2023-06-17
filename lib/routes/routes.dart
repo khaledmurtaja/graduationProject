@@ -13,6 +13,8 @@ abstract class Routes {
   static const CONNECT_US = '/connectUs';
   static const WHO_ARE_WE = '/whoAreWeScreen';
   static const ARTICLE_WEB_VIEW = '/articleWebView';
+  static const EMAIL_VERIFICATION='/emailVerification';
+  static const SEND_EMAIL_VERIFICATION="/sendVerificationCode";
 
   
 }

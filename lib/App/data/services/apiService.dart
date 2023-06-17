@@ -35,7 +35,8 @@ class ApiService extends GetxService {
       }
       if (pathParameter != null) {
         ///adding path parameter to the url just in case its not null(optional)
-        url = '$url/$pathParameter';
+        ///example of pathParameter structure page=5
+        url = '$url?$pathParameter';
       }
       api.Response response = await _dio.post(url,
           data: data, options: api.Options(headers: headers));
@@ -43,7 +44,7 @@ class ApiService extends GetxService {
           response.statusCode == HttpStatus.ok) {
         return response;
       }
-    } on api.DioError catch (error) {
+    } on api.DioException catch (error) {
       if (error.response != null) {
         var statusCode = error.response!.statusCode;
         if (statusCode == HttpStatus.unauthorized) {
@@ -86,14 +87,14 @@ class ApiService extends GetxService {
       }
       if (pathParameter != null) {
         ///adding path parameter to the url just in case its not null(optional)
-        url = '$url/$pathParameter';
+        url = '$url?$pathParameter';
       }
       api.Response response =
           await _dio.get(url, options: api.Options(headers: headers));
       if (response.statusCode == HttpStatus.ok) {
         return response;
       }
-    } on api.DioError catch (error) {
+    } on api.DioException catch (error) {
       //   print(error.response != null);
       //   print('**********');
       if (error.response != null) {

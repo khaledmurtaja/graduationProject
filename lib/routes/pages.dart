@@ -1,9 +1,13 @@
+import 'package:blood4life/App/modules/EmailVerfication/binding.dart';
 import 'package:blood4life/App/modules/login/binding.dart';
 import 'package:blood4life/App/modules/login/page.dart';
 import 'package:blood4life/App/modules/register/binding.dart';
 import 'package:blood4life/App/modules/register/page.dart';
+import 'package:blood4life/App/modules/sendVerificationCodeScreen/binding.dart';
+import 'package:blood4life/App/modules/sendVerificationCodeScreen/page.dart';
 import 'package:blood4life/routes/routes.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import '../App/modules/EmailVerfication/page.dart';
 import '../App/modules/appealDetails/binding.dart';
 import '../App/modules/appealDetails/page.dart';
 import '../App/modules/article/binding.dart';
@@ -107,5 +111,13 @@ abstract class AppPages {
         name: Routes.ARTICLE_WEB_VIEW,
         page: () => ArticleWebViewScreen(),
         bindings: [ArticleWebViewBinding()]),
+    GetPage(
+        name: Routes.EMAIL_VERIFICATION,
+        page: () => VerificationEmailScreen(),
+        bindings: [EmailVerificationBinding()]),
+    GetPage(
+        name: Routes.SEND_EMAIL_VERIFICATION,
+        page: () => SendVerificationCodeScreen(),
+        bindings: [SendVerificationCodeBinding()])
   ];
 }

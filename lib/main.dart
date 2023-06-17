@@ -1,3 +1,4 @@
+import 'package:blood4life/App/modules/EmailVerfication/page.dart';
 import 'package:blood4life/routes/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

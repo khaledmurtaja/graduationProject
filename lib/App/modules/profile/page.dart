@@ -200,11 +200,11 @@ class ProfileScreen extends GetView<ProfileScreenController> {
                     btnOkText: "تسجيل الخروج",
                     btnOkOnPress: () async {
                       Get.dialog(
-                          AlertDialog(
-                            title: const Text("جاري تسجيل خروجك"),
+                          const AlertDialog(
+                            title: Text("جاري تسجيل خروجك"),
                             content: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
+                              children: [
                                 CircularProgressIndicator(),
                               ],
                             ),

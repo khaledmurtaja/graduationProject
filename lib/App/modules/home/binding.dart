@@ -8,7 +8,7 @@ class HomeBinding extends Bindings {
   void dependencies() {
     // TODO: implement dependencies
     Get.lazyPut<HomeScreenController>(
-      () => HomeScreenController(),
+      () => HomeScreenController(),fenix: true
     );
     Get.lazyPut<HomeRepository>(
         () => HomeRepository());

@@ -34,6 +34,14 @@ class LoginScreenController extends GetxController {
     if (response != null) {
       sharedPref.putStringValue(key: 'token', value: response.data['token']);
       sharedPref.putBoolValue(key: loginPageKey, value: true);
+      sharedPref.putStringValue(key: userEmailKey, value: emailController.text);
+      print(response.data['user']['email_verified_at']);
+      if(response.data['user']['email_verified_at']==null||response.data['user']['email_verified_at']==""){
+        sharedPref.putBoolValue(key: isEmailVerifiedKey, value: false);
+      }else{
+        print("sdf;lsdflsd");
+        sharedPref.putBoolValue(key: isEmailVerifiedKey, value: true);
+      }
       homeController.isLoggedIn = true;
       Get.toNamed("/home");
       showSnackBar(

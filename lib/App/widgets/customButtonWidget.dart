@@ -12,6 +12,7 @@ class CustomButton extends StatelessWidget {
   bool? showIcon;
   FontWeight? textBtnFontWeight;
   IconData? theIconBesideText;
+  Color? buttonColor;
 
   CustomButton(
       {super.key,
@@ -20,6 +21,7 @@ class CustomButton extends StatelessWidget {
       this.width,
         this.theIconBesideText,
       this.showIcon = false,
+        this.buttonColor,
       this.textBtnFontWeight = FontWeight.w500,  });
 
   @override
@@ -30,7 +32,7 @@ class CustomButton extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12), color: primaryColor),
+            borderRadius: BorderRadius.circular(12), color:buttonColor?? primaryColor),
         width: width ?? MediaQuery.of(context).size.width * 0.872,
         child: Align(
           alignment: Alignment.center,

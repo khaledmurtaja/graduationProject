@@ -17,11 +17,11 @@ class ProfileRepository {
         return response;
       } on Exception catch (exception) {
         if (exception is UnAuthorizedException) {
-          showSnackBar(message:"انتهت صلاحية الجلسة");
+          showSnackBar(message: "انتهت صلاحية الجلسة");
         } else if (exception is ServerException) {
-          showSnackBar(message:"حدث خطأ اثناء الاتصال بالخادم");
+          showSnackBar(message: "حدث خطأ اثناء الاتصال بالخادم");
         } else {
-          showSnackBar(message:"حدث خطأ غير معروف");
+          showSnackBar(message: "حدث خطأ غير معروف");
         }
       }
       return null;
@@ -37,13 +37,15 @@ class ProfileRepository {
       token: token!,
     );
     await sharedPref.removeValue(key: "token");
-    await sharedPref.putBoolValue(key:loginPageKey , value: false);
+    await sharedPref.putBoolValue(key: loginPageKey, value: false);
+    await sharedPref.putBoolValue(key: isEmailVerifiedKey, value: false);
+    await sharedPref.removeValue(key: userEmailKey);
     return response;
   }
 
   Future<bool> _offlineLogOut() async {
     bool value = await sharedPref.removeValue(key: "token");
-    await sharedPref.putBoolValue(key:loginPageKey , value: false);
+    await sharedPref.putBoolValue(key: loginPageKey, value: false);
     return value;
   }
 }

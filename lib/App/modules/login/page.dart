@@ -27,6 +27,7 @@ class LoginScreen extends GetView<LoginScreenController> {
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
+          reverse: true,
           physics: const BouncingScrollPhysics(),
           child: SizedBox(
             width: double.infinity,
