@@ -25,6 +25,7 @@ class RegisterScreen extends GetView<RegisterScreenController> {
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
+          reverse: true,
           physics: const BouncingScrollPhysics(),
           child: Padding(
             padding: const EdgeInsets.only(right: 24, left: 24, top: 10),

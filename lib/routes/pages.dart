@@ -1,9 +1,15 @@
+import 'package:blood4life/App/modules/EmailVerfication/binding.dart';
+import 'package:blood4life/App/modules/forgetPassword/bindings.dart';
+import 'package:blood4life/App/modules/forgetPassword/page.dart';
 import 'package:blood4life/App/modules/login/binding.dart';
 import 'package:blood4life/App/modules/login/page.dart';
 import 'package:blood4life/App/modules/register/binding.dart';
 import 'package:blood4life/App/modules/register/page.dart';
+import 'package:blood4life/App/modules/sendVerificationCodeScreen/binding.dart';
+import 'package:blood4life/App/modules/sendVerificationCodeScreen/page.dart';
 import 'package:blood4life/routes/routes.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import '../App/modules/EmailVerfication/page.dart';
 import '../App/modules/appealDetails/binding.dart';
 import '../App/modules/appealDetails/page.dart';
 import '../App/modules/article/binding.dart';
@@ -18,6 +24,8 @@ import '../App/modules/donationRecord/binding.dart';
 import '../App/modules/donationRecord/page.dart';
 import '../App/modules/donationRequestDetails/binding.dart';
 import '../App/modules/donationRequestDetails/page.dart';
+import '../App/modules/forgettenPasswordVerification/binding.dart';
+import '../App/modules/forgettenPasswordVerification/page.dart';
 import '../App/modules/home/binding.dart';
 import '../App/modules/home/middleware.dart';
 import '../App/modules/home/page.dart';
@@ -27,6 +35,8 @@ import '../App/modules/notification/binding.dart';
 import '../App/modules/personalInformation/binding.dart';
 import '../App/modules/personalInformation/page.dart';
 import '../App/modules/profile/binding.dart';
+import '../App/modules/resetForgottenPassword/binding.dart';
+import '../App/modules/resetForgottenPassword/page.dart';
 import '../App/modules/resetPassword/binding.dart';
 import '../App/modules/resetPassword/page.dart';
 import '../App/modules/terms&policies/binding.dart';
@@ -107,5 +117,26 @@ abstract class AppPages {
         name: Routes.ARTICLE_WEB_VIEW,
         page: () => ArticleWebViewScreen(),
         bindings: [ArticleWebViewBinding()]),
+    GetPage(
+        name: Routes.EMAIL_VERIFICATION,
+        page: () => VerificationEmailScreen(),
+        bindings: [EmailVerificationBinding()]),
+    GetPage(
+        name: Routes.SEND_EMAIL_VERIFICATION,
+        page: () => SendVerificationCodeScreen(),
+        bindings: [SendVerificationCodeBinding()]),
+    GetPage(
+        name: Routes.Forget_Password_Screen,
+        page: () => ForgetPasswordScreen(),
+        bindings: [ForgetPasswordBinding()]),
+    GetPage(
+        name: Routes.SEND_FORGOT_PASSWORD_VERIFICATION,
+        page: () => ForgottenPasswordVerificationScreen(),
+        bindings: [ForgottenPasswordVerificationBinding()]),
+    GetPage(
+        name: Routes.RESET_Forgotten_PASSWORD,
+        page: () => ResetForgottenPasswordScreen(),
+        bindings: [ResetForgottenPasswordBinding()]),
+
   ];
 }

@@ -17,6 +17,7 @@ class HomeScreenController extends GetxController {
   int currentPageIndex = 0;
   int currentBannerIndex = 0;
   bool? isLoggedIn = Get.find<AppSharedPref>().getBoolValue(key: loginPageKey);
+  bool? isUserVerified=Get.find<AppSharedPref>().getBoolValue(key: isEmailVerifiedKey);
   final repo = Get.find<HomeRepository>();
   bool blurScreen = false;
   static const _pageSize = 15;
@@ -35,8 +36,7 @@ class HomeScreenController extends GetxController {
   bool campaignsIsLoading = false;
   @override
   void onInit() {
-    fetchCampaigns();
-
+    //fetchCampaigns();
     pagingController.addPageRequestListener((pageKey) async {
       await fetchData(pageKey: pageKey);
     });
@@ -92,4 +92,5 @@ class HomeScreenController extends GetxController {
     blurScreen = isBlur;
     update();
   }
+
 }

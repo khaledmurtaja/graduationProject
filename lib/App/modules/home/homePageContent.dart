@@ -36,27 +36,27 @@ class HomeScreenContent extends GetView<HomeScreenController> {
             return controller.campaignsIsLoading
                 ? const CustomLoadingWidget()
                 : controller.campaigns!.isEmpty
-                    ? SingleErrorTextWidget(
-                        errorMessage: 'لا يوجد حملات في الوقت الحالي !',
-                        height: 200,
-                      )
-                    : CarouselSlider(
-                        items: controller.campaigns!
-                            .map((e) => Image.network(
-                                  e.imageUrl!,
-                                  width: double.infinity,
-                                  fit: BoxFit.cover,
-                                ))
-                            .toList(),
-                        options: CarouselOptions(
-                          onPageChanged: (index, reason) {
-                            controller.changeCurrentBannerIndex(index);
-                          },
-                          viewportFraction: 1,
-                          height:
-                              getMediaQueryHeight(context: context, value: 200),
-                        ),
-                      );
+                ? SingleErrorTextWidget(
+              errorMessage: 'لا يوجد حملات في الوقت الحالي !',
+              height: 200,
+            )
+                : CarouselSlider(
+              items: controller.campaigns!
+                  .map((e) => Image.network(
+                e.imageUrl!,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ))
+                  .toList(),
+              options: CarouselOptions(
+                onPageChanged: (index, reason) {
+                  controller.changeCurrentBannerIndex(index);
+                },
+                viewportFraction: 1,
+                height:
+                getMediaQueryHeight(context: context, value: 200),
+              ),
+            );
           }),
           SizedBox(
             height: getMediaQueryHeight(context: context, value: 8),
@@ -66,19 +66,19 @@ class HomeScreenContent extends GetView<HomeScreenController> {
               return controller.campaignsIsLoading
                   ? const SizedBox()
                   : controller.errorMessage!.isNotEmpty
-                      ? const SizedBox()
-                      : controller.campaigns!.isEmpty
-                          ? const SizedBox()
-                          : Center(
-                              child: SmoothPageIndicator(
-                              controller: PageController(
-                                  initialPage: controller.currentBannerIndex),
-                              count: controller.campaigns!.length,
-                              effect: const ExpandingDotsEffect(
-                                  activeDotColor: Colors.red,
-                                  dotHeight: 10,
-                                  dotWidth: 10),
-                            ));
+                  ? const SizedBox()
+                  : controller.campaigns!.isEmpty
+                  ? const SizedBox()
+                  : Center(
+                  child: SmoothPageIndicator(
+                    controller: PageController(
+                        initialPage: controller.currentBannerIndex),
+                    count: controller.campaigns!.length,
+                    effect: const ExpandingDotsEffect(
+                        activeDotColor: Colors.red,
+                        dotHeight: 10,
+                        dotWidth: 10),
+                  ));
             },
           ),
           SizedBox(

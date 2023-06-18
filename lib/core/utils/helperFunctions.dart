@@ -88,7 +88,7 @@ String? validateDescription(String password) {
 String? validateNameField(String name) {
   if (name.isEmpty) {
     return nameIsRequiredMessage;
-  } else if (name.length < 4 || name.length > 30) {
+  } else if (name.length < 4) {
     return nameMustHave4LettersAtLeastMessage;
   } else if (name.length > 30) {
     return nameMustHave30LettersAtMostMessage;
@@ -126,7 +126,7 @@ double getMediaQueryHeight(
 
 double getMediaQueryWidth({required BuildContext context, required num value}) {
   var size = MediaQuery.of(context).size;
-  //figma height
+  //figma width
   double xdWidth = 375;
   double percentage = value / xdWidth;
 
@@ -144,7 +144,7 @@ void showSnackBar(
     backgroundColor: backGroundColor,
     colorText: Colors.white,
     snackPosition: snackPosition,
-    duration: const Duration(seconds: 5),
+    duration: const Duration(milliseconds: 2500),
   );
 }
 

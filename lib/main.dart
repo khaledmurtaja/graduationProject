@@ -1,4 +1,6 @@
+import 'package:blood4life/App/modules/EmailVerfication/page.dart';
 import 'package:blood4life/routes/pages.dart';
+import 'package:blood4life/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
       designSize: const Size(360, 690),
       builder: (context, child) {
         return GetMaterialApp(
-          initialRoute: "/home",
+          initialRoute: Routes.HOME,
           textDirection: TextDirection.rtl,
           debugShowCheckedModeBanner: false,
           theme: ThemeData(primarySwatch: Colors.red, fontFamily: "Tajawal"),

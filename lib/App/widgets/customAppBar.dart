@@ -6,8 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../core/utils/helperFunctions.dart';
 import '../../core/values/colors.dart';
 
-class CustomAppBar  extends StatelessWidget implements PreferredSizeWidget {
-
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   String title;
   final VoidCallback function;
 

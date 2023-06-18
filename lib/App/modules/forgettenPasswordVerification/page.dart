@@ -1,0 +1,189 @@
+import 'package:blood4life/App/modules/forgettenPasswordVerification/controller.dart';
+import 'package:blood4life/App/widgets/customButtonWidget.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import '../../../core/values/colors.dart';
+import '../../../core/values/consts.dart';
+import '../../widgets/OtpTextField.dart';
+
+class ForgottenPasswordVerificationScreen extends GetView<ForgottenPasswordVerificationController> {
+  const ForgottenPasswordVerificationScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final String email = Get.arguments as String;
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: PreferredSize(
+          preferredSize: Size.fromHeight(5.h),
+          child: AppBar(
+            elevation: 0,
+            backgroundColor: scaffoldColor,
+          )),
+      body: SizedBox(
+        width: double.infinity,
+        child: Column(
+          children: [
+            SizedBox(
+              height: 16.h,
+            ),
+            InkWell(
+              onTap: () {
+                ///back to register screen
+              },
+              child: Padding(
+                  padding:  EdgeInsets.only(right: 24.w),
+                  child: Align(
+                      alignment: Alignment.topRight,
+                      child: SvgPicture.asset(
+                        arrowBackIcon,
+                        height: 24.h,
+                        width: 24.w,
+                      ))),
+            ),
+            SizedBox(
+              height: 80.h,
+            ),
+            Text(
+              'أدخل رمز التحقق',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 24.spMin),
+            ),
+            SizedBox(
+              height: 24.h,
+            ),
+            RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                style: TextStyle(
+                    color: const Color(0xffA0A0A0),
+                    fontSize: 18.spMin,
+                    fontWeight: FontWeight.w400),
+                children:  [
+                  const TextSpan(
+                    text: 'تم ارسال رمز تحقق مكون من 5 ارقام على\n',
+                  ),
+                  const TextSpan(text: "بريدك الاكتروني  "),
+                  TextSpan(
+                    text: email,
+                    style: const TextStyle(color: Color(0xff6A94BB)),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 40.h,
+            ),
+            Form(
+              child: Directionality(
+                textDirection: TextDirection.ltr,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    OtpTextField(
+                      controller: controller.otp1,
+                      autoFocus: true,
+                      focusNode: controller.focusNodeOtp1,
+                      onchange: (pin) {
+                        if(pin!="") {
+                          controller.focusNodeOtp2.requestFocus();
+
+                        }
+                        controller.onOtpCodeChanged(
+                            pin: pin, context: context);
+                      },
+                    ),
+                    SizedBox(
+                      width: 12.w,
+                    ),
+                    OtpTextField(
+                      controller: controller.otp2,
+                      focusNode: controller.focusNodeOtp2,
+                      onchange: (pin) {
+                        if(pin==""){
+                          controller.focusNodeOtp1.requestFocus();
+                        }else {
+                          controller.focusNodeOtp3.requestFocus();
+                        }
+                        controller.onOtpCodeChanged(
+                            pin: pin, context: context);
+                      },
+                    ),
+                    SizedBox(
+                      width: 12.w,
+                    ),
+                    OtpTextField(
+                      controller: controller.otp3,
+                      focusNode: controller.focusNodeOtp3,
+                      onchange: (pin) {
+                        if(pin==""){
+                          controller.focusNodeOtp2.requestFocus();
+                        }else {
+                          controller.focusNodeOtp4.requestFocus();
+                        }
+                        controller.onOtpCodeChanged(
+                            pin: pin, context: context);
+                      },
+                    ),
+                    SizedBox(
+                      width: 12.w,
+                    ),
+                    OtpTextField(
+                      controller: controller.otp4,
+                      focusNode: controller.focusNodeOtp4,
+                      onchange: (pin) {
+                        if(pin==""){
+                          controller.focusNodeOtp3.requestFocus();
+                        }else {
+                          controller.focusNodeOtp5.requestFocus();
+                        }
+                        controller.onOtpCodeChanged(
+                            pin: pin, context: context);
+                      },
+                    ),
+                    SizedBox(
+                      width: 12.w,
+                    ),
+                    OtpTextField(
+                      controller: controller.otp5,
+                      focusNode: controller.focusNodeOtp5,
+                      onchange: (pin) {
+                        if(pin==""){
+                          controller.focusNodeOtp4.requestFocus();
+                        }else {
+                          controller.focusNodeOtp5.unfocus();
+                        }
+                        controller.onOtpCodeChanged(
+                            pin: pin, context: context);
+                      },
+                    )
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 32.h,
+            ),
+            GetBuilder<ForgottenPasswordVerificationController>(
+              builder: (controller) {
+                if (controller.isCheckOTPLoading) {
+                  return const CircularProgressIndicator();
+                } else {
+                  return controller.otpCode.length==5? CustomButton(
+                      onPressed: () {
+                        controller.checkOtpCode(email: email);
+                      },
+                      text: "استمرار"):CustomButton(onPressed: (){}, text: "استمرار",buttonColor:primaryColor.withOpacity(0.5),);
+                }
+              },
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

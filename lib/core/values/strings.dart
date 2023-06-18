@@ -1,5 +1,5 @@
 const emailIsRequiredMessage="حقل البريد الالكتروني مطلوب";
-const wrongEmailFormatMessage="للبريد الالكتروني غير صالح";
+const wrongEmailFormatMessage="البريد الالكتروني غير صالح";
 const passwordIsRequiredMessage="حقل كلمة المرور مطلوب";
 const detailsIsRequiredMessage="حقل التفاصيل مطلوب";
 const atLeast10CharForDetailsFieldMessage="يجب ان يحتوي هذا الحقل 10 حروف على الاقل";
@@ -11,7 +11,7 @@ const atLeast1SpecialCharacterMessage="يجب ان تحتوي على رموز م
 const nameIsRequiredMessage="  الاسم مطلوب";
 const unMatchedPasswordsMessage="كلمتا المرورر غير متوافقتين";
 const nameMustHave4LettersAtLeastMessage="حقل الاسم يجب ان يحتوي اربعة احرف على الاقل";
-const nameMustHave30LettersAtMostMessage="حقل الاسم لا يمكن ان يتجاوز ثلاثون حرفا";
+const nameMustHave30LettersAtMostMessage="حقل الاسم لا يمكن ان يتجاوز ثلاثين حرفا";
 const lessThat200CharRequiredMessage="الوصف لا يمكن أن يتجاز ٢٠٠ حرف";
 const phoneNumberRequiredMessage="رقم الهاتف مطلوب" ;
 const unValidPhoneNumMessage="رقم الهاتف غير صالح" ;
@@ -25,5 +25,7 @@ final RegExp phoneNumberRegex = RegExp(r'^(059|056)\d{7}$');
 final RegExp idNumberRegex = RegExp(r'(9|8|0|4)\d{8}');
 const String landingPageKey="isLandingPageSkipped";
 const String loginPageKey="isLoggedIn";
+const String isEmailVerifiedKey="isEmailVerified";
+const String userEmailKey="userEmail";
 
 

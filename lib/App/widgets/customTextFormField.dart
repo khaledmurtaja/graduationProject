@@ -8,6 +8,7 @@ class CustomFormField extends StatelessWidget {
   Function validator;
   Function? onFieldSubmitted;
   Color backGroundColor;
+  Function? onChange;
   String? hint;
   int? maxLength;
   bool isPassword;
@@ -26,6 +27,7 @@ class CustomFormField extends StatelessWidget {
       this.suffixIcon,
       required this.validator,
       this.onFieldSubmitted,
+        this.onChange,
       this.maxLength,
       this.passwordConfirmController,
       this.backGroundColor = textFormFieldColor,
@@ -51,6 +53,11 @@ class CustomFormField extends StatelessWidget {
       style: const TextStyle(height: 1.5),
       onFieldSubmitted: (tap) {
         onFieldSubmitted!();
+      },
+      onChanged: (value){
+        if(onChange!=null) {
+          onChange!();
+        }
       },
       selectionControls: MaterialTextSelectionControls(),
       autovalidateMode: AutovalidateMode.onUserInteraction,
