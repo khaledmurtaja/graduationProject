@@ -42,7 +42,7 @@ class ApiService extends GetxService {
           response.statusCode == HttpStatus.ok) {
         return response;
       }
-    } on api.DioError catch (error) {
+    } on api.DioException catch (error) {
       if (error.response != null) {
         var statusCode = error.response!.statusCode;
         if (statusCode == HttpStatus.unauthorized) {
@@ -76,7 +76,7 @@ class ApiService extends GetxService {
       {required String url,
       Map<String, String>? additionalHeaders,
       String? pathParameter}) async {
-    print('**********');
+    print('****');
 
     print(url);
     try {
@@ -93,9 +93,9 @@ class ApiService extends GetxService {
       if (response.statusCode == HttpStatus.ok) {
         return response;
       }
-    } on api.DioError catch (error) {
+    } on api.DioException catch (error) {
       //   print(error.response != null);
-      //   print('**********');
+      //   print('****');
       if (error.response != null) {
         var statusCode = error.response!.statusCode;
 
@@ -129,7 +129,7 @@ class ApiService extends GetxService {
           response.statusCode == HttpStatus.ok) {
         return response;
       }
-    } on api.DioError catch (error) {
+    } on api.DioException catch (error) {
       if (error.response != null) {
         var statusCode = error.response!.statusCode;
         if (statusCode == HttpStatus.unauthorized) {
