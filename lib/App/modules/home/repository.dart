@@ -27,26 +27,25 @@ class HomeRepository {
   }
 
   Future<List<CampaignModel>?> getCampaigns() async {
-// homeScreenController.f
-    Get.find<HomeScreenController>().updateErrorMessage('123');
-    print(Get.find<HomeScreenController>().errorMessage);
     try {
       final response = await apiService.getRequest(
         url: ApiEndPoints.BASE_URL + ApiEndPoints.CAMPAINGNS,
       );
+
       final List<dynamic> jsonList = response?.data['data'];
       final List<CampaignModel> campaigns =
           jsonList.map((json) => CampaignModel.fromJson(json)).toList();
       return campaigns;
     } on Exception catch (exception) {
-      // repo.updateErrorMessage(exception.toString());
-      /*  if (exception is ServerException) {
-        throw ServerException;
-      } else if (exception is NetworkException) {
-        throw NetworkException;
+      if (exception is ServerException) {
+        showSnackBar(
+            message: "يوجد مشكلة في السيرفر حاول مرة أخرى !!",
+            snackPosition: SnackPosition.TOP);
       } else {
-        rethrow;
-      }*/
+        showSnackBar(
+            message: "حدث خلل ما حاول مرة أخرى !!",
+            snackPosition: SnackPosition.TOP);
+      }
     }
   }
 }

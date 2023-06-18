@@ -67,12 +67,6 @@ class HomeScreenController extends GetxController {
     campaignsIsLoading = true;
     try {
       campaigns = await repo.getCampaigns();
-      // } on ServerException {
-      //   print('ServerException \n ServerException');
-      // } on NetworkException {
-      //   print('NetworkException \n NetworkException');
-
-      //   print('');
     } on Exception catch (exception) {
       if (exception is ServerException) {
         print('ServerException ServerException ServerException');

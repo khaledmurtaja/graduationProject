@@ -11,8 +11,6 @@ class ArticleScreenController extends GetxController {
       PagingController(firstPageKey: 0);
   final repo = Get.find<BlogRepository>();
 
-
-
   @override
   void onInit() {
     pagingController.addPageRequestListener((pageKey) async {
