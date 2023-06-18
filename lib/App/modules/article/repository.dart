@@ -12,10 +12,10 @@ class BlogRepository {
         url: ApiEndPoints.BASE_URL + ApiEndPoints.ARTICLS,
         pathParameter: "?page=$pageKey");
     final List<dynamic> jsonList = response?.data['data'];
-    
+
     final List<ArticleModel> articles =
         jsonList.map((json) => ArticleModel.fromJson(json)).toList();
-        
+
     return articles;
   }
 }

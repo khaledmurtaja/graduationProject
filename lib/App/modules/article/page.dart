@@ -48,10 +48,10 @@ class ArticleScreen extends GetView<ArticleScreenController> {
               onTap: () {
                 controller.pagingController.retryLastFailedRequest();
               },
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Column(
-                  children: const [
+                  children: [
                     Text("حدث خطأ ما.اضعط للمحاولة مجددا"),
                     Icon(Icons.refresh)
                   ],
