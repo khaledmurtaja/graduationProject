@@ -32,37 +32,31 @@ class HomeScreenContent extends GetView<HomeScreenController> {
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          /*
           GetBuilder(builder: (HomeScreenController controller) {
             return controller.campaignsIsLoading
                 ? const CustomLoadingWidget()
-                : controller.errorMessage!.isNotEmpty
+                : controller.campaigns!.isEmpty
                     ? SingleErrorTextWidget(
-                        errorMessage: controller.errorMessage!,
+                        errorMessage: 'لا يوجد حملات في الوقت الحالي !',
                         height: 200,
                       )
-                    : controller.campaigns!.isEmpty
-                        ? SingleErrorTextWidget(
-                            errorMessage: 'لا يوجد حملات في الوقت الحالي !',
-                            height: 200,
-                          )
-                        : CarouselSlider(
-                            items: controller.campaigns!
-                                .map((e) => Image.network(
-                                      e.imageUrl!,
-                                      width: double.infinity,
-                                      fit: BoxFit.contain,
-                                    ))
-                                .toList(),
-                            options: CarouselOptions(
-                              onPageChanged: (index, reason) {
-                                controller.changeCurrentBannerIndex(index);
-                              },
-                              viewportFraction: 1,
-                              height: getMediaQueryHeight(
-                                  context: context, value: 200),
-                            ),
-                          );
+                    : CarouselSlider(
+                        items: controller.campaigns!
+                            .map((e) => Image.network(
+                                  e.imageUrl!,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                ))
+                            .toList(),
+                        options: CarouselOptions(
+                          onPageChanged: (index, reason) {
+                            controller.changeCurrentBannerIndex(index);
+                          },
+                          viewportFraction: 1,
+                          height:
+                              getMediaQueryHeight(context: context, value: 200),
+                        ),
+                      );
           }),
           SizedBox(
             height: getMediaQueryHeight(context: context, value: 8),
@@ -87,7 +81,6 @@ class HomeScreenContent extends GetView<HomeScreenController> {
                             ));
             },
           ),
-          */
           SizedBox(
             height: getMediaQueryHeight(context: context, value: 24),
           ),

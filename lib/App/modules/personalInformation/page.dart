@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../../core/values/colors.dart';
 import '../../widgets/customAppBar.dart';
@@ -17,7 +18,9 @@ class PersonalInformationScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBar(
-        function: () {},
+        function: () {
+          Get.back();
+        },
         title: 'معلوماتي الشخصية',
       ),
       body: Padding(

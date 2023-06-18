@@ -29,48 +29,51 @@ class CustomListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        SvgPicture.asset(
-          leadingicon,
-        ),
-        SizedBox(
-          width: getMediaQueryWidth(context: context, value: 11),
-        ),
-        Expanded(
-          child: Text(
-            title,
-            style: TextStyle(
-              fontSize: 12.spMin,
-              fontWeight: FontWeight.w500,
-              color: Colors.black,
+    return GestureDetector(
+      onTap:onTap ,
+      child: Row(
+        children: [
+          SvgPicture.asset(
+            leadingicon,
+          ),
+          SizedBox(
+            width: getMediaQueryWidth(context: context, value: 11),
+          ),
+          Expanded(
+            child: Text(
+              title,
+              style: TextStyle(
+                fontSize: 12.spMin,
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
+              ),
             ),
           ),
-        ),
-        SizedBox(
-          width: getMediaQueryWidth(context: context, value: 110),
-        ),
-        containsSwitch
-            ? Container(
-                height: getMediaQueryWidth(context: context, value: 10),
-                width: getMediaQueryWidth(context: context, value: 16),
-                child: FittedBox(
-                  fit: BoxFit.contain,
-                  child: CupertinoSwitch(
-                    value: switchValue!,
-                    onChanged: onChanged,
-                  ),
-                ),
-              )
-            : withTrailing!
-                ? GestureDetector(
-                    onTap: onTap,
-                    child: SvgPicture.asset(
-                      "assets/images/icons/profile/turnBack.svg",
+          SizedBox(
+            width: getMediaQueryWidth(context: context, value: 110),
+          ),
+          containsSwitch
+              ? Container(
+                  height: getMediaQueryWidth(context: context, value: 10),
+                  width: getMediaQueryWidth(context: context, value: 16),
+                  child: FittedBox(
+                    fit: BoxFit.contain,
+                    child: CupertinoSwitch(
+                      value: switchValue!,
+                      onChanged: onChanged,
                     ),
-                  )
-                : Container(),
-      ],
+                  ),
+                )
+              : withTrailing!
+                  ? GestureDetector(
+                      onTap: onTap,
+                      child: SvgPicture.asset(
+                        "assets/images/icons/profile/turnBack.svg",
+                      ),
+                    )
+                  : Container(),
+        ],
+      ),
     );
   }
 }
