@@ -1,18 +1,21 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:ui';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
 import '../../../core/utils/helperFunctions.dart';
-import '../../../core/values/strings.dart';
 import '../../../routes/routes.dart';
 import '../../data/models/donationAppealModel.dart';
-import '../../data/services/sharedPrefService.dart';
 import '../../widgets/appealCard.dart';
 import '../../widgets/customButtonWidget.dart';
+import '../../widgets/customLoadingWidget.dart';
 import '../../widgets/fistPageErrorIndicator.dart';
+import '../../widgets/singleErrorTextWidget.dart';
 import 'controller.dart';
 
 class HomeScreenContent extends GetView<HomeScreenController> {
@@ -29,34 +32,53 @@ class HomeScreenContent extends GetView<HomeScreenController> {
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CarouselSlider(
-              items: imgList
-                  .map((e) => Image.asset(
-                        e,
-                        width: double.infinity,
-                        fit: BoxFit.contain,
-                      ))
+          GetBuilder(builder: (HomeScreenController controller) {
+            return controller.campaignsIsLoading
+                ? const CustomLoadingWidget()
+                : controller.campaigns!.isEmpty
+                ? SingleErrorTextWidget(
+              errorMessage: 'لا يوجد حملات في الوقت الحالي !',
+              height: 200,
+            )
+                : CarouselSlider(
+              items: controller.campaigns!
+                  .map((e) => Image.network(
+                e.imageUrl!,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ))
                   .toList(),
               options: CarouselOptions(
                 onPageChanged: (index, reason) {
                   controller.changeCurrentBannerIndex(index);
                 },
                 viewportFraction: 1,
-                height: getMediaQueryHeight(context: context, value: 200),
-              )),
+                height:
+                getMediaQueryHeight(context: context, value: 200),
+              ),
+            );
+          }),
           SizedBox(
             height: getMediaQueryHeight(context: context, value: 8),
           ),
           GetBuilder(
             builder: (HomeScreenController controller) {
-              return Center(
+              return controller.campaignsIsLoading
+                  ? const SizedBox()
+                  : controller.errorMessage!.isNotEmpty
+                  ? const SizedBox()
+                  : controller.campaigns!.isEmpty
+                  ? const SizedBox()
+                  : Center(
                   child: SmoothPageIndicator(
-                controller:
-                    PageController(initialPage: controller.currentBannerIndex),
-                count: 5,
-                effect: const ExpandingDotsEffect(
-                    activeDotColor: Colors.red, dotHeight: 10, dotWidth: 10),
-              ));
+                    controller: PageController(
+                        initialPage: controller.currentBannerIndex),
+                    count: controller.campaigns!.length,
+                    effect: const ExpandingDotsEffect(
+                        activeDotColor: Colors.red,
+                        dotHeight: 10,
+                        dotWidth: 10),
+                  ));
             },
           ),
           SizedBox(
@@ -64,30 +86,9 @@ class HomeScreenContent extends GetView<HomeScreenController> {
           ),
           CustomButton(
             onPressed: () {
-              bool? isUserVerified = Get.find<AppSharedPref>()
-                  .getBoolValue(key: isEmailVerifiedKey);
               if (controller.isLoggedIn != null &&
-                  controller.isLoggedIn == true &&
-                  isUserVerified != null &&
-                  isUserVerified == true) {
+                  controller.isLoggedIn == true) {
                 Get.toNamed(Routes.DONATION_FORM);
-              } else if (controller.isLoggedIn != null &&
-                  controller.isLoggedIn == true &&
-                  isUserVerified != null &&
-                  isUserVerified == false) {
-                customDialog(
-                    context: context,
-                    title: "العملية تحتاج الى توثيق البريد الالكتروني",
-                    controller: controller,
-                    btnOkText: "توثيق البريد الالكتروني",
-                    onDismissCallback: () {
-                      controller.blurScreenFun(false);
-                    },
-                    btnCancelOnPress: () {},
-                    btnOkOnPress: () {
-                      Get.back();
-                      Get.toNamed("/sendVerificationCode");
-                    }).show();
               } else {
                 controller.blurScreenFun(true);
                 customDialog(
@@ -123,7 +124,9 @@ class HomeScreenContent extends GetView<HomeScreenController> {
                 pagingController: controller.pagingController,
                 builderDelegate: PagedChildBuilderDelegate<DonationAppealModel>(
                     firstPageErrorIndicatorBuilder: (context) {
-                      return firstPageErrorIndicator(controller, () {});
+                      return firstPageErrorIndicator(controller, () {
+                        controller.pagingController.retryLastFailedRequest();
+                      });
                     },
                     newPageErrorIndicatorBuilder: (context) {
                       return InkWell(
