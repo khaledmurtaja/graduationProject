@@ -35,11 +35,10 @@ class LoginScreenController extends GetxController {
       sharedPref.putStringValue(key: 'token', value: response.data['token']);
       sharedPref.putBoolValue(key: loginPageKey, value: true);
       sharedPref.putStringValue(key: userEmailKey, value: emailController.text);
-      print(response.data['user']['email_verified_at']);
-      if(response.data['user']['email_verified_at']==null||response.data['user']['email_verified_at']==""){
+      if (response.data['user']['email_verified_at'] == null ||
+          response.data['user']['email_verified_at'] == "") {
         sharedPref.putBoolValue(key: isEmailVerifiedKey, value: false);
-      }else{
-        print("sdf;lsdflsd");
+      } else {
         sharedPref.putBoolValue(key: isEmailVerifiedKey, value: true);
       }
       homeController.isLoggedIn = true;

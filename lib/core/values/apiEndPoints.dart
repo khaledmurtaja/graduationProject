@@ -12,4 +12,7 @@ class ApiEndPoints{
   static const String IMAGE_BASE_URL = "${BASE_URL}/storage/";
   static const String SEND_EMAIL_VERIFICATION="/api/user/sendVerificationEmailCode";
   static const String CHECK_OTP_CODE="/api/user/verification/code";
+  static const String sendForgetPasswordCode="/api/user/sendForgetPasswordCode";
+  static const String ForgottenPasswordCodeVerification="/api/user/CheckForgetPasswordCode";
+  static const String RESET_FORGOTTEN_PASSWORD="/api/user/ResetForgetedPassword";
 }

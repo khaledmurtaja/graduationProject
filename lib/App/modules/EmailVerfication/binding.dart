@@ -1,5 +1,6 @@
-import 'package:blood4life/App/modules/EmailVerfication/controller.dart';
 import 'package:get/get.dart';
+
+import 'controller.dart';
 
 class EmailVerificationBinding extends Bindings {
   @override

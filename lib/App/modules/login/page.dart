@@ -1,4 +1,5 @@
 import 'package:blood4life/App/widgets/customTextBtnWidget.dart';
+import 'package:blood4life/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -67,7 +68,7 @@ class LoginScreen extends GetView<LoginScreenController> {
                     validator: validateEmail,
                     hint: 'example@gmail.com',
                     focusNode: controller.emailFocusNode,
-                    onFieldSubmitted: (){
+                    onFieldSubmitted: () {
                       controller.passwordFocusNode.requestFocus();
                     },
                     isPassword: false,
@@ -91,7 +92,7 @@ class LoginScreen extends GetView<LoginScreenController> {
                         prefixIcon: const Icon(Icons.lock),
                         validator: validatePasswordLogin,
                         hint: '********',
-                        onFieldSubmitted: (){},
+                        onFieldSubmitted: () {},
                         focusNode: controller.passwordFocusNode,
                         isPassword: controller.securePassword,
                         width: deviceWidth * 0.87,
@@ -117,7 +118,10 @@ class LoginScreen extends GetView<LoginScreenController> {
                         InkWell(
                             onTap: () {},
                             child: CustomTextButton(
-                                text: "هل نسيت كلمة المرور", function: () {})),
+                                text: "هل نسيت كلمة المرور",
+                                function: () {
+                                  Get.toNamed(Routes.Forget_Password_Screen);
+                                })),
                       ],
                     ),
                   ),
@@ -127,17 +131,17 @@ class LoginScreen extends GetView<LoginScreenController> {
                   Align(
                     alignment: Alignment.center,
                     child: GetBuilder<LoginScreenController>(
-                      builder: (LoginScreenController controller){
-                        if(controller.isLoading){
+                      builder: (LoginScreenController controller) {
+                        if (controller.isLoading) {
                           return const CircularProgressIndicator();
-                        }else{
-                          return  CustomButton(
+                        } else {
+                          return CustomButton(
                             onPressed: () {
-                              bool isFormValidated = _formKey.currentState!.validate();
+                              bool isFormValidated =
+                                  _formKey.currentState!.validate();
                               if (isFormValidated) {
                                 /// after signing in successfully
                                 controller.loginUser(controller: controller);
-
                               }
                             },
                             text: 'تسجيل الدخول',
@@ -145,8 +149,7 @@ class LoginScreen extends GetView<LoginScreenController> {
                         }
                       },
                     ),
-                  )
-                  ,
+                  ),
                   SizedBox(
                     height: deviceHeight * 0.019,
                   ),

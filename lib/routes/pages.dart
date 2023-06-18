@@ -1,4 +1,6 @@
 import 'package:blood4life/App/modules/EmailVerfication/binding.dart';
+import 'package:blood4life/App/modules/forgetPassword/bindings.dart';
+import 'package:blood4life/App/modules/forgetPassword/page.dart';
 import 'package:blood4life/App/modules/login/binding.dart';
 import 'package:blood4life/App/modules/login/page.dart';
 import 'package:blood4life/App/modules/register/binding.dart';
@@ -22,6 +24,8 @@ import '../App/modules/donationRecord/binding.dart';
 import '../App/modules/donationRecord/page.dart';
 import '../App/modules/donationRequestDetails/binding.dart';
 import '../App/modules/donationRequestDetails/page.dart';
+import '../App/modules/forgettenPasswordVerification/binding.dart';
+import '../App/modules/forgettenPasswordVerification/page.dart';
 import '../App/modules/home/binding.dart';
 import '../App/modules/home/middleware.dart';
 import '../App/modules/home/page.dart';
@@ -31,6 +35,8 @@ import '../App/modules/notification/binding.dart';
 import '../App/modules/personalInformation/binding.dart';
 import '../App/modules/personalInformation/page.dart';
 import '../App/modules/profile/binding.dart';
+import '../App/modules/resetForgottenPassword/binding.dart';
+import '../App/modules/resetForgottenPassword/page.dart';
 import '../App/modules/resetPassword/binding.dart';
 import '../App/modules/resetPassword/page.dart';
 import '../App/modules/terms&policies/binding.dart';
@@ -118,6 +124,19 @@ abstract class AppPages {
     GetPage(
         name: Routes.SEND_EMAIL_VERIFICATION,
         page: () => SendVerificationCodeScreen(),
-        bindings: [SendVerificationCodeBinding()])
+        bindings: [SendVerificationCodeBinding()]),
+    GetPage(
+        name: Routes.Forget_Password_Screen,
+        page: () => ForgetPasswordScreen(),
+        bindings: [ForgetPasswordBinding()]),
+    GetPage(
+        name: Routes.SEND_FORGOT_PASSWORD_VERIFICATION,
+        page: () => ForgottenPasswordVerificationScreen(),
+        bindings: [ForgottenPasswordVerificationBinding()]),
+    GetPage(
+        name: Routes.RESET_Forgotten_PASSWORD,
+        page: () => ResetForgottenPasswordScreen(),
+        bindings: [ResetForgottenPasswordBinding()]),
+
   ];
 }

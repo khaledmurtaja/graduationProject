@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../core/values/colors.dart';
-import '../modules/EmailVerfication/controller.dart';
 
 class OtpTextField extends StatelessWidget {
   final TextEditingController controller;
   final Function? onchange;
-  const OtpTextField({
+  final FocusNode? focusNode;
+  bool? autoFocus;
+
+   OtpTextField({
     super.key,
     required this.controller,
+    this.autoFocus,
+    required this.focusNode,
     required this.onchange,
   });
   @override
@@ -19,6 +23,8 @@ class OtpTextField extends StatelessWidget {
         width: 52.w,
         child: TextFormField(
           keyboardType: TextInputType.number,
+          autofocus: autoFocus??false,
+          focusNode: focusNode,
           controller: controller,
           onChanged: (value) {
             onchange!(value);

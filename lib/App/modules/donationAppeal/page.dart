@@ -44,6 +44,7 @@ class AppealScreen extends GetView<DonationAppealScreenController> {
                     child: Padding(
                       padding: const EdgeInsets.all(24),
                       child: SingleChildScrollView(
+                        reverse: true,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

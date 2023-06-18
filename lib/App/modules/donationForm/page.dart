@@ -31,6 +31,7 @@ class DonationFormScreen extends GetView<DonationFormScreenController> {
         body: Form(
           key: controller.formKey,
           child: SingleChildScrollView(
+            reverse: true,
             child: Padding(
               padding: EdgeInsets.only(
                 left: getMediaQueryWidth(context: context, value: 24),

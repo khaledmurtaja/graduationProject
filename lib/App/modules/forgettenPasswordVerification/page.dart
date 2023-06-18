@@ -1,4 +1,4 @@
-import 'package:blood4life/App/modules/EmailVerfication/controller.dart';
+import 'package:blood4life/App/modules/forgettenPasswordVerification/controller.dart';
 import 'package:blood4life/App/widgets/customButtonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,11 +8,12 @@ import '../../../core/values/colors.dart';
 import '../../../core/values/consts.dart';
 import '../../widgets/OtpTextField.dart';
 
-class VerificationEmailScreen extends GetView<EmailVerificationController> {
-  const VerificationEmailScreen({Key? key}) : super(key: key);
+class ForgottenPasswordVerificationScreen extends GetView<ForgottenPasswordVerificationController> {
+  const ForgottenPasswordVerificationScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final String email = Get.arguments as String;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -33,7 +34,7 @@ class VerificationEmailScreen extends GetView<EmailVerificationController> {
                 ///back to register screen
               },
               child: Padding(
-                  padding: const EdgeInsets.only(right: 24),
+                  padding:  EdgeInsets.only(right: 24.w),
                   child: Align(
                       alignment: Alignment.topRight,
                       child: SvgPicture.asset(
@@ -68,7 +69,7 @@ class VerificationEmailScreen extends GetView<EmailVerificationController> {
                   ),
                   const TextSpan(text: "بريدك الاكتروني  "),
                   TextSpan(
-                    text: controller.userEmail,
+                    text: email,
                     style: const TextStyle(color: Color(0xff6A94BB)),
                   ),
                 ],
@@ -85,8 +86,8 @@ class VerificationEmailScreen extends GetView<EmailVerificationController> {
                   children: [
                     OtpTextField(
                       controller: controller.otp1,
-                      focusNode: controller.focusNodeOtp1,
                       autoFocus: true,
+                      focusNode: controller.focusNodeOtp1,
                       onchange: (pin) {
                         if(pin!="") {
                           controller.focusNodeOtp2.requestFocus();
@@ -150,15 +151,15 @@ class VerificationEmailScreen extends GetView<EmailVerificationController> {
                     OtpTextField(
                       controller: controller.otp5,
                       focusNode: controller.focusNodeOtp5,
-                        onchange: (pin) {
-                          if(pin==""){
-                            controller.focusNodeOtp4.requestFocus();
-                          }else {
-                            controller.focusNodeOtp5.unfocus();
-                          }
-                          controller.onOtpCodeChanged(
-                              pin: pin, context: context);
+                      onchange: (pin) {
+                        if(pin==""){
+                          controller.focusNodeOtp4.requestFocus();
+                        }else {
+                          controller.focusNodeOtp5.unfocus();
                         }
+                        controller.onOtpCodeChanged(
+                            pin: pin, context: context);
+                      },
                     )
                   ],
                 ),
@@ -167,14 +168,14 @@ class VerificationEmailScreen extends GetView<EmailVerificationController> {
             SizedBox(
               height: 32.h,
             ),
-            GetBuilder<EmailVerificationController>(
+            GetBuilder<ForgottenPasswordVerificationController>(
               builder: (controller) {
                 if (controller.isCheckOTPLoading) {
                   return const CircularProgressIndicator();
                 } else {
                   return controller.otpCode.length==5? CustomButton(
                       onPressed: () {
-                        controller.checkOtpCode();
+                        controller.checkOtpCode(email: email);
                       },
                       text: "استمرار"):CustomButton(onPressed: (){}, text: "استمرار",buttonColor:primaryColor.withOpacity(0.5),);
                 }

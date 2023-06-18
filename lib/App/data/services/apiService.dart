@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart' as api;
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
@@ -50,6 +48,7 @@ class ApiService extends GetxService {
         if (statusCode == HttpStatus.unauthorized) {
           throw UnAuthorizedException();
         } else if (statusCode == HttpStatus.serverError) {
+          print(error.toString());
           throw ServerException();
         } else if (statusCode == HttpStatus.unProcessable) {
           throw UnProcessableException();
@@ -130,7 +129,7 @@ class ApiService extends GetxService {
           response.statusCode == HttpStatus.ok) {
         return response;
       }
-    } on api.DioError catch (error) {
+    } on api.DioException catch (error) {
       if (error.response != null) {
         var statusCode = error.response!.statusCode;
         if (statusCode == HttpStatus.unauthorized) {
@@ -142,6 +141,56 @@ class ApiService extends GetxService {
         }
       } else {
         handleDioError(error: error);
+      }
+    } catch (error) {
+      throw UnKnownException();
+    }
+    return null;
+  }
+  ///put request.
+  Future<api.Response?> putRequest(
+      {required String url,
+        required Map<String, String?> data,
+        Map<String, String>? additionalHeaders,
+        String? pathParameter}) async {
+    try {
+      if (additionalHeaders != null) {
+        ///adding headers the request if its given(optional)
+        headers.addAll(additionalHeaders);
+      }
+      if (pathParameter != null) {
+        ///adding path parameter to the url just in case its not null(optional)
+        ///example of pathParameter structure page=5
+        url = '$url?$pathParameter';
+      }
+      api.Response response = await _dio.put(url,
+          data: data, options: api.Options(headers: headers));
+      if (response.statusCode == HttpStatus.created ||
+          response.statusCode == HttpStatus.ok) {
+        return response;
+      }
+    } on api.DioException catch (error) {
+      if (error.response != null) {
+        var statusCode = error.response!.statusCode;
+        if (statusCode == HttpStatus.unauthorized) {
+          throw UnAuthorizedException();
+        } else if (statusCode == HttpStatus.serverError) {
+          print(error.toString());
+          throw ServerException();
+        } else if (statusCode == HttpStatus.unProcessable) {
+          throw UnProcessableException();
+        } else if (statusCode == HttpStatus.limiting) {
+          throw TooManyRequestsException();
+        } else if (statusCode == HttpStatus.conflict) {
+          throw ConflictException();
+        } else {
+          throw UnKnownException();
+        }
+      } else {
+        handleDioError(error: error);
+      }
+      if (kDebugMode) {
+        print(error);
       }
     } catch (error) {
       throw UnKnownException();
