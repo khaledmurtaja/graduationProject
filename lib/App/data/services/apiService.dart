@@ -44,7 +44,7 @@ class ApiService extends GetxService {
           response.statusCode == HttpStatus.ok) {
         return response;
       }
-    } on api.DioException catch (error) {
+    } on api.DioError catch (error) {
       if (error.response != null) {
         var statusCode = error.response!.statusCode;
         if (statusCode == HttpStatus.unauthorized) {
@@ -94,7 +94,7 @@ class ApiService extends GetxService {
       if (response.statusCode == HttpStatus.ok) {
         return response;
       }
-    } on api.DioException catch (error) {
+    } on api.DioError catch (error) {
       //   print(error.response != null);
       //   print('****');
       if (error.response != null) {
@@ -130,7 +130,7 @@ class ApiService extends GetxService {
           response.statusCode == HttpStatus.ok) {
         return response;
       }
-    } on api.DioException catch (error) {
+    } on api.DioError catch (error) {
       if (error.response != null) {
         var statusCode = error.response!.statusCode;
         if (statusCode == HttpStatus.unauthorized) {
