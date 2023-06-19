@@ -321,7 +321,7 @@ class AppealScreen extends GetView<DonationAppealScreenController> {
                             child: Align(
                               alignment: Alignment.center,
                               child: Text(
-                                "طلبات التبرع",
+                                "عروض التبرع",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontWeight: FontWeight.w500,

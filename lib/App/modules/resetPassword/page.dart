@@ -2,14 +2,12 @@ import 'package:blood4life/App/modules/resetPassword/controller.dart';
 import 'package:blood4life/App/widgets/customButtonWidget.dart';
 import 'package:blood4life/core/utils/helperFunctions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
-import '../../../core/values/colors.dart';
+import '../../../core/values/consts.dart';
 import '../../widgets/customAppBar.dart';
 import '../../widgets/customTextFormField.dart';
+import '../home/controller.dart';
 
 class ResetPasswordScreen extends GetView<ResetPasswordScreenController> {
   const ResetPasswordScreen({super.key});
@@ -24,170 +22,150 @@ class ResetPasswordScreen extends GetView<ResetPasswordScreenController> {
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
+        reverse: true,
         child: Padding(
           padding: EdgeInsets.only(
             left: getMediaQueryWidth(context: context, value: 24),
             right: getMediaQueryWidth(context: context, value: 24),
             top: getMediaQueryHeight(context: context, value: 16),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "كلمة المرور القديمة",
-                style:
-                    TextStyle(fontSize: 16.spMin, fontWeight: FontWeight.w500),
-              ),
-              SizedBox(
-                height: getMediaQueryHeight(context: context, value: 14),
-              ),
-              CustomFormField(
-                controller: controller.oldPasswordController,
-                prefixIcon: const Icon(Icons.lock),
-                validator: validateEmail,
-                hint: '********',
-                isPassword: true,
-                width: getMediaQueryWidth(context: context, value: 327),
-                height: getMediaQueryHeight(context: context, value: 48),
-                suffixIcon: IconButton(
-                  icon: Icon(controller.securePassword
-                      ? Icons.remove_red_eye
-                      : Icons.visibility_off),
-                  onPressed: () {
-                    controller.onRedEyeClicked();
+          child: Form(
+            key: controller.formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "كلمة المرور القديمة",
+                  style: TextStyle(
+                      fontSize: 16.spMin, fontWeight: FontWeight.w500),
+                ),
+                SizedBox(
+                  height: getMediaQueryHeight(context: context, value: 14),
+                ),
+                GetBuilder<ResetPasswordScreenController>(
+                  builder: (controller) {
+                    return CustomFormField(
+                      controller: controller.oldPasswordController,
+                      prefixIcon: const Icon(Icons.lock),
+                      validator: validatePasswordLogin,
+                      hint: '********',
+                      isPassword: controller.isOldPasswordSecured,
+                      width: getMediaQueryWidth(context: context, value: 327),
+                      suffixIcon: IconButton(
+                        icon: Icon(controller.isOldPasswordSecured
+                            ? Icons.remove_red_eye
+                            : Icons.visibility_off),
+                        onPressed: () {
+                          controller.onRedEyeOldPasswordClicked();
+                        },
+                      ),
+                    );
                   },
                 ),
-              ),
-              SizedBox(
-                height: getMediaQueryHeight(context: context, value: 16),
-              ),
-              Text(
-                "كلمة المرور الجديدة",
-                style:
-                    TextStyle(fontSize: 16.spMin, fontWeight: FontWeight.w500),
-              ),
-              SizedBox(
-                height: getMediaQueryHeight(context: context, value: 14),
-              ),
-              CustomFormField(
-                controller: controller.newPasswordController,
-                prefixIcon: const Icon(Icons.lock),
-                validator: validateEmail,
-                hint: '********',
-                isPassword: true,
-                width: getMediaQueryWidth(context: context, value: 327),
-                height: getMediaQueryHeight(context: context, value: 48),
-                suffixIcon: IconButton(
-                  icon: Icon(controller.securePassword
-                      ? Icons.remove_red_eye
-                      : Icons.visibility_off),
-                  onPressed: () {
-                    controller.onRedEyeClicked();
+                SizedBox(
+                  height: getMediaQueryHeight(context: context, value: 16),
+                ),
+                Text(
+                  "كلمة المرور الجديدة",
+                  style: TextStyle(
+                      fontSize: 16.spMin, fontWeight: FontWeight.w500),
+                ),
+                SizedBox(
+                  height: getMediaQueryHeight(context: context, value: 14),
+                ),
+                GetBuilder<ResetPasswordScreenController>(
+                  builder: (controller) {
+                    return CustomFormField(
+                      controller: controller.newPasswordController,
+                      passwordConfirmController:
+                          controller.confirmNewPasswordController,
+                      prefixIcon: const Icon(Icons.lock),
+                      validator: validatePasswordRegister,
+                      hint: '********',
+                      isPassword: controller.isNewPasswordSecured,
+                      width: getMediaQueryWidth(context: context, value: 327),
+                      suffixIcon: IconButton(
+                        icon: Icon(controller.isNewPasswordSecured
+                            ? Icons.remove_red_eye
+                            : Icons.visibility_off),
+                        onPressed: () {
+                          controller.onRedEyeNewPasswordClicked();
+                        },
+                      ),
+                    );
                   },
                 ),
-              ),
-              SizedBox(
-                height: getMediaQueryHeight(context: context, value: 16),
-              ),
-              Text(
-                "تأكيد كلمة المرور الجديدة",
-                style:
-                    TextStyle(fontSize: 16.spMin, fontWeight: FontWeight.w500),
-              ),
-              SizedBox(
-                height: getMediaQueryHeight(context: context, value: 14),
-              ),
-              CustomFormField(
-                controller: controller.confirmNewPasswordController,
-                prefixIcon: const Icon(Icons.lock),
-                validator: validateEmail,
-                hint: '********',
-                isPassword: true,
-                width: getMediaQueryWidth(context: context, value: 327),
-                height: getMediaQueryHeight(context: context, value: 48),
-                suffixIcon: IconButton(
-                  icon: Icon(controller.securePassword
-                      ? Icons.remove_red_eye
-                      : Icons.visibility_off),
-                  onPressed: () {
-                    controller.onRedEyeClicked();
+                SizedBox(
+                  height: getMediaQueryHeight(context: context, value: 16),
+                ),
+                Text(
+                  "تأكيد كلمة المرور الجديدة",
+                  style: TextStyle(
+                      fontSize: 16.spMin, fontWeight: FontWeight.w500),
+                ),
+                SizedBox(
+                  height: getMediaQueryHeight(context: context, value: 14),
+                ),
+                GetBuilder<ResetPasswordScreenController>(
+                  builder: (controller) {
+                    return CustomFormField(
+                      controller: controller.confirmNewPasswordController,
+                      passwordConfirmController:
+                          controller.newPasswordController,
+                      prefixIcon: const Icon(Icons.lock),
+                      validator: validatePasswordRegister,
+                      hint: '********',
+                      isPassword: controller.isNewPasswordConfirmationSecured,
+                      width: getMediaQueryWidth(context: context, value: 327),
+                      suffixIcon: IconButton(
+                        icon: Icon(controller.isNewPasswordConfirmationSecured
+                            ? Icons.remove_red_eye
+                            : Icons.visibility_off),
+                        onPressed: () {
+                          controller.onRedEyeNewPasswordConfirmationClicked();
+                        },
+                      ),
+                    );
                   },
                 ),
-              ),
-              SizedBox(
-                height: getMediaQueryHeight(context: context, value: 120),
-              ),
-              CustomButton(
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                            content: Padding(
-                          padding: EdgeInsets.only(
-                            left:
-                                getMediaQueryWidth(context: context, value: 50),
-                            right:
-                                getMediaQueryWidth(context: context, value: 50),
-                            top: getMediaQueryHeight(
-                                context: context, value: 24),
-                            bottom: getMediaQueryHeight(
-                                context: context, value: 28),
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              SvgPicture.asset(
-                                "assets/images/icons/verifySuccessfully.svg",
-                              ),
-                              SizedBox(
-                                height: getMediaQueryHeight(
-                                    context: context, value: 16),
-                              ),
-                              Text(
-                                'تم تغير كلمة السر بنجاح',
-                                style: TextStyle(
-                                    fontSize: 16.spMin,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              SizedBox(
-                                height: getMediaQueryHeight(
-                                    context: context, value: 40),
-                              ),
-                              InkWell(
-                                onTap: () {},
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
-                                      color: verifyBtnColor),
-                                  width: getMediaQueryWidth(
-                                      context: context, value: 207),
-                                  child: Align(
-                                    alignment: Alignment.center,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 15,
-                                          bottom: 15,
-                                          left: 12,
-                                          right: 12),
-                                      child: Text(
-                                        'عودة الى الصفحة الرئيسية',
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 14.spMin),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ));
-                      });
-                },
-                text: 'حفظ',
-              ),
-            ],
+                SizedBox(
+                  height: getMediaQueryHeight(context: context, value: 120),
+                ),
+                GetBuilder<ResetPasswordScreenController>(
+                  builder: (controller) {
+                    if (controller.isLoading) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else {
+                      return CustomButton(
+                        onPressed: () async {
+                          if (controller.formKey.currentState!.validate()) {
+                            await controller.resetPassword();
+                            if (context.mounted &&
+                                controller.passwordResetSuccessfully) {
+                              showDialog(
+                                  context: context,
+                                  builder: (c) {
+                                    return showSuccessResetPasswordMessage(
+                                        context: context,
+                                        goToHomeFun: () {
+                                          final homeController =
+                                              Get.find<HomeScreenController>();
+                                          homeController.changeCurrentPageIndex(
+                                              homePageIndex);
+                                        });
+                                  });
+                            }
+                          }
+                        },
+                        text: 'حفظ',
+                      );
+                    }
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

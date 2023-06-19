@@ -9,6 +9,8 @@ import 'package:get/get.dart';
 
 import '../../../core/utils/helperFunctions.dart';
 import '../../../core/values/colors.dart';
+import '../../../core/values/strings.dart';
+import '../../data/services/sharedPrefService.dart';
 
 class ProfileScreen extends GetView<ProfileScreenController> {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -106,7 +108,24 @@ class ProfileScreen extends GetView<ProfileScreenController> {
               leadingicon: "assets/images/icons/profile/passwordcheck.svg",
               title: 'إعادة تعين كلمة المرور',
               onTap: () {
-                Get.toNamed("/resetPassword");
+                bool? isUserVerified = Get.find<AppSharedPref>()
+                    .getBoolValue(key: isEmailVerifiedKey);
+                if(isUserVerified!=null&&isUserVerified) {
+                  Get.toNamed("/resetPassword");
+                }else{
+                  customDialog(
+                      context: context,
+                      title: "العملية تحتاج الى توثيق البريد الالكتروني",
+                      controller: controller,
+                      btnOkText: "توثيق البريد الالكتروني",
+                      onDismissCallback: () {
+                      },
+                      btnCancelOnPress: () {},
+                      btnOkOnPress: () {
+                        Get.back();
+                        Get.toNamed("/sendVerificationCode");
+                      }).show();
+                }
               },
             ),
             SizedBox(

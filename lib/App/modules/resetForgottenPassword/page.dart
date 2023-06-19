@@ -47,7 +47,7 @@ class ResetForgottenPasswordScreen
                 ),
                 Center(
                   child: Text(
-                    'انشاء كلمة سر جديدة',
+                    'اعادة تعيين  كلمة السر المفقودة ',
                     style: TextStyle(
                         fontSize: 24.spMin, fontWeight: FontWeight.bold),
                   ),

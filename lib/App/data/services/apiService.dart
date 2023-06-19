@@ -96,6 +96,7 @@ class ApiService extends GetxService {
     } on api.DioException catch (error) {
       //   print(error.response != null);
       //   print('**********');
+      print(error.toString());
       if (error.response != null) {
         var statusCode = error.response!.statusCode;
 

@@ -34,7 +34,7 @@ class firstPageErrorIndicator extends StatelessWidget {
         CustomButton(
             onPressed: () {
               function!();
-            //  controller.pagingControllerForAppeals.retryLastFailedRequest();
+             // controller.pagingControllerForAppeals.retryLastFailedRequest();
             },
             text: "حاول مجددا",
             theIconBesideText: Icons.refresh)

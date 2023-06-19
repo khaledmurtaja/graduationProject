@@ -3,8 +3,11 @@ import 'package:blood4life/App/modules/donationForm/controller.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../values/colors.dart';
 import '../values/strings.dart';
 
 /// Construct a color from a hex code string, of the format #RRGGBB.
@@ -209,6 +212,65 @@ onBackFormDonationForm({required DonationFormScreenController controller,require
       Get.back();
     }
   }
+
+}
+showSuccessResetPasswordMessage({required BuildContext context,required Function goToHomeFun}){
+  return AlertDialog(
+      contentPadding: EdgeInsets.only(
+          top: 32.h,
+          bottom: 32.h,
+          right: 60.w,
+          left: 60.w),
+      content: SizedBox(
+        width: double.infinity,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SvgPicture.asset(
+              "assets/images/icons/ep_success-filled.svg",
+            ),
+            SizedBox(
+              height: getMediaQueryHeight(
+                  context: context, value: 16),
+            ),
+            Text(
+              'تم تغير كلمة السر بنجاح',
+              style: TextStyle(
+                  fontSize: 16.spMin,
+                  fontWeight: FontWeight.w500),
+            ),
+            SizedBox(
+              height: getMediaQueryHeight(
+                  context: context, value: 40),
+            ),
+            SizedBox(
+              height: 48,
+              width: 207,
+              child: InkWell(
+                onTap: () {
+                  Get.back();
+                  Get.back();
+                  goToHomeFun();
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius:
+                      BorderRadius.circular(12),
+                      color: primaryColor),
+                  child: Center(
+                    child: Text(
+                      'عودة الى الصفحة الرئيسية',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16.spMin),
+                    ),
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ));
 
 }
 

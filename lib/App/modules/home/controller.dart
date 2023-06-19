@@ -36,7 +36,7 @@ class HomeScreenController extends GetxController {
   bool campaignsIsLoading = false;
   @override
   void onInit() {
-    //fetchCampaigns();
+    fetchCampaigns();
     pagingController.addPageRequestListener((pageKey) async {
       await fetchData(pageKey: pageKey);
     });
@@ -65,15 +65,8 @@ class HomeScreenController extends GetxController {
 
   fetchCampaigns() async {
     campaignsIsLoading = true;
-    try {
-      campaigns = await repo.getCampaigns();
-    } on Exception catch (exception) {
-      if (exception is ServerException) {
-        print('ServerException ServerException ServerException');
-      } else if (exception is NetworkException) {
-        print('NetworkException NetworkException NetworkException');
-      } else {}
-    }
+    campaigns = await repo.getCampaigns();
+
     campaignsIsLoading = false;
     update();
   }

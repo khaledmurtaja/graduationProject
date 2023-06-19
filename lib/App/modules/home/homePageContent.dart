@@ -9,8 +9,10 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../core/utils/helperFunctions.dart';
+import '../../../core/values/strings.dart';
 import '../../../routes/routes.dart';
 import '../../data/models/donationAppealModel.dart';
+import '../../data/services/sharedPrefService.dart';
 import '../../widgets/appealCard.dart';
 import '../../widgets/customButtonWidget.dart';
 import '../../widgets/customLoadingWidget.dart';
@@ -86,9 +88,30 @@ class HomeScreenContent extends GetView<HomeScreenController> {
           ),
           CustomButton(
             onPressed: () {
+              bool? isUserVerified = Get.find<AppSharedPref>()
+                  .getBoolValue(key: isEmailVerifiedKey);
               if (controller.isLoggedIn != null &&
-                  controller.isLoggedIn == true) {
+                  controller.isLoggedIn == true &&
+                  isUserVerified != null &&
+                  isUserVerified == true) {
                 Get.toNamed(Routes.DONATION_FORM);
+              } else if (controller.isLoggedIn != null &&
+                  controller.isLoggedIn == true &&
+                  isUserVerified != null &&
+                  isUserVerified == false) {
+                customDialog(
+                    context: context,
+                    title: "العملية تحتاج الى توثيق البريد الالكتروني",
+                    controller: controller,
+                    btnOkText: "توثيق البريد الالكتروني",
+                    onDismissCallback: () {
+                      controller.blurScreenFun(false);
+                    },
+                    btnCancelOnPress: () {},
+                    btnOkOnPress: () {
+                      Get.back();
+                      Get.toNamed("/sendVerificationCode");
+                    }).show();
               } else {
                 controller.blurScreenFun(true);
                 customDialog(

@@ -1,23 +1,22 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../core/utils/helperFunctions.dart';
 import '../../../core/values/apiEndPoints.dart';
 import '../../../core/values/colors.dart';
 import '../../../routes/routes.dart';
 import '../../data/services/apiService.dart';
 import 'package:dio/src/response.dart' as api;
+import '../../data/services/sharedPrefService.dart';
 
 class ResetForgottenPasswordScreenController extends GetxController {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmNewPasswordController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
+  final sharedPref = Get.find<AppSharedPref>();
   final apiService = Get.find<ApiService>();
-
   bool securePassword = true;
-  bool secureConfirmPassword=true;
+  bool secureConfirmPassword = true;
   bool isLoading = false;
 
   onRedEyeClicked() {
@@ -28,14 +27,17 @@ class ResetForgottenPasswordScreenController extends GetxController {
 
   Future<api.Response?> resetPassword({required String email}) async {
     try {
+      String? token = sharedPref.getStringValue(key: "token");
+
       isLoading = true;
       update();
       final response = await apiService.putRequest(
         url: ApiEndPoints.BASE_URL + ApiEndPoints.RESET_FORGOTTEN_PASSWORD,
+        additionalHeaders: {"Authorization": "Bearer $token"},
         data: {
           'password': passwordController.text,
           'password_confirmation': confirmNewPasswordController.text,
-          'email':email
+          'email': email
         },
       );
       isLoading = false;

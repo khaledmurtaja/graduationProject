@@ -15,4 +15,5 @@ class ApiEndPoints{
   static const String sendForgetPasswordCode="/api/user/sendForgetPasswordCode";
   static const String ForgottenPasswordCodeVerification="/api/user/CheckForgetPasswordCode";
   static const String RESET_FORGOTTEN_PASSWORD="/api/user/ResetForgetedPassword";
+  static const String CHANGE_CURRENT_PASSWORD="/api/user/resetCurrentPassword";
 }
