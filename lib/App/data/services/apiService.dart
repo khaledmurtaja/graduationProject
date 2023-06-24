@@ -43,13 +43,11 @@ class ApiService extends GetxService {
         return response;
       }
     } on api.DioException catch (error) {
-      print(error.toString());
       if (error.response != null) {
         var statusCode = error.response!.statusCode;
         if (statusCode == HttpStatus.unauthorized) {
           throw UnAuthorizedException();
         } else if (statusCode == HttpStatus.serverError) {
-          print(error.toString());
           throw ServerException();
         } else if (statusCode == HttpStatus.unProcessable) {
           throw UnProcessableException();
