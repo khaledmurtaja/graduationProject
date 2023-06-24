@@ -7,13 +7,15 @@ import '../../../../core/values/colors.dart';
 class CustomCard extends StatelessWidget {
   const CustomCard({
     super.key,
+    required this.name,
+    required this.email,
   });
-
+  final String name;
+  final String email;
   @override
   Widget build(BuildContext context) {
     return Container(
-              width: getMediaQueryWidth(context: context, value: 327),
-
+      width: getMediaQueryWidth(context: context, value: 327),
       child: Card(
         // width: getMediaQueryWidth(context: context, value: 327),
         // height: getMediaQueryHeight(context: context, value: 78),
@@ -37,10 +39,12 @@ class CustomCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  SizedBox(width: getMediaQueryWidth(context: context, value: 8),),
+                  SizedBox(
+                    width: getMediaQueryWidth(context: context, value: 8),
+                  ),
                   Container(
                     width: 40,
-                    height:40,
+                    height: 40,
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
@@ -55,7 +59,7 @@ class CustomCard extends StatelessWidget {
                     width: getMediaQueryWidth(context: context, value: 8),
                   ),
                   Text(
-                    'يوسف هاني المصري',
+                    name,
                     style: TextStyle(
                         fontSize: 16.spMin,
                         fontWeight: FontWeight.w500,
@@ -71,7 +75,7 @@ class CustomCard extends StatelessWidget {
                   right: getMediaQueryWidth(context: context, value: 8),
                 ),
                 child: Text(
-                  "yousefalmassri3ux@gmail.com",
+                  email,
                   style: TextStyle(
                     fontWeight: FontWeight.w400,
                     fontSize: 8.sp,

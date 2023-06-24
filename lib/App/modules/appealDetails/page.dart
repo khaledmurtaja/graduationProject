@@ -1,7 +1,14 @@
+import 'dart:io';
+
+import 'package:blood4life/App/modules/appealDetails/controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../core/utils/helperFunctions.dart';
 import '../../../core/values/colors.dart';
@@ -9,7 +16,7 @@ import '../../widgets/customAppBar.dart';
 import '../../widgets/customButtonWidget.dart';
 import '../../widgets/customRow.dart';
 
-class AppealDetailsScreen extends StatelessWidget {
+class AppealDetailsScreen extends GetView<AppealDetailsScreenController> {
   const AppealDetailsScreen({super.key});
 
   @override
@@ -17,7 +24,9 @@ class AppealDetailsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBar(
-        function: () {},
+        function: () {
+          Get.back();
+        },
         title: 'مناشدة',
       ),
       body: Padding(
@@ -71,8 +80,8 @@ class AppealDetailsScreen extends StatelessWidget {
                       height: getMediaQueryHeight(context: context, value: 24),
                     ),
                     CustomRow(
-                      firstText: 'إسم المتبرع :',
-                      secondText: 'يوسف هاني المصري',
+                      firstText: 'إسم المحتاج :',
+                      secondText: controller.donationAppealModel!.fullName,
                       firstTextFontWeight: FontWeight.w700,
                       secondTextFontSize: 16.spMin,
                     ),
@@ -81,7 +90,7 @@ class AppealDetailsScreen extends StatelessWidget {
                     ),
                     CustomRow(
                       firstText: 'رقم التواصل :',
-                      secondText: '0597589865',
+                      secondText: controller.donationAppealModel!.phoneNumber,
                       firstTextFontWeight: FontWeight.w700,
                       secondTextFontSize: 16.spMin,
                     ),
@@ -90,7 +99,7 @@ class AppealDetailsScreen extends StatelessWidget {
                     ),
                     CustomRow(
                       firstText: 'فصيلة الدم : ',
-                      secondText: 'O+',
+                      secondText: controller.donationAppealModel!.bloodType,
                       firstTextFontWeight: FontWeight.w700,
                       secondTextFontSize: 16.spMin,
                     ),
@@ -99,7 +108,7 @@ class AppealDetailsScreen extends StatelessWidget {
                     ),
                     CustomRow(
                       firstText: 'مكان السكن :',
-                      secondText: 'المغازي',
+                      secondText: controller.donationAppealModel!.location,
                       firstTextFontWeight: FontWeight.w700,
                       secondTextFontSize: 16.spMin,
                     ),
@@ -108,8 +117,7 @@ class AppealDetailsScreen extends StatelessWidget {
                     ),
                     CustomRow(
                       firstText: 'التفاصيل :',
-                      secondText:
-                          'نحتاج الى ثلاثة أكياس دم من فصيلة +O لحالة طارئة لعميلة جراحية في مستشفى الشفاء',
+                      secondText: controller.donationAppealModel!.description,
                       firstTextFontWeight: FontWeight.w700,
                       secondTextFontSize: 16.spMin,
                     ),
@@ -123,7 +131,10 @@ class AppealDetailsScreen extends StatelessWidget {
             Row(
               children: [
                 CustomButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    await makePhoneCall(
+                        controller.donationAppealModel!.phoneNumber);
+                  },
                   text: 'اتصل الآن',
                   width: getMediaQueryWidth(
                     context: context,
@@ -135,7 +146,10 @@ class AppealDetailsScreen extends StatelessWidget {
                   width: getMediaQueryWidth(context: context, value: 8),
                 ),
                 CustomButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    await controller.shareAppeal(
+                        appealDetailsScreenController: controller);
+                  },
                   text: 'ايقونه',
                   showIcon: true,
                   width: getMediaQueryWidth(

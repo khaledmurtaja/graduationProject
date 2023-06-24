@@ -1,3 +1,4 @@
+import 'package:blood4life/App/modules/personalInformation/controller.dart';
 import 'package:blood4life/App/widgets/customRow.dart';
 import 'package:blood4life/core/utils/helperFunctions.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,8 @@ import '../../../core/values/colors.dart';
 import '../../widgets/customAppBar.dart';
 import '../../widgets/customButtonWidget.dart';
 
-class PersonalInformationScreen extends StatelessWidget {
+class PersonalInformationScreen
+    extends GetView<PersonalInformationScreenController> {
   const PersonalInformationScreen({super.key});
 
   @override
@@ -50,7 +52,7 @@ class PersonalInformationScreen extends StatelessWidget {
                 height: getMediaQueryHeight(context: context, value: 24),
               ),
               Text(
-                'يوسف هاني المصري',
+                controller.userData!.name!,
                 style: TextStyle(
                   fontSize: 16.spMin,
                   fontWeight: FontWeight.w700,
@@ -76,7 +78,7 @@ class PersonalInformationScreen extends StatelessWidget {
               ),
               CustomRow(
                 firstText: 'الاسم بالكامل : ',
-                secondText: 'يوسف هاني المصري',
+                secondText: controller.userData!.name!,
                 firstTextFontWeight: FontWeight.w500,
                 secondTextFontSize: 12.spMin,
               ),
@@ -85,7 +87,7 @@ class PersonalInformationScreen extends StatelessWidget {
               ),
               CustomRow(
                 firstText: 'البريد الإلكتروني : ',
-                secondText: 'yousefalmassri3@gmail.com',
+                secondText: controller.userData!.email,
                 firstTextFontWeight: FontWeight.w500,
                 secondTextFontSize: 12.spMin,
               ),

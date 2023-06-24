@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "397876596986",
+    "project_id": "graduationproject-16b5c",
+    "storage_bucket": "graduationproject-16b5c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:397876596986:android:a7e76e82626e3723793943",
+        "android_client_info": {
+          "package_name": "com.example.blood4life"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "397876596986-qa62eisugpe00b3oetmhjm4r5p5sh4ir.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9spx948mE2o2bIZluxwdsWP1QOhOyin8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "397876596986-qa62eisugpe00b3oetmhjm4r5p5sh4ir.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "397876596986-giejum702slkfrf5k78pn4es4ncuuap4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.blood4life"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

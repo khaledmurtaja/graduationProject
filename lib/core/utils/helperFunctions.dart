@@ -1,10 +1,21 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:blood4life/App/modules/donationForm/controller.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../../App/data/models/notificationModel.dart';
+import '../../App/data/services/apiService.dart';
+import '../../App/data/services/sharedPrefService.dart';
 import '../values/strings.dart';
 
 /// Construct a color from a hex code string, of the format #RRGGBB.
@@ -55,15 +66,17 @@ String? validatePhoneNumber(String phoneNumber) {
     return null;
   }
 }
-String? validateDetailsField(String details){
-  if(details.isEmpty){
+
+String? validateDetailsField(String details) {
+  if (details.isEmpty) {
     return detailsIsRequiredMessage;
-  }else if(details.length<10){
-return atLeast10CharForDetailsFieldMessage;
-  }else{
+  } else if (details.length < 10) {
+    return atLeast10CharForDetailsFieldMessage;
+  } else {
     return null;
   }
 }
+
 /// for validating password field in login screen
 String? validatePasswordLogin(String password) {
   if (password.isEmpty) {
@@ -96,6 +109,7 @@ String? validateNameField(String name) {
     return null;
   }
 }
+
 ///form validation id number field
 String? validateIdNumber(String idNumber) {
   if (idNumber.isEmpty) {
@@ -106,11 +120,12 @@ String? validateIdNumber(String idNumber) {
     return null;
   }
 }
+
 ///validate dropdown
-String? validateDropDown(String? value){
-  if(value==null){
+String? validateDropDown(String? value) {
+  if (value == null) {
     return "الحقل مطلوب";
-  }else{
+  } else {
     return null;
   }
 }
@@ -156,7 +171,9 @@ void handleDioError({required DioError error}) {
   } else if (error.type == DioErrorType.sendTimeout) {
     showSnackBar(message: "انتهت صلاحية الطلب,تأكد من اتصالك بالانترنت");
   } else {
-    showSnackBar(message: "هناك مشكلة, تأكد من اتصالك بالانترنت.",snackPosition: SnackPosition.TOP);
+    showSnackBar(
+        message: "هناك مشكلة, تأكد من اتصالك بالانترنت.",
+        snackPosition: SnackPosition.TOP);
   }
 }
 
@@ -178,10 +195,12 @@ Future<bool> isConnectedToNetwork() async {
   }
   return isConnected;
 }
-closeKeyBoard({required BuildContext context}){
+
+closeKeyBoard({required BuildContext context}) {
   FocusScope.of(context).unfocus(); // close the keyboard
 }
-showConfirmationDialogForForms({required BuildContext context}){
+
+showConfirmationDialogForForms({required BuildContext context}) {
   customDialog(
       context: context,
       title: "هل أنت متأكد من أنك تريد تجاهل التغييرات؟",
@@ -194,27 +213,29 @@ showConfirmationDialogForForms({required BuildContext context}){
         Get.back();
       }).show();
 }
-onBackFormDonationForm({required DonationFormScreenController controller,required BuildContext context}){
+
+onBackFormDonationForm(
+    {required DonationFormScreenController controller,
+    required BuildContext context}) {
   closeKeyBoard(context: context);
-  if(!controller.donorChoice) {
+  if (!controller.donorChoice) {
     if (!controller.allNeedFormFieldsIsEmpty) {
       showConfirmationDialogForForms(context: context);
     } else {
       Get.back();
     }
-  }else{
+  } else {
     if (!controller.allDonorFormFieldsIsEmpty) {
       showConfirmationDialogForForms(context: context);
     } else {
       Get.back();
     }
   }
-
 }
 
 AwesomeDialog customDialog(
     {required BuildContext context,
-     dynamic controller,
+    dynamic controller,
     String btnOkText = "تسجيل الدخول",
     String btnCancelText = "تجاهل",
     DialogType dialogType = DialogType.warning,
@@ -243,4 +264,33 @@ AwesomeDialog customDialog(
       btnOkOnPress();
     },
   );
+}
+
+Future<void> makePhoneCall(String phoneNumber) async {
+  final Uri launchUri = Uri(
+    scheme: 'tel',
+    path: phoneNumber,
+  );
+  await launchUrl(launchUri);
+}
+
+Future<void> messageBackgroundHandler(RemoteMessage message) async {
+  final appSharedPref = Get.put(AppSharedPref());
+  await appSharedPref.init();
+
+  if (message.notification != null && message.notification!.body != null) {
+    final notificationData = NotificationModel(
+      arrivalTime: DateTime.now().toString(),
+      imageUrl: message.notification!.android!.imageUrl ?? '',
+      title: message.notification!.title ?? '',
+      body: message.notification!.body ?? '',
+    );
+
+    List<String> storedNotifications =
+        appSharedPref.getStringList(key: 'notifications') ?? [];
+
+    storedNotifications.add(json.encode(notificationData.toJson()));
+    await appSharedPref.setStringList(
+        key: 'notifications', value: storedNotifications);
+  }
 }

@@ -17,7 +17,8 @@ class HomeScreenController extends GetxController {
   int currentPageIndex = 0;
   int currentBannerIndex = 0;
   bool? isLoggedIn = Get.find<AppSharedPref>().getBoolValue(key: loginPageKey);
-  bool? isUserVerified=Get.find<AppSharedPref>().getBoolValue(key: isEmailVerifiedKey);
+  bool? isUserVerified =
+      Get.find<AppSharedPref>().getBoolValue(key: isEmailVerifiedKey);
   final repo = Get.find<HomeRepository>();
   bool blurScreen = false;
   static const _pageSize = 15;
@@ -35,8 +36,8 @@ class HomeScreenController extends GetxController {
   List<CampaignModel>? campaigns;
   bool campaignsIsLoading = false;
   @override
-  void onInit() {
-    //fetchCampaigns();
+  void onInit() async {
+   await  fetchCampaigns();
     pagingController.addPageRequestListener((pageKey) async {
       await fetchData(pageKey: pageKey);
     });
@@ -63,17 +64,10 @@ class HomeScreenController extends GetxController {
     update();
   }
 
-  fetchCampaigns() async {
+ Future<void> fetchCampaigns() async {
     campaignsIsLoading = true;
-    try {
-      campaigns = await repo.getCampaigns();
-    } on Exception catch (exception) {
-      if (exception is ServerException) {
-        print('ServerException ServerException ServerException');
-      } else if (exception is NetworkException) {
-        print('NetworkException NetworkException NetworkException');
-      } else {}
-    }
+    campaigns = await repo.getCampaigns();
+
     campaignsIsLoading = false;
     update();
   }
@@ -92,5 +86,4 @@ class HomeScreenController extends GetxController {
     blurScreen = isBlur;
     update();
   }
-
 }

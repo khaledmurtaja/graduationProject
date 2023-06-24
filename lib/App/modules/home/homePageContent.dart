@@ -9,8 +9,10 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../core/utils/helperFunctions.dart';
+import '../../../core/values/strings.dart';
 import '../../../routes/routes.dart';
 import '../../data/models/donationAppealModel.dart';
+import '../../data/services/sharedPrefService.dart';
 import '../../widgets/appealCard.dart';
 import '../../widgets/customButtonWidget.dart';
 import '../../widgets/customLoadingWidget.dart';
@@ -36,27 +38,27 @@ class HomeScreenContent extends GetView<HomeScreenController> {
             return controller.campaignsIsLoading
                 ? const CustomLoadingWidget()
                 : controller.campaigns!.isEmpty
-                ? SingleErrorTextWidget(
-              errorMessage: 'لا يوجد حملات في الوقت الحالي !',
-              height: 200,
-            )
-                : CarouselSlider(
-              items: controller.campaigns!
-                  .map((e) => Image.network(
-                e.imageUrl!,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ))
-                  .toList(),
-              options: CarouselOptions(
-                onPageChanged: (index, reason) {
-                  controller.changeCurrentBannerIndex(index);
-                },
-                viewportFraction: 1,
-                height:
-                getMediaQueryHeight(context: context, value: 200),
-              ),
-            );
+                    ? SingleErrorTextWidget(
+                        errorMessage: 'لا يوجد حملات في الوقت الحالي !',
+                        height: 200,
+                      )
+                    : CarouselSlider(
+                        items: controller.campaigns!
+                            .map((e) => Image.network(
+                                  e.imageUrl!,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                ))
+                            .toList(),
+                        options: CarouselOptions(
+                          onPageChanged: (index, reason) {
+                            controller.changeCurrentBannerIndex(index);
+                          },
+                          viewportFraction: 1,
+                          height:
+                              getMediaQueryHeight(context: context, value: 200),
+                        ),
+                      );
           }),
           SizedBox(
             height: getMediaQueryHeight(context: context, value: 8),
@@ -66,19 +68,19 @@ class HomeScreenContent extends GetView<HomeScreenController> {
               return controller.campaignsIsLoading
                   ? const SizedBox()
                   : controller.errorMessage!.isNotEmpty
-                  ? const SizedBox()
-                  : controller.campaigns!.isEmpty
-                  ? const SizedBox()
-                  : Center(
-                  child: SmoothPageIndicator(
-                    controller: PageController(
-                        initialPage: controller.currentBannerIndex),
-                    count: controller.campaigns!.length,
-                    effect: const ExpandingDotsEffect(
-                        activeDotColor: Colors.red,
-                        dotHeight: 10,
-                        dotWidth: 10),
-                  ));
+                      ? const SizedBox()
+                      : controller.campaigns!.isEmpty
+                          ? const SizedBox()
+                          : Center(
+                              child: SmoothPageIndicator(
+                              controller: PageController(
+                                  initialPage: controller.currentBannerIndex),
+                              count: controller.campaigns!.length,
+                              effect: const ExpandingDotsEffect(
+                                  activeDotColor: Colors.red,
+                                  dotHeight: 10,
+                                  dotWidth: 10),
+                            ));
             },
           ),
           SizedBox(
@@ -86,9 +88,30 @@ class HomeScreenContent extends GetView<HomeScreenController> {
           ),
           CustomButton(
             onPressed: () {
+              bool? isUserVerified = Get.find<AppSharedPref>()
+                  .getBoolValue(key: isEmailVerifiedKey);
               if (controller.isLoggedIn != null &&
-                  controller.isLoggedIn == true) {
+                  controller.isLoggedIn == true &&
+                  isUserVerified != null &&
+                  isUserVerified == true) {
                 Get.toNamed(Routes.DONATION_FORM);
+              } else if (controller.isLoggedIn != null &&
+                  controller.isLoggedIn == true &&
+                  isUserVerified != null &&
+                  isUserVerified == false) {
+                customDialog(
+                    context: context,
+                    title: "العملية تحتاج الى توثيق البريد الالكتروني",
+                    controller: controller,
+                    btnOkText: "توثيق البريد الالكتروني",
+                    onDismissCallback: () {
+                      controller.blurScreenFun(false);
+                    },
+                    btnCancelOnPress: () {},
+                    btnOkOnPress: () {
+                      Get.back();
+                      Get.toNamed("/sendVerificationCode");
+                    }).show();
               } else {
                 controller.blurScreenFun(true);
                 customDialog(
@@ -133,10 +156,10 @@ class HomeScreenContent extends GetView<HomeScreenController> {
                         onTap: () {
                           controller.pagingController.retryLastFailedRequest();
                         },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        child: const Padding(
+                          padding: EdgeInsets.all(8.0),
                           child: Column(
-                            children: const [
+                            children: [
                               Text("حدث خطأ ما.اضعط للمحاولة مجددا"),
                               Icon(Icons.refresh)
                             ],

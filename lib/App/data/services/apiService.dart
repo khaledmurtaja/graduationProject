@@ -76,9 +76,6 @@ class ApiService extends GetxService {
       {required String url,
       Map<String, String>? additionalHeaders,
       String? pathParameter}) async {
-    print('****');
-
-    print(url);
     try {
       if (additionalHeaders != null) {
         ///adding headers the request if its given(optional)
@@ -88,8 +85,10 @@ class ApiService extends GetxService {
         ///adding path parameter to the url just in case its not null(optional)
         url = '$url?$pathParameter';
       }
+
       api.Response response =
           await _dio.get(url, options: api.Options(headers: headers));
+
       if (response.statusCode == HttpStatus.ok) {
         return response;
       }
@@ -147,12 +146,13 @@ class ApiService extends GetxService {
     }
     return null;
   }
+
   ///put request.
   Future<api.Response?> putRequest(
       {required String url,
-        required Map<String, String?> data,
-        Map<String, String>? additionalHeaders,
-        String? pathParameter}) async {
+      required Map<String, String?> data,
+      Map<String, String>? additionalHeaders,
+      String? pathParameter}) async {
     try {
       if (additionalHeaders != null) {
         ///adding headers the request if its given(optional)

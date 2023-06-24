@@ -1,7 +1,9 @@
+import 'package:blood4life/App/modules/donationRequestDetails/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../../core/utils/helperFunctions.dart';
 import '../../../core/values/colors.dart';
@@ -9,7 +11,8 @@ import '../../widgets/customAppBar.dart';
 import '../../widgets/customButtonWidget.dart';
 import '../../widgets/customRow.dart';
 
-class DonationRequestDetailsScreen extends StatelessWidget {
+class DonationRequestDetailsScreen
+    extends GetView<DonationRequestDetailsScreenController> {
   const DonationRequestDetailsScreen({super.key});
 
   @override
@@ -60,7 +63,7 @@ class DonationRequestDetailsScreen extends StatelessWidget {
                       height: getMediaQueryHeight(context: context, value: 24),
                     ),
                     Text(
-                      'يوسف هاني المصري',
+                      controller.donationOfferModel!.fullName,
                       style: TextStyle(
                         fontSize: 16.spMin,
                         fontWeight: FontWeight.w700,
@@ -72,7 +75,7 @@ class DonationRequestDetailsScreen extends StatelessWidget {
                     ),
                     CustomRow(
                       firstText: 'إسم المتبرع :',
-                      secondText: 'يوسف هاني المصري',
+                      secondText: controller.donationOfferModel!.fullName,
                       firstTextFontWeight: FontWeight.w700,
                       secondTextFontSize: 16.spMin,
                     ),
@@ -81,7 +84,7 @@ class DonationRequestDetailsScreen extends StatelessWidget {
                     ),
                     CustomRow(
                       firstText: 'رقم التواصل :',
-                      secondText: '0597589865',
+                      secondText: controller.donationOfferModel!.phoneNumber,
                       firstTextFontWeight: FontWeight.w700,
                       secondTextFontSize: 16.spMin,
                     ),
@@ -90,7 +93,7 @@ class DonationRequestDetailsScreen extends StatelessWidget {
                     ),
                     CustomRow(
                       firstText: 'فصيلة الدم : ',
-                      secondText: 'O+',
+                      secondText: controller.donationOfferModel!.bloodType,
                       firstTextFontWeight: FontWeight.w700,
                       secondTextFontSize: 16.spMin,
                     ),
@@ -99,7 +102,7 @@ class DonationRequestDetailsScreen extends StatelessWidget {
                     ),
                     CustomRow(
                       firstText: 'مكان السكن :',
-                      secondText: 'المغازي',
+                      secondText: controller.donationOfferModel!.location,
                       firstTextFontWeight: FontWeight.w700,
                       secondTextFontSize: 16.spMin,
                     ),
@@ -113,7 +116,10 @@ class DonationRequestDetailsScreen extends StatelessWidget {
             Row(
               children: [
                 CustomButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    await makePhoneCall(
+                        controller.donationOfferModel!.phoneNumber);
+                  },
                   text: 'اتصل الآن',
                   width: getMediaQueryWidth(
                     context: context,
@@ -125,7 +131,10 @@ class DonationRequestDetailsScreen extends StatelessWidget {
                   width: getMediaQueryWidth(context: context, value: 8),
                 ),
                 CustomButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    await controller.shareOffer(
+                        donationRequestDetailsScreenController: controller);
+                  },
                   text: 'ايقونه',
                   showIcon: true,
                   width: getMediaQueryWidth(

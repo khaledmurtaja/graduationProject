@@ -20,18 +20,30 @@ class AppSharedPref extends GetxService {
     bool? value = sharedPreferences.getBool(key);
     return value;
   }
+
   /// for setting string values in the storage.
   putStringValue({required String key, required String value}) async {
-    bool x=await sharedPreferences.setString(key, value);
+    bool x = await sharedPreferences.setString(key, value);
   }
-  /// for getting string values from the storage.
-  String? getStringValue({required String key})  {
-      String? value = sharedPreferences.getString(key);
-      return value;
 
+  /// for getting string values from the storage.
+  String? getStringValue({required String key}) {
+    String? value = sharedPreferences.getString(key);
+    return value;
   }
+
   Future<bool> removeValue({required String key}) async {
     bool? value = await sharedPreferences.remove(key);
     return value;
+  }
+
+  Future<bool> setStringList(
+      {required String key, required List<String> value}) async {
+    return await sharedPreferences.setStringList(key, value);
+  }
+
+  /// For getting string list values from the storage.
+  List<String>? getStringList({required String key}) {
+    return sharedPreferences.getStringList(key);
   }
 }

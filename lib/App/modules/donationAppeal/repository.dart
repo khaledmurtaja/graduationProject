@@ -26,4 +26,5 @@ class DonationAppealRepository {
         jsonList.map((json) => DonationOfferModel.fromJson(json)).toList();
     return offers;
   }
+  
 }

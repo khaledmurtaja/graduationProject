@@ -4,6 +4,7 @@ import 'package:dio/src/response.dart' as api;
 import 'package:get/get.dart';
 import '../../../core/utils/helperFunctions.dart';
 import '../../../core/values/strings.dart';
+import '../../data/models/userModel.dart';
 import '../../data/services/apiService.dart';
 import '../../data/services/sharedPrefService.dart';
 
@@ -47,5 +48,34 @@ class ProfileRepository {
     bool value = await sharedPref.removeValue(key: "token");
     await sharedPref.putBoolValue(key: loginPageKey, value: false);
     return value;
+  }
+
+  Future<User?> getUserData() async {
+    String? token = sharedPref.getStringValue(key: "token");
+
+    try {
+      final response = await apiService.getRequest(
+          url: ApiEndPoints.BASE_URL + ApiEndPoints.USER_DATA,
+          additionalHeaders: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer $token",
+          });
+      final User userData = User.fromJson(response!.data);
+// {
+//         "email": response!.data['email'],
+//         "name": response.data['name'],
+//       }
+      return userData;
+    } on Exception catch (exception) {
+      if (exception is ServerException) {
+        showSnackBar(
+            message: "يوجد مشكلة في السيرفر حاول مرة أخرى !!",
+            snackPosition: SnackPosition.TOP);
+      } else {
+        showSnackBar(
+            message: "حدث خلل ما حاول مرة أخرى !!",
+            snackPosition: SnackPosition.TOP);
+      }
+    }
   }
 }

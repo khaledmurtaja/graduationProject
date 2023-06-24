@@ -8,19 +8,21 @@ import '../../../../core/values/colors.dart';
 class CustomCard extends StatelessWidget {
   String imageUrl;
   String title;
-    String supTitle;
-    String time;
+  String supTitle;
+  String time;
 
-   CustomCard({
-    Key? key,
-    required this.imageUrl,
-    required this.title,
-    required this.supTitle,
-    required this.time
-  }) ;
+  CustomCard(
+      {Key? key,
+      required this.imageUrl,
+      required this.title,
+      required this.supTitle,
+      required this.time});
 
   @override
   Widget build(BuildContext context) {
+    // print('imageUrl');
+
+    // print(imageUrl);
     return Card(
       color: Colors.white,
       elevation: 0,
@@ -32,19 +34,18 @@ class CustomCard extends StatelessWidget {
               Container(
                 width: 28,
                 height: 28,
-                decoration:  BoxDecoration(
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
                     fit: BoxFit.fill,
-                    image: AssetImage(
+                    image: NetworkImage(
                       imageUrl,
                     ),
                   ),
                 ),
               ),
               SizedBox(
-                width:
-                    getMediaQueryWidth(context: context, value: 8),
+                width: getMediaQueryWidth(context: context, value: 8),
               ),
               Text(
                 title,
@@ -67,8 +68,7 @@ class CustomCard extends StatelessWidget {
             height: getMediaQueryHeight(context: context, value: 8),
           ),
           Text(
-            supTitle
-            ,
+            supTitle,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(

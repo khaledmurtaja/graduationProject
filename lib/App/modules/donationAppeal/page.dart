@@ -168,7 +168,10 @@ class AppealScreen extends GetView<DonationAppealScreenController> {
                                   fontSize: 16.spMin,
                                   color: customCardTextColor),
                               data: controller.city,
-                              onChange: (value) {},
+                              onChange: (value) {
+                                controller.changeSelectedAddress(
+                                    valueSelectedAddress: value);
+                              },
                             ),
                             SizedBox(
                                 height: getMediaQueryHeight(
@@ -184,7 +187,28 @@ class AppealScreen extends GetView<DonationAppealScreenController> {
                                   context: context, value: 16),
                             ),
                             InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                controller.isAppealTabSelected
+                                    ? controller.filterAppealsData(
+                                        bloodType: controller.selectedBloodUnit,
+                                        location: controller.selectedAddress,
+                                        oldestFirst: true,
+                                      )
+                                    : controller.filterOffersData(
+                                        bloodType: controller.selectedBloodUnit,
+                                        location: controller.selectedAddress,
+                                        oldestFirst: true,
+                                      );
+                                Get.back();
+
+                                Future.delayed(const Duration(seconds: 1), () {
+                                  showSnackBar(
+                                      title: "تمت بنجاح",
+                                      message: "تم فلترة النتائج بنجاح ",
+                                      backGroundColor: Colors.green.shade400,
+                                      snackPosition: SnackPosition.TOP);
+                                });
+                              },
                               child: Text(
                                 "من الاقدم الى الأحدث",
                                 style: TextStyle(
@@ -197,7 +221,27 @@ class AppealScreen extends GetView<DonationAppealScreenController> {
                                   context: context, value: 16),
                             ),
                             InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                controller.isAppealTabSelected
+                                    ? controller.filterAppealsData(
+                                        bloodType: controller.selectedBloodUnit,
+                                        location: controller.selectedAddress,
+                                        oldestFirst: false,
+                                      )
+                                    : controller.filterOffersData(
+                                        bloodType: controller.selectedBloodUnit,
+                                        location: controller.selectedAddress,
+                                        oldestFirst: false,
+                                      );
+                                Get.back();
+                                Future.delayed(const Duration(seconds: 1), () {
+                                  showSnackBar(
+                                      title: "تمت بنجاح",
+                                      message: "تم فلترة النتائج بنجاح ",
+                                      backGroundColor: Colors.green.shade400,
+                                      snackPosition: SnackPosition.TOP);
+                                });
+                              },
                               child: Text(
                                 "من الأحدث الى الاقدم",
                                 style: TextStyle(
@@ -396,9 +440,8 @@ class AppealScreen extends GetView<DonationAppealScreenController> {
                         )
                       : RefreshIndicator(
                           onRefresh: () {
-                            return Future.sync(() => controller
-                                .pagingControllerForOffers
-                                .refresh());
+                            return Future.sync(() =>
+                                controller.pagingControllerForOffers.refresh());
                           },
                           child:
                               PagedListView<int, DonationOfferModel>.separated(

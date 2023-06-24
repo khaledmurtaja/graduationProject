@@ -31,10 +31,10 @@ class HomeRepository {
       final response = await apiService.getRequest(
         url: ApiEndPoints.BASE_URL + ApiEndPoints.CAMPAINGNS,
       );
-
       final List<dynamic> jsonList = response?.data['data'];
       final List<CampaignModel> campaigns =
           jsonList.map((json) => CampaignModel.fromJson(json)).toList();
+
       return campaigns;
     } on Exception catch (exception) {
       if (exception is ServerException) {

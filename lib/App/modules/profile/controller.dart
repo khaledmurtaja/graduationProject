@@ -1,3 +1,4 @@
+import 'package:blood4life/App/data/models/userModel.dart';
 import 'package:blood4life/App/modules/home/controller.dart';
 import 'package:blood4life/App/modules/profile/repository.dart';
 import 'package:blood4life/core/utils/helperFunctions.dart';
@@ -8,6 +9,16 @@ class ProfileScreenController extends GetxController {
   bool switchValueReadytoDonate = true;
   bool switchValueNotification = true;
   bool isLoggingOut = false;
+  User? userData;
+  bool isLoading = false;
+
+  @override
+  void onInit() async {
+    await fetchUserData();
+    super.onInit();
+  }
+
+  final repo = Get.find<ProfileRepository>();
 
   void toggleReadytoDonate(bool) {
     switchValueReadytoDonate = switchValueReadytoDonate ? false : true;
@@ -33,5 +44,12 @@ class ProfileScreenController extends GetxController {
           backGroundColor: Colors.deepOrangeAccent,
           snackPosition: SnackPosition.TOP);
     }
+  }
+
+  fetchUserData() async {
+    isLoading = true;
+    userData = await repo.getUserData();
+    isLoading = false;
+    update();
   }
 }

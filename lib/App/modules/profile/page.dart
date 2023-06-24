@@ -32,7 +32,17 @@ class ProfileScreen extends GetView<ProfileScreenController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const CustomCard(),
+            GetBuilder<ProfileScreenController>(
+                builder: (myController) => myController.isLoading
+                    ? const Center(
+                        child: Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: CircularProgressIndicator(),
+                      ))
+                    : CustomCard(
+                        email: controller.userData!.email,
+                        name: controller.userData!.name!,
+                      )),
             SizedBox(
               height: getMediaQueryHeight(context: context, value: 16),
             ),
@@ -50,7 +60,10 @@ class ProfileScreen extends GetView<ProfileScreenController> {
               leadingicon: "assets/images/icons/profile/person.svg",
               title: 'معلوماتي الشخصية',
               onTap: () {
-                Get.toNamed("/personalInformation");
+                Get.toNamed(
+                  '/personalInformation',
+                  arguments: {"UserModel": controller.userData},
+                );
               },
             ),
             SizedBox(

@@ -1,16 +1,16 @@
 class User {
   String? name;
   String email;
-  String password;
-  String deviceName;
+  String? password;
+  String? deviceName;
   String? passwordConfirmation;
 
   User({
-     this.name,
+    this.name,
     required this.email,
-    required this.password,
-    required this.deviceName,
-     this.passwordConfirmation,
+    this.password,
+    this.deviceName,
+    this.passwordConfirmation,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -24,7 +24,7 @@ class User {
   }
 
   Map<String, String?> toJson() {
-    final Map<String, String?> data =  <String, String?>{};
+    final Map<String, String?> data = <String, String?>{};
     data['name'] = name;
     data['email'] = email;
     data['password'] = password;
