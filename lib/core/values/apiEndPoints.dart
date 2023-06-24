@@ -15,4 +15,12 @@ class ApiEndPoints{
   static const String sendForgetPasswordCode="/api/user/sendForgetPasswordCode";
   static const String ForgottenPasswordCodeVerification="/api/user/CheckForgetPasswordCode";
   static const String RESET_FORGOTTEN_PASSWORD="/api/user/ResetForgetedPassword";
+  static const String USER_DATA="/api/user/getUserData";
+  static const String CHANGE_CURRENT_PASSWORD="/api/user/resetCurrentPassword";
+  static const String USER_APPEALS="/api/appeals";
+  static const String USER_OFFERS="/api/donations";
+  static const String DELETE_APPEAL="/api/appeals/";
+  static const String DELETE_OFFER="/api/donations/";
+  static const String UPDATE_APPEAL="/api/appeals/";
+  static const String UPDATE_OFFER="/api/donations/";
 }
