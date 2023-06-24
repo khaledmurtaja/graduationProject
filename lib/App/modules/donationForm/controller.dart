@@ -3,6 +3,8 @@ import 'package:blood4life/core/utils/helperFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../donationUpdateForm/repository.dart';
+
 class DonationFormScreenController extends GetxController {
   bool needChoice = false;
   bool donorChoice = true;
@@ -114,7 +116,7 @@ class DonationFormScreenController extends GetxController {
     isLoading = true;
     update();
     final repository = Get.find<DonationFormRepository>();
-    final response = await repository.shareDonationAppeal();
+    final response = await repository.shareDonationOffer();
     isLoading = false;
     update();
     if (response != null) {

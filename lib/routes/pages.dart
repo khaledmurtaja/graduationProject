@@ -1,4 +1,6 @@
 import 'package:blood4life/App/modules/EmailVerfication/binding.dart';
+import 'package:blood4life/App/modules/donationUpdateForm/binding.dart';
+import 'package:blood4life/App/modules/donationUpdateForm/page.dart';
 import 'package:blood4life/App/modules/forgetPassword/bindings.dart';
 import 'package:blood4life/App/modules/forgetPassword/page.dart';
 import 'package:blood4life/App/modules/login/binding.dart';
@@ -137,6 +139,10 @@ abstract class AppPages {
         name: Routes.RESET_Forgotten_PASSWORD,
         page: () => ResetForgottenPasswordScreen(),
         bindings: [ResetForgottenPasswordBinding()]),
+    GetPage(
+        name: Routes.UPDATE_DONATION_FORM,
+        page: () => DonationUpdateFormScreen(),
+        bindings: [DonationUpdateFormBinding()]),
 
   ];
 }

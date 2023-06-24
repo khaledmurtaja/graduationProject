@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../core/utils/helperFunctions.dart';
 import '../../core/values/colors.dart';
@@ -12,6 +11,7 @@ class CustomDropdownButton extends StatelessWidget {
   double width;
   double height;
   Color? backGroundColor;
+  String? defaultValue;
   Function(String)? onChange;
   CustomDropdownButton(
       {Key? key,
@@ -21,14 +21,16 @@ class CustomDropdownButton extends StatelessWidget {
       required this.onChange,
       this.width = 148,
       this.height = 48,
+        this.defaultValue,
       this.iconPath})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: width,
       child: DropdownButtonHideUnderline(
         child: DropdownButtonFormField<String>(
+          value: defaultValue,
           isExpanded: true,
           validator: (value) {
             return validateDropDown(value);

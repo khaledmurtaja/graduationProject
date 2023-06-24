@@ -6,6 +6,7 @@ class DonationOfferModel {
   late String weight;
   late String age;
   late String idNumber;
+   int? operationId;
 
   DonationOfferModel({
     required this.fullName,
@@ -22,6 +23,16 @@ class DonationOfferModel {
     bloodType = json['blood_type'];
     phoneNumber = json['phone_number'];
     location = json['location'];
+  }
+  DonationOfferModel.userOffers(Map<dynamic, dynamic> json) {
+    fullName = json['name'];
+    bloodType = json['blood_type'];
+    phoneNumber = json['phone_number'];
+    location = json['location'];
+    idNumber=json['id_number'];
+    age=json['age'].toString();
+    weight=json['weight'].toString();
+    operationId=json['id'];
   }
 
   Map<String, String> toJson() {

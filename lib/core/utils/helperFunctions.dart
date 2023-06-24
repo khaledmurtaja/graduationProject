@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../../App/modules/donationUpdateForm/controller.dart';
 import '../values/colors.dart';
 import '../values/strings.dart';
 
@@ -198,6 +199,23 @@ showConfirmationDialogForForms({required BuildContext context}){
       }).show();
 }
 onBackFormDonationForm({required DonationFormScreenController controller,required BuildContext context}){
+  closeKeyBoard(context: context);
+  if(!controller.donorChoice) {
+    if (!controller.allNeedFormFieldsIsEmpty) {
+      showConfirmationDialogForForms(context: context);
+    } else {
+      Get.back();
+    }
+  }else{
+    if (!controller.allDonorFormFieldsIsEmpty) {
+      showConfirmationDialogForForms(context: context);
+    } else {
+      Get.back();
+    }
+  }
+
+}
+onBackFormUpdateDonationForm({required DonationUpdateFormScreenController controller,required BuildContext context}){
   closeKeyBoard(context: context);
   if(!controller.donorChoice) {
     if (!controller.allNeedFormFieldsIsEmpty) {

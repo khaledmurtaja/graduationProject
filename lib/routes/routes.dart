@@ -18,6 +18,7 @@ abstract class Routes {
   static const SEND_EMAIL_VERIFICATION="/sendVerificationCode";
   static const Forget_Password_Screen="/forgetPassword";
   static const SEND_FORGOT_PASSWORD_VERIFICATION="/sendForgetPasswordVerification";
+  static const UPDATE_DONATION_FORM="/update/donationForm";
 
   
 }
