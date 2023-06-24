@@ -1,5 +1,5 @@
 class ApiEndPoints{
-  static const String BASE_URL = 'http://192.168.1.113:8000';/// change this according to Server ip address
+  static const String BASE_URL = 'http://192.168.1.7:8000';/// change this according to Server ip address
   static const String REGISTER='/api/user/create';
   static const String LOGIN='/api/user/login';
   static const String LOGUT="/api/user/logout";
@@ -15,7 +15,4 @@ class ApiEndPoints{
   static const String sendForgetPasswordCode="/api/user/sendForgetPasswordCode";
   static const String ForgottenPasswordCodeVerification="/api/user/CheckForgetPasswordCode";
   static const String RESET_FORGOTTEN_PASSWORD="/api/user/ResetForgetedPassword";
-  static const String USER_DATA="/api/user/getUserData";
-
-
 }

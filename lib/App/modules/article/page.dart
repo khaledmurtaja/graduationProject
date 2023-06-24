@@ -61,6 +61,7 @@ class ArticleScreen extends GetView<ArticleScreenController> {
           },
           animateTransitions: true,
           itemBuilder: (context, item, index) {
+            print(item);
             return CustomCard(
               imageUrl: '${item.imageUrl}',
               title: item.title!,

@@ -14,7 +14,7 @@ class BlogRepository {
     final List<dynamic> jsonList = response?.data['data'];
 
     final List<ArticleModel> articles =
-        jsonList.map((json) => ArticleModel.fromJson(json)).toList();
+    jsonList.map((json) => ArticleModel.fromJson(json)).toList();
 
     return articles;
   }

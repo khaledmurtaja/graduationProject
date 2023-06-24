@@ -4,6 +4,8 @@ class DonationAppealModel {
   late String phoneNumber;
   late String location;
   late String description;
+   int? operationId;
+
 
   DonationAppealModel({
     required this.fullName,
@@ -11,6 +13,7 @@ class DonationAppealModel {
     required this.phoneNumber,
     required this.location,
     required this.description,
+
   });
 
   DonationAppealModel.fromJson(Map<dynamic, dynamic> json) {
@@ -19,6 +22,14 @@ class DonationAppealModel {
     phoneNumber = json['phone_number'];
     location = json['location'];
     description =json['description'] ;
+  }
+  DonationAppealModel.userAppeals(Map<dynamic, dynamic> json) {
+    fullName = json['name'];
+    bloodType = json['blood_type'];
+    phoneNumber = json['phone_number'];
+    location = json['location'];
+    description =json['description'] ;
+    operationId=json['id'];
   }
 
   Map<String, String> toJson() {

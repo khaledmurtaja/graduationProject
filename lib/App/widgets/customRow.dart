@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../core/utils/helperFunctions.dart';
 
@@ -9,13 +10,17 @@ class CustomRow extends StatelessWidget {
   String secondText;
   FontWeight firstTextFontWeight;
   double secondTextFontSize;
-  CustomRow({
-    Key? key,
-    required this.firstText,
-    required this.secondText,
-    required this.firstTextFontWeight,
-    required this.secondTextFontSize,
-  }) : super(key: key);
+  String? iconPath;
+  Function? onClickEditIcon;
+  CustomRow(
+      {Key? key,
+      required this.firstText,
+      required this.secondText,
+      required this.firstTextFontWeight,
+      required this.secondTextFontSize,
+         this.onClickEditIcon,
+      this.iconPath})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +48,16 @@ class CustomRow extends StatelessWidget {
             ),
           ),
         ),
+       iconPath!=null? InkWell(
+         onTap: (){
+           onClickEditIcon!()??(){};
+         },
+         child: Padding(
+           padding:  EdgeInsets.only(left: 8.w),
+           child: SvgPicture.asset(iconPath!),
+         ),
+       ):Container()
+        // iconPath != null ? SvgPicture.asset(iconPath!) : Container()
       ],
     );
   }

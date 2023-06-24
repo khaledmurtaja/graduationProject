@@ -8,12 +8,13 @@ import 'package:webview_flutter/webview_flutter.dart';
 class ArticleScreenController extends GetxController {
   static const _pageSize = 15;
   final PagingController<int, ArticleModel> pagingController =
-      PagingController(firstPageKey: 0);
+  PagingController(firstPageKey: 0);
   final repo = Get.find<BlogRepository>();
 
   @override
   void onInit() {
     pagingController.addPageRequestListener((pageKey) async {
+      print(pageKey);
       await fetchData(pageKey: pageKey);
     });
   }
@@ -21,7 +22,8 @@ class ArticleScreenController extends GetxController {
   fetchData({required int pageKey}) async {
     try {
       final List<ArticleModel> newArticles =
-          await repo.getArticles(pageKey: pageKey);
+      await repo.getArticles(pageKey: pageKey);
+      print(newArticles.toString());
       final isLastPage = newArticles.length < _pageSize;
       if (isLastPage) {
         pagingController.appendLastPage(newArticles);

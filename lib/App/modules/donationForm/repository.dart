@@ -23,25 +23,25 @@ class DonationFormRepository {
           url: ApiEndPoints.BASE_URL + ApiEndPoints.SHARE_OFFER,
           additionalHeaders: {"Authorization": "Bearer $token"},
           data: DonationOfferModel(
-                  fullName: controller.nameOfDonorController.text,
-                  bloodType: controller.bloodUnitOfDonor,
-                  phoneNumber: controller.phoneOfDonorController.text,
-                  location: controller.cityOfDonor,
-                  weight: controller.weightOfDonor,
-                  age: controller.ageOfDonor,
-                  idNumber: controller.idOfDonorController.text)
+              fullName: controller.nameOfDonorController.text,
+              bloodType: controller.bloodUnitOfDonor,
+              phoneNumber: controller.phoneOfDonorController.text,
+              location: controller.cityOfDonor,
+              weight: controller.weightOfDonor,
+              age: controller.ageOfDonor,
+              idNumber: controller.idOfDonorController.text)
               .toJson());
       return response;
     } on Exception catch (exception) {
       if (exception is TooManyRequestsException) {
         showSnackBar(
             message:
-                "لا يمكنك التبرع بالدم مرة اخرى, الا بعد انقضاء 60 يوم من تاريخ التبرع",
+            "لا يمكنك التبرع بالدم مرة اخرى, الا بعد انقضاء 60 يوم من تاريخ التبرع",
             snackPosition: SnackPosition.TOP);
       } else if (exception is ConflictException) {
         showSnackBar(
             message:
-                "رقم الهوية مستخدم في طلب تبرع سابق, وهو حاليا قيد المعالجة",
+            "رقم الهوية مستخدم في طلب تبرع سابق, وهو حاليا قيد المعالجة",
             snackPosition: SnackPosition.TOP,
             backGroundColor: Colors.deepOrangeAccent);
       } else {
@@ -58,11 +58,11 @@ class DonationFormRepository {
           url: ApiEndPoints.BASE_URL + ApiEndPoints.SHARE_APPEAL,
           additionalHeaders: {"Authorization": "Bearer $token"},
           data: DonationAppealModel(
-                  fullName: controller.nameOfNeedyController.text,
-                  bloodType: controller.needyBloodUnit,
-                  phoneNumber: controller.phoneOfNeedyController.text,
-                  location: controller.needyCity,
-                  description: controller.detailsOfNeedyController.text)
+              fullName: controller.nameOfNeedyController.text,
+              bloodType: controller.needyBloodUnit,
+              phoneNumber: controller.phoneOfNeedyController.text,
+              location: controller.needyCity,
+              description: controller.detailsOfNeedyController.text)
               .toJson());
       return response;
     } on Exception catch (exception) {
