@@ -116,7 +116,7 @@ class DonationFormScreenController extends GetxController {
     isLoading = true;
     update();
     final repository = Get.find<DonationFormRepository>();
-    final response = await repository.shareDonationOffer();
+    final response = await repository.shareDonationAppeal();
     isLoading = false;
     update();
     if (response != null) {
