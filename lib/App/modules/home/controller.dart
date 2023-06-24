@@ -36,8 +36,8 @@ class HomeScreenController extends GetxController {
   List<CampaignModel>? campaigns;
   bool campaignsIsLoading = false;
   @override
-  void onInit() async {
-   await  fetchCampaigns();
+  void onInit(){
+     fetchCampaigns();
     pagingController.addPageRequestListener((pageKey) async {
       await fetchData(pageKey: pageKey);
     });
