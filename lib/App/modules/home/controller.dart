@@ -2,7 +2,6 @@ import 'package:blood4life/App/modules/home/repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import '../../../core/errors/exceptions.dart';
 import '../../../core/values/strings.dart';
 import '../../data/models/campaignModel.dart';
 import '../../data/models/donationAppealModel.dart';

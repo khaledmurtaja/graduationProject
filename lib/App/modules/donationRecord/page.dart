@@ -132,112 +132,126 @@ class DonationRecordScreen extends GetView<DonationRecordScreenController> {
               child: GetBuilder<DonationRecordScreenController>(
                 builder: (controller) {
                   if (controller.isAppealTabSelected) {
-                    return PagedListView<int, DonationAppealModel>.separated(
-                      builderDelegate:
-                          PagedChildBuilderDelegate<DonationAppealModel>(
-                              firstPageErrorIndicatorBuilder: (context) {
-                                return firstPageErrorIndicator(controller, () {
-                                  controller.pagingControllerForAppeals
-                                      .retryLastFailedRequest();
-                                });
-                              },
-                              noItemsFoundIndicatorBuilder: (context) =>
-                                  const Center(child: NoAppealsFound()),
-                              newPageErrorIndicatorBuilder: (context) {
-                                return InkWell(
-                                  onTap: () {
+                    return RefreshIndicator(
+                      onRefresh: () {
+                        return Future.sync(() => controller
+                            .pagingControllerForAppeals
+                            .refresh());
+                      },
+                      child: PagedListView<int, DonationAppealModel>.separated(
+                        builderDelegate:
+                            PagedChildBuilderDelegate<DonationAppealModel>(
+                                firstPageErrorIndicatorBuilder: (context) {
+                                  return firstPageErrorIndicator(controller, () {
                                     controller.pagingControllerForAppeals
                                         .retryLastFailedRequest();
-                                  },
-                                  child: const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Column(
-                                      children: [
-                                        Text("حدث خطأ ما.اضعط للمحاولة مجددا"),
-                                        Icon(Icons.refresh)
-                                      ],
+                                  });
+                                },
+                                noItemsFoundIndicatorBuilder: (context) =>
+                                    const Center(child: NoAppealsFound()),
+                                newPageErrorIndicatorBuilder: (context) {
+                                  return InkWell(
+                                    onTap: () {
+                                      controller.pagingControllerForAppeals
+                                          .retryLastFailedRequest();
+                                    },
+                                    child: const Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Column(
+                                        children: [
+                                          Text("حدث خطأ ما.اضعط للمحاولة مجددا"),
+                                          Icon(Icons.refresh)
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                );
-                              },
-                              animateTransitions: true,
-                              itemBuilder: (context, item, index) {
-                                return CustomAppealCard(
-                                  donationAppealModel: item,
-                                  iconPath: "assets/images/icons/edit.svg",
-                                  onEdit: () {
-                                    controller.donationAppealModel=item;
-                                    Get.toNamed(Routes.UPDATE_DONATION_FORM);
-                                  },
-                                  onDelete: () {
-                                    controller.deleteAppeal(
-                                        appealId: item.operationId);
-                                    controller.pagingControllerForAppeals
-                                        .refresh();
-                                  },
-                                );
-                              }),
-                      separatorBuilder: (BuildContext context, int index) {
-                        return SizedBox(
-                          height:
-                              getMediaQueryHeight(context: context, value: 16),
-                        );
-                      },
-                      pagingController: controller.pagingControllerForAppeals,
+                                  );
+                                },
+                                animateTransitions: true,
+                                itemBuilder: (context, item, index) {
+                                  return CustomAppealCard(
+                                    donationAppealModel: item,
+                                    iconPath: "assets/images/icons/edit.svg",
+                                    onEdit: () {
+                                      controller.donationAppealModel=item;
+                                      Get.toNamed(Routes.UPDATE_DONATION_FORM);
+                                    },
+                                    onDelete: () {
+                                      controller.deleteAppeal(
+                                          appealId: item.operationId);
+                                      controller.pagingControllerForAppeals
+                                          .refresh();
+                                    },
+                                  );
+                                }),
+                        separatorBuilder: (BuildContext context, int index) {
+                          return SizedBox(
+                            height:
+                                getMediaQueryHeight(context: context, value: 16),
+                          );
+                        },
+                        pagingController: controller.pagingControllerForAppeals,
+                      ),
                     );
                   } else {
-                    return PagedListView<int, DonationOfferModel>.separated(
-                      builderDelegate:
-                          PagedChildBuilderDelegate<DonationOfferModel>(
-                              firstPageErrorIndicatorBuilder: (context) {
-                                return firstPageErrorIndicator(controller, () {
-                                  controller.pagingControllerForOffers
-                                      .retryLastFailedRequest();
-                                });
-                              },
-                              newPageErrorIndicatorBuilder: (context) {
-                                return InkWell(
-                                  onTap: () {
+                    return RefreshIndicator(
+                      onRefresh: () {
+                        return Future.sync(() => controller
+                            .pagingControllerForOffers
+                            .refresh());
+                      },
+                      child: PagedListView<int, DonationOfferModel>.separated(
+                        builderDelegate:
+                            PagedChildBuilderDelegate<DonationOfferModel>(
+                                firstPageErrorIndicatorBuilder: (context) {
+                                  return firstPageErrorIndicator(controller, () {
                                     controller.pagingControllerForOffers
                                         .retryLastFailedRequest();
-                                  },
-                                  child: const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Column(
-                                      children: [
-                                        Text("حدث خطأ ما.اضعط للمحاولة مجددا"),
-                                        Icon(Icons.refresh)
-                                      ],
+                                  });
+                                },
+                                newPageErrorIndicatorBuilder: (context) {
+                                  return InkWell(
+                                    onTap: () {
+                                      controller.pagingControllerForOffers
+                                          .retryLastFailedRequest();
+                                    },
+                                    child: const Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Column(
+                                        children: [
+                                          Text("حدث خطأ ما.اضعط للمحاولة مجددا"),
+                                          Icon(Icons.refresh)
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                );
-                              },
-                              noItemsFoundIndicatorBuilder: (context) =>
-                                  const NoOffersFound(),
-                              animateTransitions: true,
-                              itemBuilder: (context, item, index) {
-                                return CustomOfferCard(
-                                  donationOfferModel: item,
-                                  iconPath: "assets/images/icons/edit.svg",
-                                  onEdit: (){
-                                    controller.donationOfferModel=item;
-                                    Get.toNamed(Routes.UPDATE_DONATION_FORM);
-                                  },
-                                  onDelete: () {
-                                    controller.deleteOffer(
-                                        offerId: item.operationId);
-                                    controller.pagingControllerForOffers
-                                        .refresh();
-                                  },
-                                );
-                              }),
-                      separatorBuilder: (BuildContext context, int index) {
-                        return SizedBox(
-                          height:
-                              getMediaQueryHeight(context: context, value: 16),
-                        );
-                      },
-                      pagingController: controller.pagingControllerForOffers,
+                                  );
+                                },
+                                noItemsFoundIndicatorBuilder: (context) =>
+                                    const NoOffersFound(),
+                                animateTransitions: true,
+                                itemBuilder: (context, item, index) {
+                                  return CustomOfferCard(
+                                    donationOfferModel: item,
+                                    iconPath: "assets/images/icons/edit.svg",
+                                    onEdit: (){
+                                      controller.donationOfferModel=item;
+                                      Get.toNamed(Routes.UPDATE_DONATION_FORM);
+                                    },
+                                    onDelete: () {
+                                      controller.deleteOffer(
+                                          offerId: item.operationId);
+                                      controller.pagingControllerForOffers
+                                          .refresh();
+                                    },
+                                  );
+                                }),
+                        separatorBuilder: (BuildContext context, int index) {
+                          return SizedBox(
+                            height:
+                                getMediaQueryHeight(context: context, value: 16),
+                          );
+                        },
+                        pagingController: controller.pagingControllerForOffers,
+                      ),
                     );
                   }
                 },
